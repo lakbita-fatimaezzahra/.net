@@ -4,16 +4,16 @@
 winexe
 C#
 .cs
-E:\4IIR\.Net\projet\LocationVoituresSolution\LocationVoitures.BackOffice\obj\Debug\net8.0-windows\
+C:\dotNet\.net\LocationVoituresSolution\LocationVoitures.BackOffice\obj\Debug\net8.0-windows\
 LocationVoitures.BackOffice
 none
 false
 TRACE;DEBUG;NET;NET8_0;NETCOREAPP;WINDOWS;WINDOWS7_0;NET5_0_OR_GREATER;NET6_0_OR_GREATER;NET7_0_OR_GREATER;NET8_0_OR_GREATER;NETCOREAPP3_0_OR_GREATER;NETCOREAPP3_1_OR_GREATER;WINDOWS7_0_OR_GREATER
-E:\4IIR\.Net\projet\LocationVoituresSolution\LocationVoitures.BackOffice\App.xaml
+C:\dotNet\.net\LocationVoituresSolution\LocationVoitures.BackOffice\App.xaml
 28862984655
 
 35-2015399476
-239-273000508
+2391788703063
 AddEmployeeWindow.xaml;AddLocationWindow.xaml;AdminWindow.xaml;Controls\DashboardAlertes.xaml;EmployeWindow.xaml;LocationDetailsWindow.xaml;LoginWindow.xaml;MainWindow.xaml;Pages\AddEditVoiturePage.xaml;Pages\AddLocationPage.xaml;Pages\AlertesPage.xaml;Pages\ClientFormPage.xaml;Pages\ClientsPage.xaml;Pages\DashboardPage.xaml;Pages\EmployeesPage.xaml;Pages\LocationDetailsPage.xaml;Pages\LocationsListPage.xaml;Pages\PageMaintenances.xaml;Pages\ProfilPage.xaml;Pages\TypesVoituresPage.xaml;Pages\VoitureDetailsPage.xaml;Pages\VoitureImagesPage.xaml;Pages\VoitureListPage.xaml;PaiementsWindow.xaml;PlanifierMaintenanceWindow.xaml;Resources\SharedStyles.xaml;TerminerLocationWindow.xaml;TypeVoitureFormWindow.xaml;
 
 False

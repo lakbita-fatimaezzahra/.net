@@ -4373,24 +4373,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\HP ELITEBOOK G6\\.nuget\\packages\\": {},
-    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
+    "C:\\Users\\IKRAM\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "E:\\4IIR\\.Net\\projet\\LocationVoituresSolution\\LocationVoitures.BackOffice\\LocationVoitures.BackOffice.csproj",
+      "projectUniqueName": "C:\\dotNet\\.net\\LocationVoituresSolution\\LocationVoitures.BackOffice\\LocationVoitures.BackOffice.csproj",
       "projectName": "LocationVoitures.BackOffice",
-      "projectPath": "E:\\4IIR\\.Net\\projet\\LocationVoituresSolution\\LocationVoitures.BackOffice\\LocationVoitures.BackOffice.csproj",
-      "packagesPath": "C:\\Users\\HP ELITEBOOK G6\\.nuget\\packages\\",
-      "outputPath": "E:\\4IIR\\.Net\\projet\\LocationVoituresSolution\\LocationVoitures.BackOffice\\obj\\",
+      "projectPath": "C:\\dotNet\\.net\\LocationVoituresSolution\\LocationVoitures.BackOffice\\LocationVoitures.BackOffice.csproj",
+      "packagesPath": "C:\\Users\\IKRAM\\.nuget\\packages\\",
+      "outputPath": "C:\\dotNet\\.net\\LocationVoituresSolution\\LocationVoitures.BackOffice\\obj\\",
       "projectStyle": "PackageReference",
-      "fallbackFolders": [
-        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-      ],
       "configFilePaths": [
-        "C:\\Users\\HP ELITEBOOK G6\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+        "C:\\Users\\IKRAM\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -4398,15 +4393,14 @@
       ],
       "sources": {
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-        "C:\\Program Files\\dotnet\\library-packs": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
         "net8.0-windows7.0": {
           "targetAlias": "net8.0-windows",
           "projectReferences": {
-            "E:\\4IIR\\.Net\\projet\\LocationVoituresSolution\\LocationVoitures.Data\\LocationVoitures.Data.csproj": {
-              "projectPath": "E:\\4IIR\\.Net\\projet\\LocationVoituresSolution\\LocationVoitures.Data\\LocationVoitures.Data.csproj"
+            "C:\\dotNet\\.net\\LocationVoituresSolution\\LocationVoitures.Data\\LocationVoitures.Data.csproj": {
+              "projectPath": "C:\\dotNet\\.net\\LocationVoituresSolution\\LocationVoitures.Data\\LocationVoitures.Data.csproj"
             }
           }
         }
@@ -4475,7 +4469,7 @@
             "privateAssets": "none"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.306/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.308/PortableRuntimeIdentifierGraph.json"
       }
     }
   },

@@ -12,9 +12,8 @@
       }
     ],
     "additionalProbingPaths": [
-      "C:\\Users\\HP ELITEBOOK G6\\.dotnet\\store\\|arch|\\|tfm|",
-      "C:\\Users\\HP ELITEBOOK G6\\.nuget\\packages",
-      "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+      "C:\\Users\\IKRAM\\.dotnet\\store\\|arch|\\|tfm|",
+      "C:\\Users\\IKRAM\\.nuget\\packages"
     ],
     "configProperties": {
       "System.Runtime.Serialization.EnableUnsafeBinaryFormatterSerialization": true,

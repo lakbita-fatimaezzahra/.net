@@ -58,6 +58,8 @@ wwwroot\lib\jquery-validation\LICENSE.md
 wwwroot\lib\jquery-validation-unobtrusive\jquery.validate.unobtrusive.js
 wwwroot\lib\jquery-validation-unobtrusive\jquery.validate.unobtrusive.min.js
 wwwroot\lib\jquery-validation-unobtrusive\LICENSE.txt
+wwwroot\uploads\voitures\029f7087-991a-4f21-aa55-d1e1ecfc2a9e.jpg
+wwwroot\uploads\voitures\247b7a15-6f3e-48c8-b0c4-4957ee86adb3.png
 wwwroot\uploads\voitures\4c628372-2151-42d0-8355-0ec1b397b040.png
 wwwroot\uploads\voitures\61d33e48-f7ee-413e-9e16-83888ea7015b.png
 wwwroot\uploads\voitures\b9f15539-03b1-4647-a925-e2a563f06a71.png

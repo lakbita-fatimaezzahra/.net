@@ -1,0 +1,34 @@
+﻿@model List<LocationVoitures.Data.Models.Voiture>
+
+@{
+    ViewData["Title"] = "Liste des voitures";
+}
+
+<h2 class="mb-4">Nos Voitures</h2>
+
+<div class="row">
+    @foreach (var v in Model)
+    {
+        <div class="col-md-4">
+            <div class="card mb-3">
+
+                <!-- Image -->
+                <img class="card-img-top"
+                     src="@Url.Content(v.Images?.FirstOrDefault()?.Chemin ?? "~/images/default-car.jpg")"
+                     style="height:200px; object-fit:cover;" />
+
+                <div class="card-body">
+                    <h5 class="card-title">@v.Marque @v.Modele</h5>
+
+                    <p class="card-text">
+                        <strong>Prix/Jour :</strong> @v.PrixJour DH<br />
+                        <strong>Statut :</strong> @v.Statut<br />
+                        <strong>Type :</strong> @v.TypeVoiture?.Nom
+                    </p>
+
+                    <a class="btn btn-primary">Voir détails</a>
+                </div>
+            </div>
+        </div>
+    }
+</div>

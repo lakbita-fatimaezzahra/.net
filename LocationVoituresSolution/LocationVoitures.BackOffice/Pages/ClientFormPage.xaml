@@ -1,0 +1,92 @@
+﻿<Page x:Class="LocationVoitures.BackOffice.Pages.ClientFormPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:LocationVoitures.BackOffice.Pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="ClientFormPage">
+    <Page.Resources>
+        <!-- Style des boutons arrondis -->
+        <Style x:Key="RoundedButton" TargetType="Button">
+            <Setter Property="Background" Value="#3498DB"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="Padding" Value="8,4"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}"
+                             CornerRadius="6"
+                             Padding="{TemplateBinding Padding}">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="#2980B9"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </Page.Resources>
+
+    <Grid Margin="20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <TextBlock Text="Informations Client"
+                FontSize="20"
+                FontWeight="Bold"
+                Foreground="#2C3E50"
+                Margin="0 0 0 20"
+                Grid.Row="0"/>
+
+        <StackPanel Grid.Row="1" VerticalAlignment="Top" Margin="0,0,0,10" >
+
+            <!-- Nom -->
+            <TextBlock Text="Nom" FontWeight="SemiBold"/>
+            <TextBox x:Name="tbNom" Margin="0,5"/>
+
+            <!-- Prénom -->
+            <TextBlock Text="Prénom" FontWeight="SemiBold"/>
+            <TextBox x:Name="tbPrenom" Margin="0,5"/>
+
+            <!-- Email -->
+            <TextBlock Text="Email" FontWeight="SemiBold"/>
+            <TextBox x:Name="tbEmail" Margin="0,5"/>
+
+            <!-- CIN -->
+            <TextBlock Text="CIN" FontWeight="SemiBold"/>
+            <TextBox x:Name="tbCIN" Margin="0,5"/>
+
+            <!-- Téléphone -->
+            <TextBlock Text="Téléphone" FontWeight="SemiBold"/>
+            <TextBox x:Name="tbTelephone" Margin="0,5"/>
+
+            <!-- Adresse -->
+            <TextBlock Text="Adresse" FontWeight="SemiBold"/>
+            <TextBox x:Name="tbAdresse" Margin="0,5"/>
+
+            <!-- Permis de conduire -->
+            <TextBlock Text="Permis de conduire" FontWeight="SemiBold"/>
+            <TextBox x:Name="tbPermis" Margin="0,5"/>
+
+            <!-- Date de naissance -->
+            <TextBlock Text="Date de naissance" FontWeight="SemiBold"/>
+            <DatePicker x:Name="dpDateNaissance" Margin="0,5"/>
+        </StackPanel>
+
+        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,20,0,0">
+            <Button x:Name="btnSave" Content="Enregistrer" Width="120" Click="BtnSave_Click" Style="{StaticResource RoundedButton}"/>
+            <Button x:Name="btnCancel" Content="Annuler" Width="120" Margin="10,0,0,0" Click="BtnCancel_Click" Style="{StaticResource RoundedButton}" Background="#E74C3C"/>
+        </StackPanel>
+    </Grid>
+</Page>

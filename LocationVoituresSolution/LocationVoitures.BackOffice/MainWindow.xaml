@@ -1,0 +1,19 @@
+﻿<Window x:Class="LocationVoitures.BackOffice.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Liste des utilisateurs" Height="534" Width="800">
+    <Grid Margin="10">
+        <StackPanel>
+            <Button Content="Charger les utilisateurs" Click="BtnLoadUsers_Click" Margin="0,0,0,10"/>
+            <DataGrid x:Name="dgUsers" AutoGenerateColumns="False">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Id" Binding="{Binding Id}" />
+                    <DataGridTextColumn Header="Nom" Binding="{Binding Nom}" />
+                    <DataGridTextColumn Header="Prénom" Binding="{Binding Prenom}" />
+                    <DataGridTextColumn Header="Email" Binding="{Binding Email}" />
+                    <DataGridTextColumn Header="Rôle" Binding="{Binding Role.Nom}" />
+                </DataGrid.Columns>
+            </DataGrid>
+        </StackPanel>
+    </Grid>
+</Window>

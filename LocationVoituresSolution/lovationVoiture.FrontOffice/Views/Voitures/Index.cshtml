@@ -1,0 +1,52 @@
+﻿@model IEnumerable<LocationVoitures.Data.Models.Voiture>
+
+<h2 class="mb-4">Liste des voitures disponibles</h2>
+
+<div class="row">
+    @foreach (var voiture in Model)
+    {
+        <div class="col-md-4 mb-4">
+            <div class="card h-100 shadow-sm">
+                @if (voiture.Images != null && voiture.Images.Any())
+                {
+                    <img src="@voiture.Images.First().Chemin"
+                         class="card-img-top"
+                         alt="@voiture.Marque @voiture.Modele"
+                         style="height:200px; object-fit:cover;">
+                }
+                else
+                {
+                    <img src="/images/default-car.png"
+                         class="card-img-top"
+                         alt="Image par défaut"
+                         style="height:200px; object-fit:cover;">
+                }
+
+                @{
+                    var img = voiture.Images?.FirstOrDefault();
+                }
+
+
+
+                <div class="card-body">
+                   
+
+                    <h5 class="card-title">@voiture.Marque @voiture.Modele</h5>
+                    <p class="card-text">
+                        <strong>Année :</strong> @voiture.Annee.Year<br />
+                        <strong>Prix/jour :</strong> @voiture.PrixJour DH<br />
+                        <strong>Kilométrage :</strong> @voiture.Kilometrage km<br />
+                        <strong>Statut :</strong>
+                        <span class="badge @(voiture.Statut == "Disponible" ? "bg-success" : "bg-danger")">
+                            @voiture.Statut
+                        </span><br />
+                        <strong>Type :</strong> @voiture.TypeVoiture?.Nom
+                    </p>
+                </div>
+                <div class="card-footer text-center">
+                    <a href="#" class="btn btn-primary">Réserver</a>
+                </div>
+            </div>
+        </div>
+    }
+</div>

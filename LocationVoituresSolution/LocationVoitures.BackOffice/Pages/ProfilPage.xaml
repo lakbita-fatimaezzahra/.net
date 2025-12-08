@@ -1,0 +1,139 @@
+<Page x:Class="LocationVoitures.BackOffice.Pages.ProfilPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      Title="Mon Profil">
+    <Grid Margin="20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!-- En-tête -->
+        <StackPanel Grid.Row="0" Margin="0,0,0,20">
+            <TextBlock Text="Mon Profil" FontSize="28" FontWeight="Bold" Margin="0,0,0,10"/>
+            <TextBlock x:Name="TxtWelcome" Text="Bienvenue" FontSize="16" Foreground="Gray"/>
+        </StackPanel>
+
+        <!-- Contenu principal -->
+        <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto">
+            <StackPanel>
+                <!-- Informations personnelles -->
+                <GroupBox Header="Informations personnelles" Margin="0,0,0,20" Padding="15">
+                    <StackPanel>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="150"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+
+                            <Label Grid.Row="0" Grid.Column="0" Content="Nom :" VerticalAlignment="Center"/>
+                            <TextBox x:Name="TxtNom" Grid.Row="0" Grid.Column="1" Margin="10,5" Height="30"/>
+
+                            <Label Grid.Row="1" Grid.Column="0" Content="Prénom :" VerticalAlignment="Center"/>
+                            <TextBox x:Name="TxtPrenom" Grid.Row="1" Grid.Column="1" Margin="10,5" Height="30"/>
+
+                            <Label Grid.Row="2" Grid.Column="0" Content="Email :" VerticalAlignment="Center"/>
+                            <TextBox x:Name="TxtEmail" Grid.Row="2" Grid.Column="1" Margin="10,5" Height="30"/>
+
+                            <Label Grid.Row="3" Grid.Column="0" Content="Rôle :" VerticalAlignment="Center"/>
+                            <TextBlock x:Name="TxtRole" Grid.Row="3" Grid.Column="1" Margin="10,5" 
+                                       VerticalAlignment="Center" FontWeight="Bold" Foreground="#27AE60"/>
+                        </Grid>
+
+                        <Button x:Name="BtnSaveProfile" Content="Enregistrer les modifications" 
+                                Click="BtnSaveProfile_Click" 
+                                Background="#3498DB" Foreground="White" 
+                                Height="40" Margin="0,15,0,0" FontWeight="Bold"/>
+                    </StackPanel>
+                </GroupBox>
+
+                <!-- Informations employé (si applicable) -->
+                <GroupBox x:Name="GbxEmployeInfo" Header="Informations employé" Margin="0,0,0,20" Padding="15" Visibility="Collapsed">
+                    <StackPanel>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="150"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+
+                            <Label Grid.Row="0" Grid.Column="0" Content="Poste :" VerticalAlignment="Center"/>
+                            <TextBlock x:Name="TxtPoste" Grid.Row="0" Grid.Column="1" Margin="10,5" 
+                                       VerticalAlignment="Center" FontWeight="Bold"/>
+
+                            <Label Grid.Row="1" Grid.Column="0" Content="Salaire :" VerticalAlignment="Center"/>
+                            <TextBlock x:Name="TxtSalaire" Grid.Row="1" Grid.Column="1" Margin="10,5" 
+                                       VerticalAlignment="Center" FontWeight="Bold"/>
+                        </Grid>
+                    </StackPanel>
+                </GroupBox>
+
+                <!-- Changer le mot de passe -->
+                <GroupBox Header="Changer le mot de passe" Margin="0,0,0,20" Padding="15">
+                    <StackPanel>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="200"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+
+                            <Label Grid.Row="0" Grid.Column="0" Content="Mot de passe actuel :" VerticalAlignment="Center"/>
+                            <PasswordBox x:Name="PwdCurrentPassword" Grid.Row="0" Grid.Column="1" Margin="10,5" Height="30"/>
+
+                            <Label Grid.Row="1" Grid.Column="0" Content="Nouveau mot de passe :" VerticalAlignment="Center"/>
+                            <PasswordBox x:Name="PwdNewPassword" Grid.Row="1" Grid.Column="1" Margin="10,5" Height="30"/>
+
+                            <Label Grid.Row="2" Grid.Column="0" Content="Confirmer le mot de passe :" VerticalAlignment="Center"/>
+                            <PasswordBox x:Name="PwdConfirmPassword" Grid.Row="2" Grid.Column="1" Margin="10,5" Height="30"/>
+                        </Grid>
+
+                        <Button x:Name="BtnChangePassword" Content="Changer le mot de passe" 
+                                Click="BtnChangePassword_Click" 
+                                Background="#E74C3C" Foreground="White" 
+                                Height="40" Margin="0,15,0,0" FontWeight="Bold"/>
+                    </StackPanel>
+                </GroupBox>
+
+                <!-- Informations système -->
+                <GroupBox Header="Informations système" Padding="15">
+                    <StackPanel>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="200"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+
+                            <Label Grid.Row="0" Grid.Column="0" Content="Date de création :" VerticalAlignment="Center"/>
+                            <TextBlock x:Name="TxtCreatedAt" Grid.Row="0" Grid.Column="1" Margin="10,5" 
+                                       VerticalAlignment="Center"/>
+
+                            <Label Grid.Row="1" Grid.Column="0" Content="Dernière mise à jour :" VerticalAlignment="Center"/>
+                            <TextBlock x:Name="TxtUpdatedAt" Grid.Row="1" Grid.Column="1" Margin="10,5" 
+                                       VerticalAlignment="Center"/>
+                        </Grid>
+                    </StackPanel>
+                </GroupBox>
+            </StackPanel>
+        </ScrollViewer>
+    </Grid>
+</Page>
+
+

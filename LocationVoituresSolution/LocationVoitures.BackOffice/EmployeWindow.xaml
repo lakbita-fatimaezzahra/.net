@@ -1,0 +1,176 @@
+﻿<Window x:Class="LocationVoitures.BackOffice.EmployeWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:LocationVoitures.BackOffice"
+        mc:Ignorable="d"
+        Title="EmployeWindow"
+        Height="450"
+        Width="1950"
+        WindowState="Maximized"
+        ResizeMode="CanResize">
+
+    <Window.Resources>
+
+        <!-- Styles sidebar -->
+        <Style x:Key="SidebarButtonStyle" TargetType="Button">
+            <Setter Property="Background" Value="#FF34495E"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Height" Value="40"/>
+            <Setter Property="Width" Value="230"/>
+            <Setter Property="HorizontalContentAlignment" Value="Left"/>
+            <Setter Property="Padding" Value="10,0"/>
+            <Setter Property="Margin" Value="0,5"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+        </Style>
+
+        <Style x:Key="SidebarSubButtonStyle"
+               TargetType="Button"
+               BasedOn="{StaticResource SidebarButtonStyle}">
+            <Setter Property="Padding" Value="30,0"/>
+        </Style>
+
+        <Style TargetType="Expander">
+            <Setter Property="Width" Value="230"/>
+            <Setter Property="Background" Value="#FF34495E"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="Margin" Value="0,5"/>
+            <Setter Property="Padding" Value="0"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+        </Style>
+
+    </Window.Resources>
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="250"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <!-- Sidebar -->
+        <StackPanel Grid.Column="0" Background="#FF2C3E50">
+
+            <!-- Profil -->
+            <StackPanel Orientation="Vertical" Margin="20" VerticalAlignment="Top">
+                <Ellipse Width="80" Height="80" Fill="Gray"/>
+                <TextBlock Text="Admin" Foreground="White" FontWeight="Bold" FontSize="16" Margin="0,10,0,0"/>
+                <TextBlock Text="admin@test.com" Foreground="White" FontSize="12"/>
+            </StackPanel>
+
+            <Separator Margin="10,10"/>
+
+            <!-- Menu -->
+            <StackPanel>
+
+                <Button Style="{StaticResource SidebarButtonStyle}" Click="DashboardButton_Click">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="📊" FontSize="16" Margin="0,0,10,0"/>
+                        <TextBlock Text="Tableaux de bord"/>
+                    </StackPanel>
+                </Button>
+
+               
+
+                <!-- Gestion des clients -->
+                <Expander x:Name="ClientsExpander" Header="Gestion des clients" Expanded="Expander_Expanded">
+                    <StackPanel>
+                        <Button Style="{StaticResource SidebarSubButtonStyle}" Click="ClientsButton_Click">
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="👥" FontSize="16" Margin="0,0,10,0"/>
+                                <TextBlock Text="Gestion des clients"/>
+                            </StackPanel>
+                        </Button>
+
+                      
+
+                      
+                    </StackPanel>
+                </Expander>
+
+                <!-- Gestion des véhicules -->
+                <Expander x:Name="VehiclesExpander" Header="Gestion des véhicules" Expanded="Expander_Expanded">
+                    <StackPanel>
+
+                        <Button Style="{StaticResource SidebarSubButtonStyle}" Click="VehiclesButton_Click">
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="🚗" FontSize="16" Margin="0,0,10,0"/>
+                                <TextBlock Text="Véhicules et images"/>
+                            </StackPanel>
+                        </Button>
+
+      
+                    </StackPanel>
+                </Expander>
+
+                <!-- Gestion des locations -->
+                <Expander x:Name="RentalsExpander" Header="Gestion des locations" Expanded="Expander_Expanded">
+                    <StackPanel>
+
+                     
+
+                    </StackPanel>
+                </Expander>
+
+               
+            </StackPanel>
+        </StackPanel>
+
+        <!-- Contenu principal -->
+        <Grid Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <!-- Logout -->
+            <Button Content="Logout"
+                    Width="100"
+                    Height="35"
+                    HorizontalAlignment="Right"
+                    Margin="0,10,10,0"
+                    Click="LogoutButton_Click">
+                <Button.Style>
+                    <Style TargetType="Button">
+                        <Setter Property="Background" Value="#E74C3C"/>
+                        <Setter Property="Foreground" Value="White"/>
+                        <Setter Property="FontWeight" Value="Bold"/>
+                        <Setter Property="BorderBrush" Value="Transparent"/>
+                        <Setter Property="BorderThickness" Value="0"/>
+                        <Setter Property="Cursor" Value="Hand"/>
+                        <Setter Property="Padding" Value="5,2"/>
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="Button">
+                                    <Border Background="{TemplateBinding Background}"
+                                            CornerRadius="5"
+                                            BorderBrush="{TemplateBinding BorderBrush}"
+                                            BorderThickness="{TemplateBinding BorderThickness}">
+                                        <ContentPresenter HorizontalAlignment="Center"
+                                                          VerticalAlignment="Center"/>
+                                    </Border>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="#C0392B"/>
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter Property="Background" Value="#A93226"/>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
+            </Button>
+
+            <!-- Frame Navigation -->
+            <Frame x:Name="MainFrame"
+                   Grid.Row="1"
+                   NavigationUIVisibility="Hidden"/>
+        </Grid>
+
+    </Grid>
+
+</Window>

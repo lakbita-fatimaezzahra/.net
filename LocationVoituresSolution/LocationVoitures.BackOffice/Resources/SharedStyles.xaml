@@ -1,0 +1,208 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <!-- ==================== COULEURS ==================== -->
+    <SolidColorBrush x:Key="PrimaryColor" Color="#2C3E50"/>
+    <SolidColorBrush x:Key="SecondaryColor" Color="#3498DB"/>
+    <SolidColorBrush x:Key="SuccessColor" Color="#27AE60"/>
+    <SolidColorBrush x:Key="DangerColor" Color="#E74C3C"/>
+    <SolidColorBrush x:Key="WarningColor" Color="#F39C12"/>
+    <SolidColorBrush x:Key="InfoColor" Color="#9B59B6"/>
+    <SolidColorBrush x:Key="OrangeColor" Color="#E67E22"/>
+    <SolidColorBrush x:Key="GreyColor" Color="#95A5A6"/>
+    <SolidColorBrush x:Key="BackgroundColor" Color="#F5F6FA"/>
+    <SolidColorBrush x:Key="BorderColor" Color="#BDC3C7"/>
+    <SolidColorBrush x:Key="TextPrimaryColor" Color="#2C3E50"/>
+    <SolidColorBrush x:Key="TextSecondaryColor" Color="#7F8C8D"/>
+
+    <!-- ==================== BUTTONS ==================== -->
+    <!-- Base Modern Button -->
+    <Style x:Key="ModernButton" TargetType="Button">
+        <Setter Property="Background" Value="{StaticResource SecondaryColor}"/>
+        <Setter Property="Foreground" Value="White"/>
+        <Setter Property="BorderThickness" Value="0"/>
+        <Setter Property="Padding" Value="15,8"/>
+        <Setter Property="FontSize" Value="13"/>
+        <Setter Property="FontWeight" Value="SemiBold"/>
+        <Setter Property="Cursor" Value="Hand"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Border Background="{TemplateBinding Background}"
+                            CornerRadius="5"
+                            Padding="{TemplateBinding Padding}">
+                        <ContentPresenter HorizontalAlignment="Center" 
+                                        VerticalAlignment="Center"/>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Opacity" Value="0.85"/>
+            </Trigger>
+            <Trigger Property="IsPressed" Value="True">
+                <Setter Property="Opacity" Value="0.7"/>
+            </Trigger>
+            <Trigger Property="IsEnabled" Value="False">
+                <Setter Property="Opacity" Value="0.5"/>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+    <!-- Primary Button -->
+    <Style x:Key="PrimaryButton" TargetType="Button" BasedOn="{StaticResource ModernButton}">
+        <Setter Property="Background" Value="{StaticResource SecondaryColor}"/>
+    </Style>
+
+    <!-- Success Button -->
+    <Style x:Key="SuccessButton" TargetType="Button" BasedOn="{StaticResource ModernButton}">
+        <Setter Property="Background" Value="{StaticResource SuccessColor}"/>
+    </Style>
+
+    <!-- Danger Button -->
+    <Style x:Key="DangerButton" TargetType="Button" BasedOn="{StaticResource ModernButton}">
+        <Setter Property="Background" Value="{StaticResource DangerColor}"/>
+    </Style>
+
+    <!-- Warning Button -->
+    <Style x:Key="WarningButton" TargetType="Button" BasedOn="{StaticResource ModernButton}">
+        <Setter Property="Background" Value="{StaticResource WarningColor}"/>
+    </Style>
+
+    <!-- Info Button -->
+    <Style x:Key="InfoButton" TargetType="Button" BasedOn="{StaticResource ModernButton}">
+        <Setter Property="Background" Value="{StaticResource InfoColor}"/>
+    </Style>
+
+    <!-- Orange Button -->
+    <Style x:Key="OrangeButton" TargetType="Button" BasedOn="{StaticResource ModernButton}">
+        <Setter Property="Background" Value="{StaticResource OrangeColor}"/>
+    </Style>
+
+    <!-- Grey Button -->
+    <Style x:Key="GreyButton" TargetType="Button" BasedOn="{StaticResource ModernButton}">
+        <Setter Property="Background" Value="{StaticResource GreyColor}"/>
+    </Style>
+
+    <!-- Icon Button (petit, carré) -->
+    <Style x:Key="IconButton" TargetType="Button" BasedOn="{StaticResource ModernButton}">
+        <Setter Property="Width" Value="35"/>
+        <Setter Property="Height" Value="35"/>
+        <Setter Property="Padding" Value="0"/>
+        <Setter Property="FontSize" Value="16"/>
+    </Style>
+
+    <!-- ==================== TEXTBOX ==================== -->
+    <Style x:Key="ModernTextBox" TargetType="TextBox">
+        <Setter Property="Height" Value="35"/>
+        <Setter Property="Padding" Value="10"/>
+        <Setter Property="FontSize" Value="13"/>
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
+        <Setter Property="Background" Value="White"/>
+        <Setter Property="BorderBrush" Value="{StaticResource BorderColor}"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Style.Triggers>
+            <Trigger Property="IsFocused" Value="True">
+                <Setter Property="BorderBrush" Value="{StaticResource SecondaryColor}"/>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+    <!-- ==================== COMBOBOX ==================== -->
+    <Style x:Key="ModernComboBox" TargetType="ComboBox">
+        <Setter Property="Height" Value="35"/>
+        <Setter Property="FontSize" Value="13"/>
+        <Setter Property="Padding" Value="10,0"/>
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
+    </Style>
+
+    <!-- ==================== BORDER/CARD ==================== -->
+    <Style x:Key="CardBorder" TargetType="Border">
+        <Setter Property="Background" Value="White"/>
+        <Setter Property="CornerRadius" Value="8"/>
+        <Setter Property="Padding" Value="15"/>
+        <Setter Property="Margin" Value="0,0,0,20"/>
+        <Setter Property="BorderBrush" Value="{StaticResource BorderColor}"/>
+        <Setter Property="BorderThickness" Value="1"/>
+    </Style>
+
+    <!-- ==================== DATAGRID ==================== -->
+    <Style x:Key="ModernDataGrid" TargetType="DataGrid">
+        <Setter Property="Background" Value="White"/>
+        <Setter Property="BorderBrush" Value="{StaticResource BorderColor}"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="GridLinesVisibility" Value="Horizontal"/>
+        <Setter Property="HorizontalGridLinesBrush" Value="#ECF0F1"/>
+        <Setter Property="HeadersVisibility" Value="Column"/>
+        <Setter Property="AutoGenerateColumns" Value="False"/>
+        <Setter Property="CanUserAddRows" Value="False"/>
+        <Setter Property="CanUserDeleteRows" Value="False"/>
+        <Setter Property="SelectionMode" Value="Single"/>
+        <Setter Property="IsReadOnly" Value="True"/>
+        <Setter Property="RowHeight" Value="50"/>
+        <Setter Property="FontSize" Value="13"/>
+        <Setter Property="AlternatingRowBackground" Value="#F8F9FA"/>
+    </Style>
+
+    <!-- DataGrid Column Header -->
+    <Style x:Key="ModernDataGridColumnHeader" TargetType="DataGridColumnHeader">
+        <Setter Property="Background" Value="#2C3E50"/>
+        <Setter Property="Foreground" Value="White"/>
+        <Setter Property="FontWeight" Value="Bold"/>
+        <Setter Property="FontSize" Value="14"/>
+        <Setter Property="Padding" Value="10"/>
+        <Setter Property="Height" Value="45"/>
+        <Setter Property="BorderThickness" Value="0,0,1,0"/>
+        <Setter Property="BorderBrush" Value="#34495E"/>
+    </Style>
+
+    <!-- DataGrid Row -->
+    <Style x:Key="ModernDataGridRow" TargetType="DataGridRow">
+        <Setter Property="Background" Value="White"/>
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Background" Value="#EAF3FF"/>
+            </Trigger>
+            <Trigger Property="IsSelected" Value="True">
+                <Setter Property="Background" Value="#D6EAF8"/>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+    <!-- DataGrid Cell -->
+    <Style x:Key="ModernDataGridCell" TargetType="DataGridCell">
+        <Setter Property="BorderThickness" Value="0"/>
+        <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+        <Style.Triggers>
+            <Trigger Property="IsSelected" Value="True">
+                <Setter Property="Background" Value="Transparent"/>
+                <Setter Property="Foreground" Value="{StaticResource TextPrimaryColor}"/>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+    <!-- ==================== STATUT BADGES ==================== -->
+    <Style x:Key="StatutBadge" TargetType="Border">
+        <Setter Property="CornerRadius" Value="12"/>
+        <Setter Property="Padding" Value="8,4"/>
+        <Setter Property="HorizontalAlignment" Value="Center"/>
+    </Style>
+
+    <!-- ==================== PAGE TITLE ==================== -->
+    <Style x:Key="PageTitle" TargetType="TextBlock">
+        <Setter Property="FontSize" Value="28"/>
+        <Setter Property="FontWeight" Value="Bold"/>
+        <Setter Property="Foreground" Value="{StaticResource TextPrimaryColor}"/>
+        <Setter Property="Margin" Value="0,0,0,20"/>
+    </Style>
+
+    <!-- ==================== SECTION TITLE ==================== -->
+    <Style x:Key="SectionTitle" TargetType="TextBlock">
+        <Setter Property="FontSize" Value="18"/>
+        <Setter Property="FontWeight" Value="Bold"/>
+        <Setter Property="Foreground" Value="{StaticResource TextPrimaryColor}"/>
+        <Setter Property="Margin" Value="0,0,0,10"/>
+    </Style>
+
+</ResourceDictionary>

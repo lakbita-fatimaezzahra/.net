@@ -1,0 +1,66 @@
+﻿<Window x:Class="LocationVoitures.BackOffice.AddEmployeeWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Ajouter un employé" WindowStartupLocation="CenterScreen"
+        Height="500" Width="400">
+
+    <Grid Margin="20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <!-- Titre -->
+        <TextBlock Text="Ajouter un nouvel utilisateur / employé" x:Name="labelText"
+                  
+                   FontWeight="Bold" FontSize="16"/>
+
+        <!-- Champs formulaire -->
+        <StackPanel Grid.Row="1" Orientation="Vertical" Margin="0,10,0,10">
+            <!-- Nom -->
+            <StackPanel Orientation="Vertical" Margin="0,5">
+                <TextBlock Text="Nom:"/>
+                <TextBox x:Name="tbNom"/>
+            </StackPanel>
+
+            <!-- Prénom -->
+            <StackPanel Orientation="Vertical" Margin="0,5">
+                <TextBlock Text="Prénom:"/>
+                <TextBox x:Name="tbPrenom"/>
+            </StackPanel>
+
+            <!-- Email -->
+            <StackPanel Orientation="Vertical" Margin="0,5">
+                <TextBlock Text="Email:"/>
+                <TextBox x:Name="tbEmail"/>
+            </StackPanel>
+
+         
+
+            <!-- Rôle -->
+            <StackPanel Orientation="Vertical" Margin="0,5">
+                <TextBlock Text="Rôle:"/>
+                <ComboBox x:Name="cbRoles" DisplayMemberPath="Nom" SelectedValuePath="Id"/>
+            </StackPanel>
+
+            <!-- Poste -->
+            <StackPanel Orientation="Vertical" Margin="0,5">
+                <TextBlock Text="Poste:"/>
+                <TextBox x:Name="tbPoste"/>
+            </StackPanel>
+
+            <!-- Salaire -->
+            <StackPanel Orientation="Vertical" Margin="0,5">
+                <TextBlock Text="Salaire:"/>
+                <TextBox x:Name="tbSalaire"/>
+            </StackPanel>
+        </StackPanel>
+
+        <!-- Bouton Ajouter -->
+        <Button x:Name="BtnAdd" Content="Ajouter" Grid.Row="2" Width="100" Height="30" HorizontalAlignment="Right"
+        Click="BtnAdd_Click"/>
+
+
+    </Grid>
+</Window>

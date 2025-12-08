@@ -1,0 +1,116 @@
+﻿<Page x:Class="LocationVoitures.BackOffice.Pages.AddEditVoiturePage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      mc:Ignorable="d"
+      Background="#F5F5F5"
+      Title="Ajouter/Modifier Voiture">
+
+    <Page.Resources>
+        <!-- Style carte -->
+        <Style x:Key="CardStyle" TargetType="Border">
+            <Setter Property="CornerRadius" Value="10"/>
+            <Setter Property="Padding" Value="20"/>
+            <Setter Property="Background" Value="White"/>
+            <Setter Property="Margin" Value="20"/>
+            <Setter Property="Effect">
+                <Setter.Value>
+                    <DropShadowEffect Color="Gray" BlurRadius="5" ShadowDepth="2"/>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <!-- Style bouton primaire -->
+        <Style x:Key="PrimaryButton" TargetType="Button">
+            <Setter Property="Background" Value="#0078D7"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="Padding" Value="10,5"/>
+            <Setter Property="Margin" Value="5"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Width" Value="120"/>
+        </Style>
+
+        <!-- Style bouton danger -->
+        <Style x:Key="DangerButton" TargetType="Button">
+            <Setter Property="Background" Value="#D9534F"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="Padding" Value="10,5"/>
+            <Setter Property="Margin" Value="5"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Width" Value="120"/>
+        </Style>
+    </Page.Resources>
+
+    <ScrollViewer>
+        <Border Style="{StaticResource CardStyle}">
+            <StackPanel>
+                <!-- Titre -->
+                <TextBlock x:Name="TitrePage"
+                       Text="Ajouter / Modifier une voiture"
+                       FontSize="24"
+                       FontWeight="Bold"
+                       Margin="0,0,0,20"/>
+
+                <!-- Grid pour inputs côte à côte -->
+                <Grid Margin="0,0,0,10">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+
+                    <!-- Colonne 1 -->
+                    <StackPanel Grid.Column="0" Margin="0,0,10,0">
+                        <TextBlock Text="Matricule" Margin="0,0,0,5"/>
+                        <TextBox x:Name="TxtMatricule" Margin="0,0,0,10"/>
+
+                        <TextBlock Text="Modèle" Margin="0,0,0,5"/>
+                        <TextBox x:Name="TxtModele" Margin="0,0,0,10"/>
+
+                        <TextBlock Text="Kilométrage" Margin="0,0,0,5"/>
+                        <TextBox x:Name="TxtKilometrage" Margin="0,0,0,10"/>
+
+                        <TextBlock Text="Année" Margin="0,0,0,5"/>
+                        <DatePicker x:Name="DpAnnee" Margin="0,0,0,10"/>
+                    </StackPanel>
+
+                    <!-- Colonne 2 -->
+                    <StackPanel Grid.Column="1" Margin="10,0,0,0">
+                        <TextBlock Text="Marque" Margin="0,0,0,5"/>
+                        <TextBox x:Name="TxtMarque" Margin="0,0,0,10"/>
+
+                        <TextBlock Text="Type de voiture" Margin="0,0,0,5"/>
+                        <ComboBox x:Name="CbTypeVoiture"
+                              DisplayMemberPath="Nom"
+                              SelectedValuePath="Id"
+                              Margin="0,0,0,10"/>
+
+                        <TextBlock Text="Prix par jour" Margin="0,0,0,5"/>
+                        <TextBox x:Name="TxtPrixJour" Margin="0,0,0,10"/>
+
+                        <TextBlock Text="Statut" Margin="0,0,0,5"/>
+                        <ComboBox x:Name="CbStatut" Margin="0,0,0,10">
+                            <ComboBoxItem Content="Disponible"/>
+                            <ComboBoxItem Content="Louée"/>
+                            <ComboBoxItem Content="En maintenance"/>
+                        </ComboBox>
+
+                        <TextBlock Text="Dernière Maintenance" Margin="0,0,0,5"/>
+                        <DatePicker x:Name="DpMaintenance" Margin="0,0,0,10"/>
+                    </StackPanel>
+                </Grid>
+
+                <!-- Boutons -->
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,20,0,0">
+                    <Button Content="Enregistrer" Style="{StaticResource PrimaryButton}" Click="Enregistrer_Click"/>
+                    <Button Content="Annuler" Style="{StaticResource DangerButton}" Click="Annuler_Click"/>
+                </StackPanel>
+            </StackPanel>
+        </Border>
+    </ScrollViewer>
+
+</Page> 

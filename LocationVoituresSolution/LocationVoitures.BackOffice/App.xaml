@@ -1,0 +1,8 @@
+﻿<Application x:Class="LocationVoitures.BackOffice.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             StartupUri="AdminWindow.xaml">
+    <!-- ou LoginWindow.xaml si tu l'as créé -->
+   
+</Application>
+

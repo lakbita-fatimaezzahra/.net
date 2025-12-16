@@ -19,7 +19,7 @@ namespace LocationVoitures.BackOffice.Pages
 
         private void LoadData()
         {
-            List<TypeVoiture> types = _service.GetAllTypes(); // Changé de GetAll() à GetAllTypes()
+            List<TypeVoiture> types = _service.GetAllTypes(); 
             TypeVoitureDataGrid.ItemsSource = types;
         }
 
@@ -28,7 +28,7 @@ namespace LocationVoitures.BackOffice.Pages
             var window = new TypeVoitureFormWindow();
             if (window.ShowDialog() == true)
             {
-                _service.AddType(window.TypeVoiture); // Changé de Add() à AddType()
+                _service.AddType(window.TypeVoiture); 
                 LoadData();
             }
         }

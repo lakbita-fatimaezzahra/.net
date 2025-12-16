@@ -67,12 +67,7 @@
                         <Image x:Name="QRCodeImage" Width="160" Height="160"/>
                     </Border>
 
-                    <Button Content="Planifier maintenance"
-                            Width="180" Height="35"
-                            Background="#FF4080"
-                            Foreground="White"
-                            Margin="0,20,0,0"
-                            Click="PlanifierMaintenance_Click"/>
+                  
 
                     <Button Content="Retour"
                             Width="120"

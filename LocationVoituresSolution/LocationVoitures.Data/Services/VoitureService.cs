@@ -36,6 +36,13 @@ namespace LocationVoitures.Data.Services
                 .OrderBy(v => v.Id)
                 .ToList();
         }
+        public List<Voiture> GetVoitureByType()
+        {
+            return _context.Voitures
+              .Include(v => v.TypeVoiture)
+              .ToList();
+
+        }
 
         // Pagination
         public PagedResult<Voiture> GetPagedVoitures(int page, int pageSize)
@@ -179,9 +186,14 @@ namespace LocationVoitures.Data.Services
         }
 
         // ✅ CORRIGÉ: Utiliser la classe VoitureAvecUrgence définie dans MaintenanceService
-        public List<MaintenanceService.VoitureAvecUrgence> GetVoituresAvecAlertes()
+        public List<Voiture> GetVoituresAvecAlertes()
         {
-            return _maintenanceService.GetVoituresAvecUrgence();
+            return _context.Voitures
+                 .Include(v => v.TypeVoiture)
+                 .Include(v => v.Images)
+                 .OrderBy(v => v.Id)
+                 .Where(v => v.Statut == "en maintenance")
+                 .ToList();
         }
 
         // Obtenir le statut de maintenance d'une voiture

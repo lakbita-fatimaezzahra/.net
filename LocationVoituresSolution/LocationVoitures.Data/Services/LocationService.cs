@@ -3,6 +3,7 @@ using LocationVoitures.Data.Models;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Diagnostics;
 using System.Linq;
 
 namespace LocationVoitures.Data.Services
@@ -107,60 +108,55 @@ namespace LocationVoitures.Data.Services
 
 
         // 🔹 Terminer une location
-        public void TerminerLocation(int locationId, double kilometrageFinal, double? fraisSupplementaires = 0)
+        public void TerminerLocation(int locationId, double kmFinal, double fraisSupplementaires)
         {
             try
             {
+                Debug.WriteLine($"[Service] TerminerLocation - Location {locationId}");
+
+                // ✅ RECHARGER la location depuis la base
                 var location = _context.Locations
                     .Include(l => l.Voiture)
+                    .Include(l => l.Client)
                     .FirstOrDefault(l => l.Id == locationId);
 
                 if (location == null)
-                    throw new Exception("Location introuvable.");
-
-                if (location.Statut == "Terminée")
-                    throw new Exception("Cette location est déjà terminée.");
-
-                // Sauvegarder le kilométrage initial pour le calcul
-                double kmInitial = location.Voiture.Kilometrage;
-
-                // Mise à jour du kilométrage
-                location.Voiture.Kilometrage = kilometrageFinal;
-
-                // Calcul des frais supplémentaires
-                int nbJours = (location.DateFin - location.DateDebut).Days;
-                if (nbJours == 0) nbJours = 1;
-                double kmParJour = 200; // Limite par jour
-                double kmAutorise = nbJours * kmParJour;
-                double kmParcouru = kilometrageFinal - kmInitial;
-
-                if (kmParcouru > kmAutorise)
                 {
-                    double kmDepassement = kmParcouru - kmAutorise;
-                    fraisSupplementaires += kmDepassement * 0.5; // 0.5 MAD par km dépassé
+                    throw new Exception($"Location {locationId} introuvable.");
                 }
 
-                // Vérifier le retard
-                if (DateTime.Now > location.DateFin)
+                Debug.WriteLine($"[Service] Location trouvée : Statut = {location.Statut}");
+
+                if (location.Statut != "En cours")
                 {
-                    int joursRetard = (DateTime.Now - location.DateFin).Days;
-                    fraisSupplementaires += joursRetard * location.Voiture.PrixJour * 1.5; // Pénalité 150%
+                    throw new Exception($"Cette location ne peut pas être terminée. Statut: {location.Statut}");
                 }
 
-                // Mise à jour du prix total
-                location.PrixTotal += fraisSupplementaires ?? 0;
+                // ✅ Mettre à jour la location
                 location.Statut = "Terminée";
-                location.DateFinReelle = DateTime.Now; // ✅ AJOUTÉ: Enregistrer la date de fin réelle
+               // location.DateRetourEffectif = DateTime.Now;
+                location.PrixTotal += fraisSupplementaires;
 
-                // Libérer le véhicule
-                location.Voiture.Statut = "Disponible";
+                Debug.WriteLine($"[Service] Location mise à jour : Statut = Terminée, Prix = {location.PrixTotal}");
 
-                _context.SaveChanges();
+                // ✅ Mettre à jour la voiture
+                if (location.Voiture != null)
+                {
+                    location.Voiture.Kilometrage = kmFinal;
+                    location.Voiture.Statut = "Disponible";
+                        }
+
+                // ✅✅ SAUVEGARDER
+                int changes = _context.SaveChanges();
+                GetAll();
+
 
             }
             catch (Exception ex)
             {
-                throw new Exception($"Erreur terminaison location : {ex.Message}");
+                Debug.WriteLine($"[Service] ❌ ERREUR : {ex.Message}");
+                Debug.WriteLine($"[Service] Stack: {ex.StackTrace}");
+                throw;
             }
         }
 

@@ -63,4 +63,5 @@ wwwroot\uploads\voitures\247b7a15-6f3e-48c8-b0c4-4957ee86adb3.png
 wwwroot\uploads\voitures\4c628372-2151-42d0-8355-0ec1b397b040.png
 wwwroot\uploads\voitures\61d33e48-f7ee-413e-9e16-83888ea7015b.png
 wwwroot\uploads\voitures\b9f15539-03b1-4647-a925-e2a563f06a71.png
+wwwroot\uploads\voitures\c61de260-74c4-4a8e-8726-131b2c1ee334.png
 wwwroot\uploads\voitures\e3775be2-d5e7-4120-84d1-448ad3d8cea9.png

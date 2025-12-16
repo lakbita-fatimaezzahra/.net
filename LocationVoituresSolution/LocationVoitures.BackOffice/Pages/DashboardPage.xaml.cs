@@ -1,12 +1,15 @@
 ﻿using LiveCharts;
 using LiveCharts.Wpf;
 using LocationVoitures.BackOffice.Pages;
+using LocationVoitures.Data.Models;
 using LocationVoitures.Data.Services;
 using System;
+using System.Data.Entity;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using System.Windows.Media;
 using System.Windows.Threading;
 
 namespace LocationVoitures.BackOffice
@@ -16,7 +19,10 @@ namespace LocationVoitures.BackOffice
         private readonly DashboardService _dashboardService;
         private readonly MaintenanceService _maintenanceService;
         private readonly AlerteService _alerteService;
+        private readonly VoitureService _voitureService;
+
         private DispatcherTimer _timer;
+        private List<Voiture> _allVoitures;
 
         // Propriétés pour le binding
         private int _usersCount;
@@ -81,7 +87,7 @@ namespace LocationVoitures.BackOffice
             _dashboardService = new DashboardService();
             _maintenanceService = new MaintenanceService();
             _alerteService = new AlerteService();
-
+            _voitureService = new VoitureService();
             // ✅ Initialiser les collections vides pour éviter les erreurs de binding
             MonthlyRentalsSeries = new SeriesCollection();
             VehicleTypeSeries = new SeriesCollection();
@@ -103,6 +109,7 @@ namespace LocationVoitures.BackOffice
 
             Loaded += DashboardPage_Loaded;
         }
+        
 
         private void DashboardPage_Loaded(object sender, RoutedEventArgs e)
         {
@@ -112,11 +119,13 @@ namespace LocationVoitures.BackOffice
             // Charger toutes les statistiques
             LoadStatistics();
             LoadCharts();
+            LoadVoitures();
+            LoadTypesChart();
             LoadAlertesMaintenance();
             UpdateDateTime();
             StartTimer();
         }
-
+      
         // Vérifier les maintenances de toutes les voitures
         private void VerifierMaintenances()
         {
@@ -146,140 +155,102 @@ namespace LocationVoitures.BackOffice
             TxtRentalsCount.Text = RentalsCount.ToString();
             TxtClientsCount.Text = ClientsCount.ToString();
         }
+        private void LoadVoitures()
+        {
+            // Exemple de récupération depuis la base
+            _allVoitures = _voitureService.GetVoitureByType();
+        }
+        private void LoadTypesChart()
+        {
+            // Inclure le TypeVoiture pour accéder à son nom
+            var typesCount = _allVoitures
+                .GroupBy(v => v.TypeVoiture.Nom) // On groupe par nom du type
+                .Select(g => new { TypeName = g.Key, Count = g.Count() })
+                .ToList();
 
-        // Charger les graphiques
+            SeriesCollection series = new SeriesCollection();
+
+            foreach (var t in typesCount)
+            {
+                series.Add(new PieSeries
+                {
+                    Title = t.TypeName, // Affiche le nom du type
+                    Values = new ChartValues<int> { t.Count },
+                    DataLabels = true
+                });
+            }
+
+            TypeVoituresChart.Series = series;
+        }
+
+
+
+        // Charger le graphique location
         private void LoadCharts()
         {
             try
             {
-                // ✅ Locations par mois
-                var data = _dashboardService.GetLocationsParMois();
-                
-                if (data != null && data.Any())
+                // -------------------------
+                // 1️⃣ Locations par mois
+                // -------------------------
+                var locationsData = _dashboardService.GetLocationsParMois();
+
+                if (locationsData != null && locationsData.Any())
                 {
-                    Months = data.Select(x => x.Key).ToArray();
+                    Months = locationsData.Select(x => x.Key).ToArray();
                     MonthlyRentalsSeries = new SeriesCollection
-                    {
-                        new ColumnSeries
-                        {
-                            Title = "Locations",
-                            Values = new ChartValues<int>(data.Select(x => x.Value)),
-                            Fill = System.Windows.Media.Brushes.CornflowerBlue,
-                            Stroke = System.Windows.Media.Brushes.DarkBlue,
-                            StrokeThickness = 2
-                        }
-                    };
+            {
+                new ColumnSeries
+                {
+                    Title = "Locations",
+                    Values = new ChartValues<int>(locationsData.Select(x => x.Value)),
+                    Fill = Brushes.CornflowerBlue,
+                    Stroke = Brushes.DarkBlue,
+                    StrokeThickness = 2
+                }
+            };
                 }
                 else
                 {
-                    // Si pas de données, créer un graphique vide
+                    // Aucun donnée → graphique vide
                     Months = new[] { "Aucune donnée" };
                     MonthlyRentalsSeries = new SeriesCollection
-                    {
-                        new ColumnSeries
-                        {
-                            Title = "Locations",
-                            Values = new ChartValues<int> { 0 },
-                            Fill = System.Windows.Media.Brushes.LightGray
-                        }
-                    };
-                }
-
-                // ✅ Répartition par type de voiture
-                var types = _dashboardService.GetVoituresParType();
-                
-                System.Diagnostics.Debug.WriteLine($"[LoadCharts] Types de véhicules récupérés: {types?.Count ?? 0}");
-                
-                if (types != null && types.Any())
+            {
+                new ColumnSeries
                 {
-                    System.Diagnostics.Debug.WriteLine($"[LoadCharts] Création du graphique avec {types.Count} types");
-                    
-                    // Couleurs pour le graphique en camembert
-                    var colors = new[]
-                    {
-                        System.Windows.Media.Brushes.CornflowerBlue,
-                        System.Windows.Media.Brushes.LightGreen,
-                        System.Windows.Media.Brushes.Orange,
-                        System.Windows.Media.Brushes.Pink,
-                        System.Windows.Media.Brushes.Purple,
-                        System.Windows.Media.Brushes.Teal,
-                        System.Windows.Media.Brushes.Gold,
-                        System.Windows.Media.Brushes.Crimson,
-                        System.Windows.Media.Brushes.DarkCyan,
-                        System.Windows.Media.Brushes.IndianRed
-                    };
-
-                    // Créer la collection de séries
-                    var pieSeriesList = new List<PieSeries>();
-                    
-                    int index = 0;
-                    foreach (var type in types)
-                    {
-                        var pieSeries = new PieSeries
-                        {
-                            Title = $"{type.Key}",
-                            Values = new ChartValues<int> { type.Value },
-                            DataLabels = true,
-                            LabelPoint = point => $"{point.Y} ({point.Participation:P0})",
-                            Fill = colors[index % colors.Length],
-                            StrokeThickness = 2,
-                            Stroke = System.Windows.Media.Brushes.White
-                        };
-                        
-                        pieSeriesList.Add(pieSeries);
-                        System.Diagnostics.Debug.WriteLine($"[LoadCharts] Ajouté: {type.Key} = {type.Value} véhicules");
-                        index++;
-                    }
-
-                    // ✅ Créer la SeriesCollection et l'assigner
-                    var newSeries = new SeriesCollection(pieSeriesList);
-                    VehicleTypeSeries = newSeries;
-                    
-                    System.Diagnostics.Debug.WriteLine($"[LoadCharts] VehicleTypeSeries créé avec {VehicleTypeSeries.Count} séries");
-                    
-                    // ✅ Forcer la notification de changement
-                    OnPropertyChanged(nameof(VehicleTypeSeries));
+                    Title = "Locations",
+                    Values = new ChartValues<int> { 0 },
+                    Fill = Brushes.LightGray
                 }
-                else
-                {
-                    System.Diagnostics.Debug.WriteLine("[LoadCharts] Aucun type de véhicule trouvé, création d'un graphique vide");
-                    
-                    // Si pas de données, créer un graphique avec un message
-                    VehicleTypeSeries = new SeriesCollection
-                    {
-                        new PieSeries
-                        {
-                            Title = "Aucune donnée",
-                            Values = new ChartValues<int> { 1 },
-                            Fill = System.Windows.Media.Brushes.LightGray,
-                            DataLabels = false
-                        }
-                    };
+            };
                 }
 
-                // ✅ Forcer la mise à jour du binding immédiatement
+              
+
+                // -------------------------
+                // 3️⃣ Forcer le Binding
+                // -------------------------
                 OnPropertyChanged(nameof(MonthlyRentalsSeries));
                 OnPropertyChanged(nameof(Months));
                 OnPropertyChanged(nameof(VehicleTypeSeries));
-                
-                System.Diagnostics.Debug.WriteLine($"[LoadCharts] Binding mis à jour - VehicleTypeSeries.Count = {VehicleTypeSeries?.Count ?? 0}");
-                
-                // ✅ Forcer le rafraîchissement de l'interface sur le thread UI
+
+                // Optionnel : rafraîchir le DataContext pour s'assurer que LiveCharts voit les changements
                 Dispatcher.BeginInvoke(new Action(() =>
                 {
-                    // Recharger le DataContext pour forcer la mise à jour des graphiques
                     var currentContext = DataContext;
                     DataContext = null;
                     DataContext = currentContext ?? this;
-                }), System.Windows.Threading.DispatcherPriority.Loaded);
+                }), DispatcherPriority.Loaded);
+
             }
             catch (Exception ex)
             {
                 System.Diagnostics.Debug.WriteLine($"Erreur chargement graphiques : {ex.Message}");
-                MessageBox.Show($"Erreur lors du chargement des graphiques : {ex.Message}", 
+                MessageBox.Show($"Erreur lors du chargement des graphiques : {ex.Message}",
                     "Erreur", MessageBoxButton.OK, MessageBoxImage.Warning);
             }
         }
+
 
         // ✅ Méthode pour notifier les changements de propriétés (pour le binding)
         private void OnPropertyChanged(string propertyName)

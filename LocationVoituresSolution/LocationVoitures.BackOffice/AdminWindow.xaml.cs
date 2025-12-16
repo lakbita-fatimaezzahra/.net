@@ -128,10 +128,10 @@ namespace LocationVoitures.BackOffice
             {
                 // ✅ Déconnecter l'utilisateur
                 CurrentUser.Logout();
-                
-                this.Close();
                 LoginWindow login = new LoginWindow();
                 login.Show();
+                this.Close();
+                
             }
         }
 

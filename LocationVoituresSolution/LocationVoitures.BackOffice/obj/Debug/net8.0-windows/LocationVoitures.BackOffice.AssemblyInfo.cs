@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("LocationVoitures.BackOffice")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+9b8c4fbd5df7d54d424e2b577f8d9ae616cfa685")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+207f3a07f28eb810402a795e0665ae2c8b57efd5")]
 [assembly: System.Reflection.AssemblyProductAttribute("LocationVoitures.BackOffice")]
 [assembly: System.Reflection.AssemblyTitleAttribute("LocationVoitures.BackOffice")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

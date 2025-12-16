@@ -12,6 +12,9 @@ namespace LocationVoitures.BackOffice.Pages
         public Client Client { get; private set; }
         private bool isEditMode;
 
+        // ✅ AJOUT : Événement pour notifier les changements
+        public event EventHandler ClientSaved;
+
         public ClientFormPage(Client client = null)
         {
             InitializeComponent();
@@ -79,7 +82,7 @@ namespace LocationVoitures.BackOffice.Pages
                     // 2) Créer le client avec mot de passe hashé
                     Client.Password = hashedPassword;
 
-                    // 3) Envoyer l’email AVANT d’ajouter le client
+                    // 3) Envoyer l'email AVANT d'ajouter le client
                     try
                     {
                         EmailHelper.SendPasswordEmail(
@@ -98,23 +101,31 @@ namespace LocationVoitures.BackOffice.Pages
 
                     // 4) Ajouter le client dans la base
                     service.AddClient(Client);
+
+                    // ✅ AJOUT : Déclencher l'événement AVANT le GoBack
+                    ClientSaved?.Invoke(this, EventArgs.Empty);
+
                     MessageBox.Show("Client ajouté avec succès ! Mot de passe envoyé par email.", "Succès", MessageBoxButton.OK, MessageBoxImage.Information);
+
+                    NavigationService?.GoBack();
                 }
                 else
                 {
                     service.UpdateClient(Client);
-                    MessageBox.Show("Client modifié avec succès !", "Succès", MessageBoxButton.OK, MessageBoxImage.Information);
-                }
 
-                NavigationService?.GoBack();
-              
+                    // ✅ AJOUT : Déclencher l'événement AVANT le GoBack
+                    ClientSaved?.Invoke(this, EventArgs.Empty);
+
+                    MessageBox.Show("Client modifié avec succès !", "Succès", MessageBoxButton.OK, MessageBoxImage.Information);
+
+                    NavigationService?.GoBack();
+                }
             }
             catch (Exception ex)
             {
                 MessageBox.Show($"Erreur : {ex.Message}", "Erreur", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
-
 
         private void BtnCancel_Click(object sender, RoutedEventArgs e)
         {

@@ -23,15 +23,11 @@ namespace LocationVoitures.BackOffice
         }
         private void Expander_Expanded(object sender, RoutedEventArgs e)
         {
-            // Évite la propagation vers les enfants
             e.Handled = true;
-
             Expander exp = sender as Expander;
 
-            // Fermer les autres expanders
-            if (exp != ClientsExpander) ClientsExpander.IsExpanded = false;
             if (exp != VehiclesExpander) VehiclesExpander.IsExpanded = false;
-            if (exp != RentalsExpander) RentalsExpander.IsExpanded = false;
+
         }
         private void LogoutButton_Click(object sender, RoutedEventArgs e)
         {
@@ -45,77 +41,67 @@ namespace LocationVoitures.BackOffice
             {
                 // ✅ Déconnecter l'utilisateur
                 CurrentUser.Logout();
-                
-                this.Close();
                 LoginWindow login = new LoginWindow();
                 login.Show();
+                this.Close();
+               
             }
         }
 
-        // ✅ NOUVEAU: Bouton pour accéder au profil (si ajouté dans XAML)
-        private void ProfilButton_Click(object sender, RoutedEventArgs e)
+        // ✅ NOUVEAU: Clic sur l'Ellipse (avatar) pour afficher le profil
+        private void EllipseProfil_MouseLeftButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
             MainFrame.Navigate(new ProfilPage());
         }
-        // Boutons navigation
+
+        // ✅ NOUVEAU: Clic sur le nom pour afficher le profil
+        private void TxtUserName_MouseLeftButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            MainFrame.Navigate(new ProfilPage());
+        }
+
+        // ✅ NOUVEAU: Clic sur l'email pour afficher le profil
+        private void TxtUserEmail_MouseLeftButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            MainFrame.Navigate(new ProfilPage());
+        }
+
         private void DashboardButton_Click(object sender, RoutedEventArgs e)
         {
             MainFrame.Navigate(new DashboardPage());
-
         }
 
+      
         private void ClientsButton_Click(object sender, RoutedEventArgs e)
         {
             MainFrame.Navigate(new ClientsPage());
         }
-        /* private void QRCodeButton_Click(object sender, RoutedEventArgs e)
-         {
-             MainFrame.Navigate(new QRCodePage());
-         }
-        */
-        /* private void EmailButton_Click(object sender, RoutedEventArgs e)
-         {
-             MainFrame.Navigate(new EmailNotificationPage());
-         }*/
-        private void VehiclesButton_Click(object sender, RoutedEventArgs e)
 
+        private void VehiclesButton_Click(object sender, RoutedEventArgs e)
         {
-            try
-            {
-                MainFrame.Navigate(new VoitureListPage());
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Erreur : " + ex.Message);
-            }
+            MainFrame.Navigate(new VoitureListPage());
         }
+
+        private void Type_voitureButton_Click(object sender, RoutedEventArgs e)
+        {
+            MainFrame.Navigate(new TypeVoiturePage());
+        }
+
+        private void LocationButton_Click(object sender, RoutedEventArgs e)
+        {
+            MainFrame.Navigate(new LocationListPage());
+        }
+
+        private void AlertesButton_Click(object sender, RoutedEventArgs e)
+        {
+            MainFrame.Navigate(new AlertesPage());
+        }
+
+        private void MaintenancesButton_Click(object sender, RoutedEventArgs e)
+        {
+            MainFrame.Navigate(new PageMaintenances());
+        }
+
     }
 
-    /* private void TarifsButton_Click(object sender, RoutedEventArgs e)
-     {
-         MainFrame.Navigate(new TarifsPage());
-     }
-
-     private void AvailabilityButton_Click(object sender, RoutedEventArgs e)
-     {
-         MainFrame.Navigate(new AvailabilityPage());
-     }
-
-     private void RentalsButton_Click(object sender, RoutedEventArgs e)
-     {
-         MainFrame.Navigate(new RentalsPage());
-     }
-
-     private void PaymentsButton_Click(object sender, RoutedEventArgs e)
-     {
-         MainFrame.Navigate(new PaymentsPage());
-     }
-
-     private void PDFButton_Click(object sender, RoutedEventArgs e)
-     {
-         MainFrame.Navigate(new PDFPage());
-     }    */
-
-
 }
-

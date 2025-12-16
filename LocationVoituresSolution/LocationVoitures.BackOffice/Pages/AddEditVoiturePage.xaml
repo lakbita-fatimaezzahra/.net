@@ -95,8 +95,9 @@
                         <TextBlock Text="Statut" Margin="0,0,0,5"/>
                         <ComboBox x:Name="CbStatut" Margin="0,0,0,10">
                             <ComboBoxItem Content="Disponible"/>
-                            <ComboBoxItem Content="Louée"/>
+                            <ComboBoxItem Content="Loué"/>
                             <ComboBoxItem Content="En maintenance"/>
+                            <ComboBoxItem Content="Hors service"/>
                         </ComboBox>
 
                         <TextBlock Text="Dernière Maintenance" Margin="0,0,0,5"/>

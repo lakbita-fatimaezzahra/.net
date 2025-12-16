@@ -1,25 +1,29 @@
-﻿using LocationVoitures.Data.Models;
+﻿using LocationVoitures.BackOffice.Utils;
+using LocationVoitures.Data.Models;
 using LocationVoitures.Data.Services;
 using Microsoft.Win32;
 using System;
 using System.Linq;
 using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Media;
+using static QRCoder.PayloadGenerator;
 
 namespace LocationVoitures.BackOffice
 {
-    // Classe pour ComboBox - Client
+    // Classes pour ComboBox
     public class ClientComboBoxItem
     {
         public int Id { get; set; }
-        public string DisplayText { get; set; }
+        public Client? Client { get; set; }
+        public string DisplayText { get; set; } = string.Empty;
     }
 
-    // Classe pour ComboBox - Voiture
     public class VoitureComboBoxItem
     {
         public int Id { get; set; }
-        public Voiture Voiture { get; set; }
-        public string DisplayText { get; set; }
+        public Voiture? Voiture { get; set; }
+        public string DisplayText { get; set; } = string.Empty;
     }
 
     public partial class AddLocationWindow : Window
@@ -31,18 +35,33 @@ namespace LocationVoitures.BackOffice
         public AddLocationWindow()
         {
             InitializeComponent();
+
             _clientService = new ClientService();
             _voitureService = new VoitureService();
             _locationService = new LocationService();
 
+            // Initialiser les placeholders
+            InitializePlaceholders();
+
             LoadClients();
             LoadVoitures();
 
+            // Dates par défaut
             DpDateDebut.SelectedDate = DateTime.Now;
             DpDateFin.SelectedDate = DateTime.Now.AddDays(1);
         }
 
-        // 📥 Charger les clients
+        // ===== INITIALISATION =====
+        private void InitializePlaceholders()
+        {
+            TxtSearchClient.Text = "🔍 Rechercher par nom, prénom, CIN ou téléphone...";
+            TxtSearchClient.Foreground = Brushes.Gray;
+
+            TxtSearchVoiture.Text = "🔍 Rechercher par marque, modèle ou matricule...";
+            TxtSearchVoiture.Foreground = Brushes.Gray;
+        }
+
+        // ===== CHARGEMENT DES DONNÉES =====
         private void LoadClients()
         {
             try
@@ -51,13 +70,12 @@ namespace LocationVoitures.BackOffice
                     .Select(c => new ClientComboBoxItem
                     {
                         Id = c.Id,
-                        DisplayText = $"{c.Nom} {c.Prenom} - {c.CIN}"
+                        Client = c,
+                        DisplayText = $"{c.Nom} {c.Prenom} - {c.CIN ?? "Sans CIN"}"
                     })
                     .ToList();
 
                 CmbClient.ItemsSource = clients;
-                CmbClient.DisplayMemberPath = "DisplayText";
-                CmbClient.SelectedValuePath = "Id";
             }
             catch (Exception ex)
             {
@@ -66,7 +84,6 @@ namespace LocationVoitures.BackOffice
             }
         }
 
-        // 📥 Charger les véhicules
         private void LoadVoitures()
         {
             try
@@ -76,7 +93,7 @@ namespace LocationVoitures.BackOffice
                 DateTime? dateFin = DpDateFin.SelectedDate;
 
                 var voitures = toutesVoitures
-                    .Where(v => 
+                    .Where(v =>
                     {
                         // Filtrer les voitures disponibles
                         if (v.Statut == "Loué" || v.Statut == "Maintenance" || v.Statut == "En Maintenance")
@@ -88,54 +105,210 @@ namespace LocationVoitures.BackOffice
                             return _locationService.IsVehiculeDisponible(v.Id, dateDebut.Value, dateFin.Value);
                         }
 
-                        // Sinon, afficher toutes les voitures disponibles (pas en location/maintenance)
+                        // Sinon, afficher toutes les voitures disponibles
                         return v.Statut == "Disponible";
                     })
                     .Select(v => new VoitureComboBoxItem
                     {
                         Id = v.Id,
                         Voiture = v,
-                        DisplayText = $"{v.Marque} {v.Modele} - {v.Matricule} [{v.Statut}]"
+                        DisplayText = $"{v.Marque} {v.Modele} - {v.Matricule} ({v.PrixJour:F2} MAD/j)"
                     })
                     .ToList();
 
                 CmbVoiture.ItemsSource = voitures;
-                CmbVoiture.DisplayMemberPath = "DisplayText";
-                CmbVoiture.SelectedValuePath = "Id";
 
-                // Afficher un message si aucune voiture disponible
+                // Message si aucune voiture disponible
                 if (!voitures.Any() && dateDebut.HasValue && dateFin.HasValue)
                 {
-                    TxtVoitureInfo.Text = "⚠️ Aucune voiture disponible pour les dates sélectionnées";
+                    TxtVoitureInfo.Text = "⚠️ Aucune voiture disponible pour ces dates";
+                    PnlVoitureInfo.Visibility = Visibility.Visible;
                 }
             }
             catch (Exception ex)
             {
                 MessageBox.Show($"Erreur chargement véhicules : {ex.Message}",
-                              "Erreur", MessageBoxButton.OK, MessageBoxImage.Error);
+                    "Erreur", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
 
-        // 🚗 Sélection d'un véhicule
-        private void CmbVoiture_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
+        // ===== RECHERCHE CLIENT =====
+        private void TxtSearchClient_GotFocus(object sender, RoutedEventArgs e)
+        {
+            if (TxtSearchClient.Text == "🔍 Rechercher par nom, prénom, CIN ou téléphone...")
+            {
+                TxtSearchClient.Text = "";
+                TxtSearchClient.Foreground = Brushes.Black;
+            }
+        }
+
+        private void TxtSearchClient_LostFocus(object sender, RoutedEventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(TxtSearchClient.Text))
+            {
+                TxtSearchClient.Text = "🔍 Rechercher par nom, prénom, CIN ou téléphone...";
+                TxtSearchClient.Foreground = Brushes.Gray;
+            }
+        }
+
+        private void TxtSearchClient_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            // Ignorer si c'est le placeholder
+            if (TxtSearchClient.Text == "🔍 Rechercher par nom, prénom, CIN ou téléphone...")
+                return;
+
+            try
+            {
+                string search = TxtSearchClient.Text.Trim().ToLower();
+
+                var clients = _clientService.GetAllClients()
+                    .Where(c => string.IsNullOrWhiteSpace(search) ||
+                               c.Nom.ToLower().Contains(search) ||
+                               c.Prenom.ToLower().Contains(search) ||
+                               (c.CIN != null && c.CIN.ToLower().Contains(search)) ||
+                               (c.Telephone != null && c.Telephone.Contains(search)))
+                    .Select(c => new ClientComboBoxItem
+                    {
+                        Id = c.Id,
+                        Client = c,
+                        DisplayText = $"{c.Nom} {c.Prenom} - {c.CIN ?? "Sans CIN"}"
+                    })
+                    .ToList();
+
+                CmbClient.ItemsSource = clients;
+
+                if (clients.Count > 0)
+                    CmbClient.SelectedIndex = 0;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Erreur recherche : {ex.Message}", "Erreur",
+                    MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+
+        private void CmbClient_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (CmbClient.SelectedItem is ClientComboBoxItem item && item.Client != null)
+            {
+                var client = item.Client;
+
+                TxtClientInfo.Text = $"📧 {client.Email}\n" +
+                                    $"📞 {client.Telephone ?? "Non renseigné"}\n" +
+                                    $"🏠 {client.Adresse ?? "Non renseignée"}";
+
+                PnlClientInfo.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                PnlClientInfo.Visibility = Visibility.Collapsed;
+            }
+        }
+
+        // ===== RECHERCHE VOITURE =====
+        private void TxtSearchVoiture_GotFocus(object sender, RoutedEventArgs e)
+        {
+            if (TxtSearchVoiture.Text == "🔍 Rechercher par marque, modèle ou matricule...")
+            {
+                TxtSearchVoiture.Text = "";
+                TxtSearchVoiture.Foreground = Brushes.Black;
+            }
+        }
+
+        private void TxtSearchVoiture_LostFocus(object sender, RoutedEventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(TxtSearchVoiture.Text))
+            {
+                TxtSearchVoiture.Text = "🔍 Rechercher par marque, modèle ou matricule...";
+                TxtSearchVoiture.Foreground = Brushes.Gray;
+            }
+        }
+
+        private void TxtSearchVoiture_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            // Ignorer si c'est le placeholder
+            if (TxtSearchVoiture.Text == "🔍 Rechercher par marque, modèle ou matricule...")
+                return;
+
+            try
+            {
+                string search = TxtSearchVoiture.Text.Trim().ToLower();
+                DateTime? dateDebut = DpDateDebut.SelectedDate;
+                DateTime? dateFin = DpDateFin.SelectedDate;
+
+                var voitures = _voitureService.GetAllVoitures()
+                    .Where(v =>
+                    {
+                        // Filtrer les voitures disponibles
+                        if (v.Statut != "Disponible") return false;
+
+                        // Recherche textuelle
+                        bool matchSearch = string.IsNullOrWhiteSpace(search) ||
+                                         v.Marque.ToLower().Contains(search) ||
+                                         v.Modele.ToLower().Contains(search) ||
+                                         v.Matricule.ToLower().Contains(search);
+
+                        if (!matchSearch) return false;
+
+                        // Vérifier la disponibilité selon les dates
+                        if (dateDebut.HasValue && dateFin.HasValue)
+                        {
+                            return _locationService.IsVehiculeDisponible(v.Id, dateDebut.Value, dateFin.Value);
+                        }
+
+                        return true;
+                    })
+                    .Select(v => new VoitureComboBoxItem
+                    {
+                        Id = v.Id,
+                        Voiture = v,
+                        DisplayText = $"{v.Marque} {v.Modele} - {v.Matricule} ({v.PrixJour:F2} MAD/j)"
+                    })
+                    .ToList();
+
+                CmbVoiture.ItemsSource = voitures;
+
+                if (voitures.Count > 0)
+                    CmbVoiture.SelectedIndex = 0;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Erreur recherche : {ex.Message}", "Erreur",
+                    MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+
+        private void CmbVoiture_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (CmbVoiture.SelectedItem is VoitureComboBoxItem item && item.Voiture != null)
             {
                 var voiture = item.Voiture;
-                TxtVoitureInfo.Text = $"📊 Type: {voiture.TypeVoiture?.Nom ?? "N/A"} | 💰 Prix: {voiture.PrixJour:F2} MAD/jour | 🛣️ Kilométrage: {voiture.Kilometrage:F2} km";
+
+                TxtVoitureInfo.Text = $"🚗 Type: {voiture.TypeVoiture?.Nom ?? "N/A"}\n" +
+                                     $"📊 Kilométrage: {voiture.Kilometrage:N0} km\n" +
+                                     $"💰 Prix: {voiture.PrixJour:F2} MAD/jour";
+
+                PnlVoitureInfo.Visibility = Visibility.Visible;
                 CalculerPrix();
+            }
+            else
+            {
+                PnlVoitureInfo.Visibility = Visibility.Collapsed;
             }
         }
 
-        // 📅 Changement de dates
-        private void Dates_Changed(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
+        // ===== DATES ET PRIX =====
+        private void Dates_Changed(object sender, SelectionChangedEventArgs e)
         {
             CalculerPrix();
-            // ✅ Recharger les voitures disponibles selon les nouvelles dates
-            LoadVoitures();
+            LoadVoitures(); // Recharger les voitures disponibles
         }
 
-        // 💰 Calculer le prix
+        private void BtnCalculerPrix_Click(object sender, RoutedEventArgs e)
+        {
+            CalculerPrix();
+        }
+
         private void CalculerPrix()
         {
             if (DpDateDebut.SelectedDate.HasValue &&
@@ -147,8 +320,8 @@ namespace LocationVoitures.BackOffice
 
                 if (dateFin <= dateDebut)
                 {
-                    TxtPrixTotal.Text = "-";
-                    TxtPrixDetails.Text = "";
+                    TxtPrixTotal.Text = "0.00 MAD";
+                    TxtPrixDetails.Text = "⚠️ Date de fin invalide";
                     PnlDuree.Visibility = Visibility.Collapsed;
                     return;
                 }
@@ -157,13 +330,35 @@ namespace LocationVoitures.BackOffice
                 if (nbJours == 0) nbJours = 1;
 
                 double prixJour = item.Voiture.PrixJour;
-                double prixTotal = nbJours * prixJour;
+                double sousTotal = nbJours * prixJour;
 
+                // Réductions
+                double reduction = 0;
+                string detailReduction = "";
+
+                if (nbJours >= 30)
+                {
+                    reduction = sousTotal * 0.15;
+                    detailReduction = "\n💰 Réduction longue durée (15%)";
+                }
+                else if (nbJours >= 7)
+                {
+                    reduction = sousTotal * 0.10;
+                    detailReduction = "\n💰 Réduction semaine (10%)";
+                }
+
+                double total = sousTotal - reduction;
+
+                // Affichage
                 TxtDuree.Text = $"📅 Durée: {nbJours} jour{(nbJours > 1 ? "s" : "")}";
                 PnlDuree.Visibility = Visibility.Visible;
 
-                TxtPrixDetails.Text = $"{nbJours} jour(s) × {prixJour:F2} MAD";
-                TxtPrixTotal.Text = $"{prixTotal:F2} MAD";
+                TxtPrixDetails.Text = $"💵 Prix journalier: {prixJour:F2} MAD\n" +
+                                     $"📊 Sous-total: {sousTotal:F2} MAD" +
+                                     detailReduction +
+                                     (reduction > 0 ? $"\n✅ Économie: -{reduction:F2} MAD" : "");
+
+                TxtPrixTotal.Text = $"{total:F2} MAD";
             }
             else
             {
@@ -173,20 +368,19 @@ namespace LocationVoitures.BackOffice
             }
         }
 
-        // ➕ Nouveau client
+        // ===== ACTIONS =====
         private void BtnNouveauClient_Click(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("Fonctionnalité à implémenter : ouvrir la fenêtre d'ajout de client",
+            MessageBox.Show("Utilisez la section 'Gestion des Clients' pour ajouter un nouveau client.",
                 "Information", MessageBoxButton.OK, MessageBoxImage.Information);
             LoadClients();
         }
 
-        // ✅ Créer la location
-        private void BtnCreer_Click(object sender, RoutedEventArgs e)
+        private void BtnAjouterLocation_Click(object sender, RoutedEventArgs e)
         {
             try
             {
-                // Validation
+                // Validations
                 if (CmbClient.SelectedValue == null)
                 {
                     MessageBox.Show("Veuillez sélectionner un client.", "Validation",
@@ -221,15 +415,45 @@ namespace LocationVoitures.BackOffice
                 int clientId = (int)CmbClient.SelectedValue;
                 int voitureId = (int)CmbVoiture.SelectedValue;
 
+                // Créer la location
                 var location = _locationService.CreerLocation(clientId, voitureId, dateDebut, dateFin);
 
-                // Email
-                if (ChkEnvoiEmail.IsChecked == true)
-                {
-                    // À implémenter
-                }
+                    // Options
+                    if (ChkEnvoiEmail.IsChecked == true)
+                    {
+                        try
+                        {
+                            // Récupérer le client et la voiture
+                            var client = ((ClientComboBoxItem)CmbClient.SelectedItem).Client;
+                            var voiture = ((VoitureComboBoxItem)CmbVoiture.SelectedItem).Voiture;
 
-                // PDF
+                            if (client != null && voiture != null && !string.IsNullOrWhiteSpace(client.Email))
+                            {
+                                EmailHelper.SendReservationConfirmation(
+                                    client.Email,                                 // Email client
+                                    $"{client.Prenom} {client.Nom}",             // Nom client
+                                    voiture.Marque,                               // Marque
+                                    voiture.Modele,                               // Modèle
+                                    location.DateDebut,                           // Date début
+                                    location.DateFin,                             // Date fin
+                                    location.PrixTotal,                           // Prix total
+                                    location.Id.ToString()                        // Numéro réservation
+                                );
+                            }
+                        }
+                        catch (Exception ex)
+                        {
+                            MessageBox.Show(
+                                $"⚠️ La location a été créée, mais l'email n'a pas pu être envoyé.\n\nDétails : {ex.Message}",
+                                "Avertissement",
+                                MessageBoxButton.OK,
+                                MessageBoxImage.Warning
+                            );
+                        }
+                    }
+
+                
+
                 if (ChkGenererPdf.IsChecked == true)
                 {
                     try
@@ -244,7 +468,6 @@ namespace LocationVoitures.BackOffice
                         {
                             QRCodePdfService.GenerateLocationPdf(location, saveDialog.FileName);
 
-                            // ✅ CORRECTION : Ouvrir le PDF correctement
                             try
                             {
                                 System.Diagnostics.Process.Start(new System.Diagnostics.ProcessStartInfo
@@ -255,19 +478,19 @@ namespace LocationVoitures.BackOffice
                             }
                             catch
                             {
-                                MessageBox.Show($"PDF généré avec succès !\n\nEmplacement : {saveDialog.FileName}",
+                                MessageBox.Show($"PDF généré : {saveDialog.FileName}",
                                     "Succès", MessageBoxButton.OK, MessageBoxImage.Information);
                             }
                         }
                     }
                     catch (Exception ex)
                     {
-                        MessageBox.Show($"Location créée mais erreur de génération PDF : {ex.Message}",
+                        MessageBox.Show($"Erreur PDF : {ex.Message}",
                             "Avertissement", MessageBoxButton.OK, MessageBoxImage.Warning);
                     }
                 }
 
-                MessageBox.Show($"Location n°{location.Id} créée avec succès !", "Succès",
+                MessageBox.Show($"✅ Location n°{location.Id} créée avec succès !", "Succès",
                     MessageBoxButton.OK, MessageBoxImage.Information);
 
                 DialogResult = true;
@@ -280,7 +503,6 @@ namespace LocationVoitures.BackOffice
             }
         }
 
-        // ❌ Annuler
         private void BtnAnnuler_Click(object sender, RoutedEventArgs e)
         {
             DialogResult = false;

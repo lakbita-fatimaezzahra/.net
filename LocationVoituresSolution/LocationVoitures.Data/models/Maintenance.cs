@@ -37,13 +37,45 @@ namespace LocationVoitures.Data.Models
         public string Description { get; set; }
 
         [Column("statut")]
-        public string Statut { get; set; } // Effectuée, Planifiée, En retard
+        public string Statut { get; set; } // Planifiée, Effectuée, En cours, Annulée, En retard
 
         [Column("date_creation")]
         public DateTime DateCreation { get; set; }
 
-        // Relation
+        // ✅ NOUVELLES COLONNES À AJOUTER
+        [Column("date_execution")]
+        public DateTime? DateExecution { get; set; } // Date réelle d'exécution
+
+        [Column("notes_garage")]
+        public string NotesGarage { get; set; } // Notes du garage après intervention
+
+        [Column("cout_reel")]
+        public double? CoutReel { get; set; } // Coût réel vs estimé
+
+        [Column("employe_id")]
+        public int? EmployeId { get; set; } // Qui a géré cette maintenance
+
+        [Column("priorite")]
+        public string Priorite { get; set; } // Haute, Moyenne, Basse
+
+        // Relations
         [ForeignKey("VoitureId")]
         public virtual Voiture Voiture { get; set; }
+
+        // ✅ Méthodes utilitaires
+        public bool EstEnRetard()
+        {
+            return DateTime.Now > DateProchaineMaintenance && Statut != "Effectuée";
+        }
+
+        public int JoursRestants()
+        {
+            return (DateProchaineMaintenance - DateTime.Now).Days;
+        }
+
+        public double KilometragesRestants(double kilometrageActuel)
+        {
+            return KilometrageProchain - kilometrageActuel;
+        }
     }
 }

@@ -270,25 +270,9 @@
   <ItemGroup>
     <Compile Include="Class1.cs" />
     <Compile Include="LocationContext.cs" />
-    <Compile Include="Migrations\202511121158556_firstMigration.cs" />
-    <Compile Include="Migrations\202511121158556_firstMigration.Designer.cs">
-      <DependentUpon>202511121158556_firstMigration.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202511241657038_UpdateModel.cs" />
-    <Compile Include="Migrations\202511241657038_UpdateModel.Designer.cs">
-      <DependentUpon>202511241657038_UpdateModel.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202511292022502_AjoutTableAlertes.cs" />
-    <Compile Include="Migrations\202511292022502_AjoutTableAlertes.Designer.cs">
-      <DependentUpon>202511292022502_AjoutTableAlertes.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202511292314525_InitialCreate.cs" />
-    <Compile Include="Migrations\202511292314525_InitialCreate.Designer.cs">
-      <DependentUpon>202511292314525_InitialCreate.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202511301521190_InitialCreate1.cs" />
-    <Compile Include="Migrations\202511301521190_InitialCreate1.Designer.cs">
-      <DependentUpon>202511301521190_InitialCreate1.cs</DependentUpon>
+    <Compile Include="Migrations\202512121631028_InitialCreate.cs" />
+    <Compile Include="Migrations\202512121631028_InitialCreate.Designer.cs">
+      <DependentUpon>202512121631028_InitialCreate.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="models\Alerte.cs" />
@@ -298,6 +282,7 @@
     <Compile Include="models\Location.cs" />
     <Compile Include="models\LogAction.cs" />
     <Compile Include="models\Maintenance.cs" />
+    <Compile Include="models\MaintenanceConfig.cs" />
     <Compile Include="models\Paiement.cs" />
     <Compile Include="models\Role.cs" />
     <Compile Include="models\TypeVoiture.cs" />
@@ -311,6 +296,7 @@
     <Compile Include="Services\ImageVoitureService.cs" />
     <Compile Include="Services\ImportExportService.cs" />
     <Compile Include="Services\LocationService.cs" />
+    <Compile Include="Services\MaintenanceScheduler.cs" />
     <Compile Include="Services\MaintenanceService.cs" />
     <Compile Include="Services\PagedResult.cs" />
     <Compile Include="Services\PaiementService.cs" />
@@ -325,20 +311,8 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202511121158556_firstMigration.resx">
-      <DependentUpon>202511121158556_firstMigration.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202511241657038_UpdateModel.resx">
-      <DependentUpon>202511241657038_UpdateModel.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202511292022502_AjoutTableAlertes.resx">
-      <DependentUpon>202511292022502_AjoutTableAlertes.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202511292314525_InitialCreate.resx">
-      <DependentUpon>202511292314525_InitialCreate.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202511301521190_InitialCreate1.resx">
-      <DependentUpon>202511301521190_InitialCreate1.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202512121631028_InitialCreate.resx">
+      <DependentUpon>202512121631028_InitialCreate.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

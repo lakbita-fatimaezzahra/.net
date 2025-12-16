@@ -50,70 +50,120 @@
         </Grid.ColumnDefinitions>
 
         <!-- Sidebar -->
-        <StackPanel Grid.Column="0" Background="#FF2C3E50">
-
+        <StackPanel Grid.Column="0" Background="#FF2C3E50" HorizontalAlignment="Left" Width="187">
             <!-- Profil -->
             <StackPanel Orientation="Vertical" Margin="20" VerticalAlignment="Top">
-                <Ellipse Width="80" Height="80" Fill="Gray"/>
-                <TextBlock Text="Admin" Foreground="White" FontWeight="Bold" FontSize="16" Margin="0,10,0,0"/>
-                <TextBlock Text="admin@test.com" Foreground="White" FontSize="12"/>
+                <!-- Avatar avec icône -->
+                <Grid Width="80" Height="80" Margin="0,0,0,10" Cursor="Hand" MouseLeftButtonDown="EllipseProfil_MouseLeftButtonDown">
+                    <Ellipse x:Name="EllipseProfil" 
+                      Width="80" 
+                      Height="80" 
+                      Fill="#3498DB"
+                      Stroke="#2980B9"
+                      StrokeThickness="2">
+                        <Ellipse.Style>
+                            <Style TargetType="Ellipse">
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Opacity" Value="0.8"/>
+                                        <Setter Property="Fill" Value="#2980B9"/>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Ellipse.Style>
+                        <Ellipse.ToolTip>
+                            <ToolTip Content="Cliquez pour voir votre profil"/>
+                        </Ellipse.ToolTip>
+                    </Ellipse>
+                    <!-- Icône utilisateur au centre -->
+                    <TextBlock Text="👤" 
+                        FontSize="40" 
+                        HorizontalAlignment="Center" 
+                        VerticalAlignment="Center"
+                        IsHitTestVisible="False"/>
+                </Grid>
+                <TextBlock x:Name="TxtUserName" 
+                    Text="Utilisateur" 
+                    Foreground="White" 
+                    FontWeight="Bold" 
+                    FontSize="16" 
+                    Margin="0,10,0,0" 
+                    TextAlignment="Center"
+                    Cursor="Hand"
+                    MouseLeftButtonDown="TxtUserName_MouseLeftButtonDown"/>
+                <TextBlock x:Name="TxtUserEmail" 
+                    Text="email@example.com" 
+                    Foreground="White" 
+                    FontSize="12" 
+                    TextAlignment="Center" 
+                    TextWrapping="Wrap"
+                    Cursor="Hand"
+                    MouseLeftButtonDown="TxtUserEmail_MouseLeftButtonDown"/>
             </StackPanel>
 
             <Separator Margin="10,10"/>
 
             <!-- Menu -->
             <StackPanel>
-
                 <Button Style="{StaticResource SidebarButtonStyle}" Click="DashboardButton_Click">
                     <StackPanel Orientation="Horizontal">
                         <TextBlock Text="📊" FontSize="16" Margin="0,0,10,0"/>
                         <TextBlock Text="Tableaux de bord"/>
                     </StackPanel>
                 </Button>
-
-               
+              
 
                 <!-- Gestion des clients -->
-                <Expander x:Name="ClientsExpander" Header="Gestion des clients" Expanded="Expander_Expanded">
-                    <StackPanel>
-                        <Button Style="{StaticResource SidebarSubButtonStyle}" Click="ClientsButton_Click">
-                            <StackPanel Orientation="Horizontal">
-                                <TextBlock Text="👥" FontSize="16" Margin="0,0,10,0"/>
-                                <TextBlock Text="Gestion des clients"/>
-                            </StackPanel>
-                        </Button>
-
-                      
-
-                      
+                <Button Style="{StaticResource SidebarButtonStyle}"  Click="ClientsButton_Click">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="👥" FontSize="16" Margin="0,0,10,0"/>
+                        <TextBlock Text="Gestion des clients"/>
                     </StackPanel>
-                </Expander>
+                </Button>
+
+
 
                 <!-- Gestion des véhicules -->
-                <Expander x:Name="VehiclesExpander" Header="Gestion des véhicules" Expanded="Expander_Expanded">
+                <Expander x:Name="VehiclesExpander" Header="Gestion des voitures" Expanded="Expander_Expanded">
                     <StackPanel>
-
                         <Button Style="{StaticResource SidebarSubButtonStyle}" Click="VehiclesButton_Click">
                             <StackPanel Orientation="Horizontal">
                                 <TextBlock Text="🚗" FontSize="16" Margin="0,0,10,0"/>
-                                <TextBlock Text="Véhicules et images"/>
+                                <TextBlock Text="voiture et images"/>
+                            </StackPanel>
+                        </Button>
+                        <Button Style="{StaticResource SidebarSubButtonStyle}" Click="Type_voitureButton_Click">
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="💰" FontSize="16" Margin="0,0,10,0"/>
+                                <TextBlock Text="Type voiture"/>
                             </StackPanel>
                         </Button>
 
-      
                     </StackPanel>
                 </Expander>
 
                 <!-- Gestion des locations -->
-                <Expander x:Name="RentalsExpander" Header="Gestion des locations" Expanded="Expander_Expanded">
-                    <StackPanel>
-
-                     
-
+                <Button Style="{StaticResource SidebarButtonStyle}" Click="LocationButton_Click">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="📄" FontSize="16" Margin="0,0,10,0"/>
+                        <TextBlock Text="Locations"/>
                     </StackPanel>
-                </Expander>
+                </Button>
 
-               
+
+                <Button Style="{StaticResource SidebarButtonStyle}" Click="AlertesButton_Click">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="🔔" FontSize="16" Margin="0,0,10,0"/>
+                        <TextBlock Text="Alertes d'entretien"/>
+                    </StackPanel>
+                </Button>
+                <Button Style="{StaticResource SidebarButtonStyle}" Click="MaintenancesButton_Click">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="🛠️" FontSize="16" Margin="0,0,10,0"/>
+                        <TextBlock Text="Maintenances"/>
+                    </StackPanel>
+                </Button>
+
             </StackPanel>
         </StackPanel>
 
@@ -121,16 +171,13 @@
         <Grid Grid.Column="1">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
+                <!-- Ligne pour logout -->
                 <RowDefinition Height="*"/>
+                <!-- Contenu -->
             </Grid.RowDefinitions>
 
-            <!-- Logout -->
-            <Button Content="Logout"
-                    Width="100"
-                    Height="35"
-                    HorizontalAlignment="Right"
-                    Margin="0,10,10,0"
-                    Click="LogoutButton_Click">
+            <!-- Bouton Logout -->
+            <Button Width="35" Height="35" HorizontalAlignment="Right" Margin="0,10,10,0" Click="LogoutButton_Click">
                 <Button.Style>
                     <Style TargetType="Button">
                         <Setter Property="Background" Value="#E74C3C"/>
@@ -143,12 +190,11 @@
                         <Setter Property="Template">
                             <Setter.Value>
                                 <ControlTemplate TargetType="Button">
-                                    <Border Background="{TemplateBinding Background}"
-                                            CornerRadius="5"
-                                            BorderBrush="{TemplateBinding BorderBrush}"
-                                            BorderThickness="{TemplateBinding BorderThickness}">
-                                        <ContentPresenter HorizontalAlignment="Center"
-                                                          VerticalAlignment="Center"/>
+                                    <Border Background="{TemplateBinding Background}" 
+                                CornerRadius="5"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}">
+                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
                                     </Border>
                                 </ControlTemplate>
                             </Setter.Value>
@@ -163,12 +209,23 @@
                         </Style.Triggers>
                     </Style>
                 </Button.Style>
+                <Button.Content>
+                    <StackPanel Orientation="Horizontal">
+                        <!-- Icône Logout -->
+                        <Path Data="M17,7L15.59,8.41L18.17,11H8V13H18.17L15.59,15.58L17,17L22,12M4,5H12V3H4C2.89,3 2,3.89 2,5V19C2,20.1 2.89,21 4,21H12V19H4V5Z" 
+                  Fill="White" 
+                  Stretch="Uniform" 
+                  Width="16" 
+                  Height="16"
+                  Margin="0,0,5,0"/>
+                        <TextBlock VerticalAlignment="Center"/>
+                    </StackPanel>
+                </Button.Content>
             </Button>
 
-            <!-- Frame Navigation -->
-            <Frame x:Name="MainFrame"
-                   Grid.Row="1"
-                   NavigationUIVisibility="Hidden"/>
+            <!-- Frame pour navigation -->
+            <Frame x:Name="MainFrame" Grid.Row="1" NavigationUIVisibility="Hidden" Margin="-60,5,10,-5"/>
+
         </Grid>
 
     </Grid>

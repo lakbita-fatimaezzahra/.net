@@ -7,6 +7,7 @@ using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
+using System.Windows.Navigation;
 
 namespace LocationVoitures.BackOffice.Pages
 {
@@ -29,11 +30,27 @@ namespace LocationVoitures.BackOffice.Pages
             _clientService = new ClientService(context);
             _importExportService = new ImportExportService(context);
 
+            // ✅ AJOUT : S'abonner à l'événement de navigation
+            if (NavigationService != null)
+            {
+                NavigationService.Navigated += NavigationService_Navigated;
+            }
+
             // Charger les données
             LoadClients();
 
             // Marquer comme initialisé
             _isInitialized = true;
+        }
+
+        // ✅ AJOUT : Gérer le retour de navigation
+        private void NavigationService_Navigated(object sender, NavigationEventArgs e)
+        {
+            // Recharger les clients quand on revient sur cette page
+            if (e.Content == this)
+            {
+                LoadClients();
+            }
         }
 
         private void LoadClients()
@@ -45,8 +62,11 @@ namespace LocationVoitures.BackOffice.Pages
                 var result = _clientService.GetPagedClients(_page, _pageSize);
 
                 dgClients.ItemsSource = result.Items;
-                _totalPages = result.TotalPages;
+                if (TxtTotalItems != null)
+                    TxtTotalItems.Text = result.TotalItems.ToString();
 
+                _totalPages = result.TotalPages;
+              
                 if (TxtPageInfo != null)
                     TxtPageInfo.Text = $"Page {_page} / {_totalPages}";
 
@@ -158,7 +178,12 @@ namespace LocationVoitures.BackOffice.Pages
 
             try
             {
-                NavigationService.Navigate(new ClientFormPage());
+                var formPage = new ClientFormPage();
+
+                // ✅ AJOUT : S'abonner à l'événement ClientSaved
+                formPage.ClientSaved += (s, ev) => LoadClients();
+
+                NavigationService.Navigate(formPage);
             }
             catch (Exception ex)
             {
@@ -175,7 +200,12 @@ namespace LocationVoitures.BackOffice.Pages
             {
                 try
                 {
-                    NavigationService.Navigate(new ClientFormPage(selectedClient));
+                    var formPage = new ClientFormPage(selectedClient);
+
+                    // ✅ AJOUT : S'abonner à l'événement ClientSaved
+                    formPage.ClientSaved += (s, ev) => LoadClients();
+
+                    NavigationService.Navigate(formPage);
                 }
                 catch (Exception ex)
                 {

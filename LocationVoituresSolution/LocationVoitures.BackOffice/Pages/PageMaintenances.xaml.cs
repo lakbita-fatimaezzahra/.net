@@ -2,6 +2,7 @@
 using LocationVoitures.Data.Services;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
@@ -25,26 +26,89 @@ namespace LocationVoitures.BackOffice.Pages
             LoadMaintenances();
         }
 
+        // ✅ MÉTHODE CORRIGÉE - FORCE LE RECHARGEMENT COMPLET
         private void LoadMaintenances()
         {
-            // Charger toutes les maintenances avec Voiture incluse
-            _allMaintenances = _maintenanceService.GetAllMaintenancesWithVoiture();
-            _currentPage = 1;
-            ApplyPagination();
+            try
+            {
+                Debug.WriteLine("═══════════════════════════════════════════");
+                Debug.WriteLine($"[LoadMaintenances] DÉBUT - Page {_currentPage}");
+
+                // ✅ 1. VIDER COMPLÈTEMENT la grille
+                if (dgMaintenances != null)
+                {
+                    dgMaintenances.ItemsSource = null;
+                    dgMaintenances.Items.Refresh();
+                    dgMaintenances.UpdateLayout();
+                }
+
+                // ✅ 2. CRÉER UN NOUVEAU SERVICE (sans using)
+                var freshService = new MaintenanceService();
+
+                // ✅ 3. CHARGER les données fraîches depuis la base
+                _allMaintenances = freshService.GetAllMaintenancesWithVoiture();
+
+                Debug.WriteLine($"[LoadMaintenances] {_allMaintenances.Count} maintenances chargées");
+
+                // ✅ 4. Réinitialiser la page
+                _currentPage = 1;
+
+                // ✅ 5. Appliquer la pagination
+                ApplyPagination();
+
+                Debug.WriteLine($"[LoadMaintenances] ✅ TERMINÉ AVEC SUCCÈS");
+                Debug.WriteLine("═══════════════════════════════════════════");
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine($"[LoadMaintenances] ❌ ERREUR : {ex.Message}");
+                MessageBox.Show($"Erreur de chargement : {ex.Message}", "Erreur",
+                    MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
 
         private void ApplyPagination()
         {
-            _totalPages = (int)Math.Ceiling((double)_allMaintenances.Count / _pageSize);
-            _currentPage = Math.Max(1, Math.Min(_currentPage, _totalPages));
+            try
+            {
+                if (_allMaintenances == null || _allMaintenances.Count == 0)
+                {
+                    _totalPages = 1;
+                    _currentPage = 1;
+                    _pagedMaintenances = new List<Maintenance>();
+                }
+                else
+                {
+                    _totalPages = (int)Math.Ceiling((double)_allMaintenances.Count / _pageSize);
+                    _currentPage = Math.Max(1, Math.Min(_currentPage, _totalPages));
 
-            _pagedMaintenances = _allMaintenances
-                .Skip((_currentPage - 1) * _pageSize)
-                .Take(_pageSize)
-                .ToList();
+                    _pagedMaintenances = _allMaintenances
+                        .Skip((_currentPage - 1) * _pageSize)
+                        .Take(_pageSize)
+                        .ToList();
+                }
 
-            dgMaintenances.ItemsSource = _pagedMaintenances;
-            TxtPageInfo.Text = $"Page {_currentPage} / {_totalPages}";
+                // ✅ Affecter les données à la grille
+                if (dgMaintenances != null)
+                {
+                    dgMaintenances.ItemsSource = _pagedMaintenances;
+                    dgMaintenances.Items.Refresh();
+                }
+
+                // ✅ Mettre à jour l'affichage de la pagination
+                if (TxtPageInfo != null)
+                {
+                    TxtPageInfo.Text = _totalPages > 0
+                        ? $"Page {_currentPage} / {_totalPages}"
+                        : "Aucune maintenance";
+                }
+
+                Debug.WriteLine($"[ApplyPagination] Page {_currentPage}/{_totalPages}, {_pagedMaintenances.Count} items affichés");
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine($"[ApplyPagination] Erreur : {ex.Message}");
+            }
         }
 
         private void BtnPrev_Click(object sender, RoutedEventArgs e)
@@ -67,43 +131,56 @@ namespace LocationVoitures.BackOffice.Pages
 
         private void SearchBox_TextChanged(object sender, TextChangedEventArgs e)
         {
-            string keyword = SearchBox.Text.Trim().ToLower();
+            try
+            {
+                string keyword = SearchBox?.Text?.Trim().ToLower() ?? "";
 
-            _allMaintenances = _maintenanceService.GetAllMaintenancesWithVoiture()
-                .Where(m =>
+                // ✅ Recharger depuis la base avec un nouveau service
+                var freshService = new MaintenanceService();
+                var allData = freshService.GetAllMaintenancesWithVoiture();
+
+                if (string.IsNullOrWhiteSpace(keyword))
                 {
-                    switch (GetSelectedFilter())
-                    {
-                        case "Type": return m.TypeMaintenance?.ToLower().Contains(keyword) ?? false;
-                        case "Garage": return m.Garage?.ToLower().Contains(keyword) ?? false;
-                        case "Statut": return m.Statut?.ToLower().Contains(keyword) ?? false;
-                        default:
-                            return (m.TypeMaintenance?.ToLower().Contains(keyword) ?? false)
-                                     || (m.Garage?.ToLower().Contains(keyword) ?? false)
-                                     || (m.Statut?.ToLower().Contains(keyword) ?? false);
-                    }
-                })
-                .ToList();
+                    _allMaintenances = allData;
+                }
+                else
+                {
+                    _allMaintenances = allData
+                        .Where(m =>
+                        {
+                            switch (GetSelectedFilter())
+                            {
+                                case "Type":
+                                    return m.TypeMaintenance?.ToLower().Contains(keyword) ?? false;
+                                case "Garage":
+                                    return m.Garage?.ToLower().Contains(keyword) ?? false;
+                                case "Statut":
+                                    return m.Statut?.ToLower().Contains(keyword) ?? false;
+                                default:
+                                    return (m.TypeMaintenance?.ToLower().Contains(keyword) ?? false)
+                                         || (m.Garage?.ToLower().Contains(keyword) ?? false)
+                                         || (m.Statut?.ToLower().Contains(keyword) ?? false)
+                                         || (m.Voiture?.Matricule?.ToLower().Contains(keyword) ?? false);
+                            }
+                        })
+                        .ToList();
+                }
 
-            _currentPage = 1;
-            ApplyPagination();
+                _currentPage = 1;
+                ApplyPagination();
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine($"[SearchBox_TextChanged] Erreur : {ex.Message}");
+            }
         }
 
         private string GetSelectedFilter()
         {
-            if (rbType.IsChecked == true) return "Type";
-            if (rbGarage.IsChecked == true) return "Garage";
-            if (rbStatut.IsChecked == true) return "Statut";
+            if (rbType?.IsChecked == true) return "Type";
+            if (rbGarage?.IsChecked == true) return "Garage";
+            if (rbStatut?.IsChecked == true) return "Statut";
             return "";
-        }
-
-        // Ajouter nouvelle maintenance
-        private void BtnAdd_Click(object sender, RoutedEventArgs e)
-        {
-            var addWindow = new PlanifierMaintenanceWindow(null); // 0 = pas de voiture spécifique
-            addWindow.ShowDialog();
-            if (addWindow.MaintenanceCreee)
-                LoadMaintenances();
         }
 
         // Modifier maintenance
@@ -111,22 +188,94 @@ namespace LocationVoitures.BackOffice.Pages
         {
             if (sender is Button button && button.Tag is Maintenance maintenance)
             {
-                var editWindow = new PlanifierMaintenanceWindow(maintenance.Voiture);
+                try
+                {
+                    var editWindow = new PlanifierMaintenanceWindow(maintenance.Voiture);
 
-                // Pré-remplir les champs existants
-                editWindow.cmbType.SelectedItem = editWindow.cmbType.Items
-                    .Cast<ComboBoxItem>()
-                    .FirstOrDefault(i => i.Content.ToString() == maintenance.TypeMaintenance);
+                    // Pré-remplir les champs existants
+                    editWindow.cmbType.SelectedItem = editWindow.cmbType.Items
+                        .Cast<ComboBoxItem>()
+                        .FirstOrDefault(i => i.Content.ToString() == maintenance.TypeMaintenance);
 
-                editWindow.dpDateMaintenance.SelectedDate = maintenance.DateMaintenance;
-                editWindow.txtKmMaintenance.Text = maintenance.KilometrageMaintenance.ToString();
-                editWindow.txtGarage.Text = maintenance.Garage;
-                editWindow.txtDescription.Text = maintenance.Description;
+                    editWindow.dpDateMaintenance.SelectedDate = maintenance.DateMaintenance;
+                    editWindow.txtKmMaintenance.Text = maintenance.KilometrageMaintenance.ToString();
+                    editWindow.txtGarage.Text = maintenance.Garage;
+                    editWindow.txtDescription.Text = maintenance.Description;
 
-                editWindow.ShowDialog();
+                    editWindow.ShowDialog();
 
-                if (editWindow.MaintenanceCreee)
-                    LoadMaintenances();
+                    if (editWindow.MaintenanceCreee)
+                        LoadMaintenances();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"Erreur : {ex.Message}", "Erreur",
+                        MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+            }
+        }
+
+        // ✅ MÉTHODE CORRIGÉE - Marquer comme effectuée
+        private void BtnMarquerEffectuee_Click(object sender, RoutedEventArgs e)
+        {
+            if (sender is Button button && button.Tag is Maintenance maintenance)
+            {
+                Debug.WriteLine($"[BtnMarquerEffectuee] Début pour maintenance {maintenance.Id}");
+
+                // Vérifier que la maintenance est bien planifiée ou en cours
+                if (maintenance.Statut != "Planifiée" &&
+                    maintenance.Statut != "En cours" &&
+                    maintenance.Statut != "En retard")
+                {
+                    MessageBox.Show(
+                        $"Cette maintenance ne peut pas être marquée comme effectuée.\nStatut actuel : {maintenance.Statut}",
+                        "Attention",
+                        MessageBoxButton.OK,
+                        MessageBoxImage.Warning);
+                    return;
+                }
+
+                try
+                {
+                    var window = new MarquerMaintenanceEffectueeWindow(maintenance);
+                    window.Owner = Window.GetWindow(this);
+
+                    Debug.WriteLine($"[BtnMarquerEffectuee] Fenêtre ouverte, attente de DialogResult...");
+
+                    bool? result = window.ShowDialog();
+
+                    Debug.WriteLine($"[BtnMarquerEffectuee] DialogResult = {result}");
+
+                    if (result == true)
+                    {
+                        Debug.WriteLine($"[BtnMarquerEffectuee] ✅ Maintenance effectuée, rechargement...");
+
+                        // ✅ FORCER LE RECHARGEMENT COMPLET
+                        LoadMaintenances();
+
+                        Debug.WriteLine($"[BtnMarquerEffectuee] ✅ Rechargement terminé");
+
+                        MessageBox.Show(
+                            "✅ Maintenance marquée comme effectuée avec succès !\n\n" ,
+                            
+                            "Succès",
+                            MessageBoxButton.OK,
+                            MessageBoxImage.Information);
+                    }
+                    else
+                    {
+                        Debug.WriteLine($"[BtnMarquerEffectuee] ❌ Annulé ou erreur");
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Debug.WriteLine($"[BtnMarquerEffectuee] ❌ EXCEPTION : {ex.Message}");
+                    MessageBox.Show(
+                        $"Erreur : {ex.Message}",
+                        "Erreur",
+                        MessageBoxButton.OK,
+                        MessageBoxImage.Error);
+                }
             }
         }
 
@@ -143,9 +292,25 @@ namespace LocationVoitures.BackOffice.Pages
 
                 if (result == MessageBoxResult.Yes)
                 {
-                    // Ajoute cette méthode dans MaintenanceService si elle n'existe pas
-                    _maintenanceService.DeleteMaintenance(maintenance.Id);
-                    LoadMaintenances();
+                    try
+                    {
+                        _maintenanceService.DeleteMaintenance(maintenance.Id);
+                        LoadMaintenances();
+
+                        MessageBox.Show(
+                            "Maintenance supprimée avec succès !",
+                            "Succès",
+                            MessageBoxButton.OK,
+                            MessageBoxImage.Information);
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(
+                            $"Erreur lors de la suppression : {ex.Message}",
+                            "Erreur",
+                            MessageBoxButton.OK,
+                            MessageBoxImage.Error);
+                    }
                 }
             }
         }

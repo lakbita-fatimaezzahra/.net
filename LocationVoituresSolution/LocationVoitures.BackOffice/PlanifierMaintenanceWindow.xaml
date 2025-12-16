@@ -2,40 +2,140 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="Planifier une maintenance"
-        Height="480" Width="420"
+        Height="550" Width="450"
         WindowStartupLocation="CenterOwner"
-        ResizeMode="NoResize">
-    <Grid>
-        <StackPanel Margin="20">
+        ResizeMode="NoResize"
+        Background="#F5F5F5">
 
-        <TextBlock Text="Planifier une maintenance" FontSize="20" FontWeight="Bold" />
+    <Grid Margin="20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
 
-        <Label Content="Type de maintenance :" />
-        <ComboBox x:Name="cmbType" Width="250">
-            <ComboBoxItem Content="Vidange"/>
-            <ComboBoxItem Content="Révision"/>
-            <ComboBoxItem Content="Contrôle technique"/>
-            <ComboBoxItem Content="Diagnostic"/>
-        </ComboBox>
+        <!-- En-tête -->
+        <Border Grid.Row="0" Background="#3498DB" Padding="15" CornerRadius="5" Margin="0,0,0,20">
+            <TextBlock Text="📅 Planifier une maintenance" 
+                       FontSize="20" FontWeight="Bold" 
+                       Foreground="White" 
+                       HorizontalAlignment="Center"/>
+        </Border>
 
-        <Label Content="Date :" />
-        <DatePicker x:Name="dpDateMaintenance" Width="200"/>
+        <!-- Formulaire -->
+        <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto">
+            <StackPanel>
+                <!-- Type de maintenance -->
+                <Label Content="Type de maintenance : *" FontWeight="Bold" Margin="0,5,0,2"/>
+                <ComboBox x:Name="cmbType" Height="30" Margin="0,0,0,10">
+                    <ComboBoxItem Content="Vidange"/>
+                    <ComboBoxItem Content="Révision"/>
+                    <ComboBoxItem Content="Contrôle Technique"/>
+                    <ComboBoxItem Content="Pneus"/>
+                    <ComboBoxItem Content="Freins"/>
+                    <ComboBoxItem Content="Batterie"/>
+                    <ComboBoxItem Content="Climatisation"/>
+                    <ComboBoxItem Content="Courroie Distribution"/>
+                    <ComboBoxItem Content="Filtre Air"/>
+                    <ComboBoxItem Content="Liquide Refroidissement"/>
+                    <ComboBoxItem Content="Diagnostic"/>
+                    <ComboBoxItem Content="Autre"/>
+                </ComboBox>
 
-        <Label Content="Kilométrage actuel :" />
-        <TextBox x:Name="txtKmMaintenance" Width="200"/>
+                <!-- Date -->
+                <Label Content="Date de maintenance : *" FontWeight="Bold" Margin="0,5,0,2"/>
+                <DatePicker x:Name="dpDateMaintenance" Height="30" Margin="0,0,0,10"/>
 
-        <Label Content="Garage :" />
-        <TextBox x:Name="txtGarage" Width="250" />
+                <!-- Kilométrage -->
+                <Label Content="Kilométrage actuel : *" FontWeight="Bold" Margin="0,5,0,2"/>
+                <TextBox x:Name="txtKmMaintenance" Height="30" Margin="0,0,0,10"/>
 
-        <Label Content="Description :" />
-        <TextBox x:Name="txtDescription" Width="250" Height="70" TextWrapping="Wrap"/>
+                <!-- Garage -->
+                <Label Content="Garage :" FontWeight="Bold" Margin="0,5,0,2"/>
+                <TextBox x:Name="txtGarage" Height="30" Margin="0,0,0,10"/>
 
-        <Button Content="Enregistrer" 
-            Click="BtnSave_Click" 
-            Background="#27AE60" 
-            Foreground="White"
-            Margin="0,15,0,0"/>
-    </StackPanel>
+                <!-- Description -->
+                <Label Content="Description :" FontWeight="Bold" Margin="0,5,0,2"/>
+                <TextBox x:Name="txtDescription" 
+                         Height="80" 
+                         TextWrapping="Wrap" 
+                         AcceptsReturn="True"
+                         VerticalScrollBarVisibility="Auto"
+                         Margin="0,0,0,10"/>
 
+              
+            </StackPanel>
+        </ScrollViewer>
+
+        <!-- Boutons -->
+        <StackPanel Grid.Row="2" 
+                    Orientation="Horizontal" 
+                    HorizontalAlignment="Right" 
+                    Margin="0,20,0,0">
+            <Button x:Name="BtnEnregistrer" 
+                    Content="✓ Enregistrer" 
+                    Width="120" Height="35" 
+                    Margin="0,0,10,0"
+                    Background="#27AE60" 
+                    Foreground="White"
+                    FontWeight="Bold" 
+                    FontSize="14"
+                    Click="BtnSave_Click"
+                    Cursor="Hand">
+                <Button.Style>
+                    <Style TargetType="Button">
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="Button">
+                                    <Border Background="{TemplateBinding Background}" 
+                                            CornerRadius="3"
+                                            Padding="10,5">
+                                        <ContentPresenter HorizontalAlignment="Center" 
+                                                        VerticalAlignment="Center"/>
+                                    </Border>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="#229954"/>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
+            </Button>
+
+            <Button x:Name="BtnAnnuler" 
+                    Content="✕ Annuler" 
+                    Width="100" Height="35"
+                    Background="#E74C3C" 
+                    Foreground="White"
+                    FontWeight="Bold" 
+                    FontSize="14"
+                    Click="BtnAnnuler_Click"
+                    Cursor="Hand">
+                <Button.Style>
+                    <Style TargetType="Button">
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="Button">
+                                    <Border Background="{TemplateBinding Background}" 
+                                            CornerRadius="3"
+                                            Padding="10,5">
+                                        <ContentPresenter HorizontalAlignment="Center" 
+                                                        VerticalAlignment="Center"/>
+                                    </Border>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="#C0392B"/>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
+            </Button>
+        </StackPanel>
     </Grid>
 </Window>

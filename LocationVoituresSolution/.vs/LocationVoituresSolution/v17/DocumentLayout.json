@@ -1,0 +1,970 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "E:\\4IIR\\.Net\\projet\\.net\\.net\\LocationVoituresSolution\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{2FEC284F-E127-43BF-BE72-7DD4A79CB6B3}|LocationVoitures.BackOffice\\LocationVoitures.BackOffice.csproj|e:\\4iir\\.net\\projet\\.net\\.net\\locationvoituressolution\\locationvoitures.backoffice\\pages\\employeespage.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2FEC284F-E127-43BF-BE72-7DD4A79CB6B3}|LocationVoitures.BackOffice\\LocationVoitures.BackOffice.csproj|solutionrelative:locationvoitures.backoffice\\pages\\employeespage.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2FEC284F-E127-43BF-BE72-7DD4A79CB6B3}|LocationVoitures.BackOffice\\LocationVoitures.BackOffice.csproj|e:\\4iir\\.net\\projet\\.net\\.net\\locationvoituressolution\\locationvoitures.backoffice\\pages\\locationslistpage.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2FEC284F-E127-43BF-BE72-7DD4A79CB6B3}|LocationVoitures.BackOffice\\LocationVoitures.BackOffice.csproj|solutionrelative:locationvoitures.backoffice\\pages\\locationslistpage.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2FEC284F-E127-43BF-BE72-7DD4A79CB6B3}|LocationVoitures.BackOffice\\LocationVoitures.BackOffice.csproj|e:\\4iir\\.net\\projet\\.net\\.net\\locationvoituressolution\\locationvoitures.backoffice\\pages\\clientspage.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2FEC284F-E127-43BF-BE72-7DD4A79CB6B3}|LocationVoitures.BackOffice\\LocationVoitures.BackOffice.csproj|solutionrelative:locationvoitures.backoffice\\pages\\clientspage.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0852BD6F-92F7-4F36-9204-9D825D3AEBF9}|LocationVoitures.Data\\LocationVoitures.Data.csproj|e:\\4iir\\.net\\projet\\.net\\.net\\locationvoituressolution\\locationvoitures.data\\services\\importexportservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0852BD6F-92F7-4F36-9204-9D825D3AEBF9}|LocationVoitures.Data\\LocationVoitures.Data.csproj|solutionrelative:locationvoitures.data\\services\\importexportservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2FEC284F-E127-43BF-BE72-7DD4A79CB6B3}|LocationVoitures.BackOffice\\LocationVoitures.BackOffice.csproj|e:\\4iir\\.net\\projet\\.net\\.net\\locationvoituressolution\\locationvoitures.backoffice\\app.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{2FEC284F-E127-43BF-BE72-7DD4A79CB6B3}|LocationVoitures.BackOffice\\LocationVoitures.BackOffice.csproj|solutionrelative:locationvoitures.backoffice\\app.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2FEC284F-E127-43BF-BE72-7DD4A79CB6B3}|LocationVoitures.BackOffice\\LocationVoitures.BackOffice.csproj|e:\\4iir\\.net\\projet\\.net\\.net\\locationvoituressolution\\locationvoitures.backoffice\\utils\\emailhelper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2FEC284F-E127-43BF-BE72-7DD4A79CB6B3}|LocationVoitures.BackOffice\\LocationVoitures.BackOffice.csproj|solutionrelative:locationvoitures.backoffice\\utils\\emailhelper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2FEC284F-E127-43BF-BE72-7DD4A79CB6B3}|LocationVoitures.BackOffice\\LocationVoitures.BackOffice.csproj|e:\\4iir\\.net\\projet\\.net\\.net\\locationvoituressolution\\locationvoitures.backoffice\\pages\\profilpage.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{2FEC284F-E127-43BF-BE72-7DD4A79CB6B3}|LocationVoitures.BackOffice\\LocationVoitures.BackOffice.csproj|solutionrelative:locationvoitures.backoffice\\pages\\profilpage.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2FEC284F-E127-43BF-BE72-7DD4A79CB6B3}|LocationVoitures.BackOffice\\LocationVoitures.BackOffice.csproj|e:\\4iir\\.net\\projet\\.net\\.net\\locationvoituressolution\\locationvoitures.backoffice\\pages\\locationdetailspage.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{2FEC284F-E127-43BF-BE72-7DD4A79CB6B3}|LocationVoitures.BackOffice\\LocationVoitures.BackOffice.csproj|solutionrelative:locationvoitures.backoffice\\pages\\locationdetailspage.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2FEC284F-E127-43BF-BE72-7DD4A79CB6B3}|LocationVoitures.BackOffice\\LocationVoitures.BackOffice.csproj|e:\\4iir\\.net\\projet\\.net\\.net\\locationvoituressolution\\locationvoitures.backoffice\\terminerlocationwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2FEC284F-E127-43BF-BE72-7DD4A79CB6B3}|LocationVoitures.BackOffice\\LocationVoitures.BackOffice.csproj|solutionrelative:locationvoitures.backoffice\\terminerlocationwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2FEC284F-E127-43BF-BE72-7DD4A79CB6B3}|LocationVoitures.BackOffice\\LocationVoitures.BackOffice.csproj|e:\\4iir\\.net\\projet\\.net\\.net\\locationvoituressolution\\locationvoitures.backoffice\\paiementswindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2FEC284F-E127-43BF-BE72-7DD4A79CB6B3}|LocationVoitures.BackOffice\\LocationVoitures.BackOffice.csproj|solutionrelative:locationvoitures.backoffice\\paiementswindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2FEC284F-E127-43BF-BE72-7DD4A79CB6B3}|LocationVoitures.BackOffice\\LocationVoitures.BackOffice.csproj|e:\\4iir\\.net\\projet\\.net\\.net\\locationvoituressolution\\locationvoitures.backoffice\\terminerlocationwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{2FEC284F-E127-43BF-BE72-7DD4A79CB6B3}|LocationVoitures.BackOffice\\LocationVoitures.BackOffice.csproj|solutionrelative:locationvoitures.backoffice\\terminerlocationwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2FEC284F-E127-43BF-BE72-7DD4A79CB6B3}|LocationVoitures.BackOffice\\LocationVoitures.BackOffice.csproj|e:\\4iir\\.net\\projet\\.net\\.net\\locationvoituressolution\\locationvoitures.backoffice\\utils\\currentuser.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2FEC284F-E127-43BF-BE72-7DD4A79CB6B3}|LocationVoitures.BackOffice\\LocationVoitures.BackOffice.csproj|solutionrelative:locationvoitures.backoffice\\utils\\currentuser.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2FEC284F-E127-43BF-BE72-7DD4A79CB6B3}|LocationVoitures.BackOffice\\LocationVoitures.BackOffice.csproj|e:\\4iir\\.net\\projet\\.net\\.net\\locationvoituressolution\\locationvoitures.backoffice\\addlocationwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2FEC284F-E127-43BF-BE72-7DD4A79CB6B3}|LocationVoitures.BackOffice\\LocationVoitures.BackOffice.csproj|solutionrelative:locationvoitures.backoffice\\addlocationwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2FEC284F-E127-43BF-BE72-7DD4A79CB6B3}|LocationVoitures.BackOffice\\LocationVoitures.BackOffice.csproj|e:\\4iir\\.net\\projet\\.net\\.net\\locationvoituressolution\\locationvoitures.backoffice\\addlocationwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{2FEC284F-E127-43BF-BE72-7DD4A79CB6B3}|LocationVoitures.BackOffice\\LocationVoitures.BackOffice.csproj|solutionrelative:locationvoitures.backoffice\\addlocationwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0852BD6F-92F7-4F36-9204-9D825D3AEBF9}|LocationVoitures.Data\\LocationVoitures.Data.csproj|E:\\4IIR\\.Net\\projet\\.net\\.net\\LocationVoituresSolution\\locationvoitures.data\\services\\locationservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0852BD6F-92F7-4F36-9204-9D825D3AEBF9}|LocationVoitures.Data\\LocationVoitures.Data.csproj|solutionrelative:locationvoitures.data\\services\\locationservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2FEC284F-E127-43BF-BE72-7DD4A79CB6B3}|LocationVoitures.BackOffice\\LocationVoitures.BackOffice.csproj|e:\\4iir\\.net\\projet\\.net\\.net\\locationvoituressolution\\locationvoitures.backoffice\\pages\\pagemaintenances.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2FEC284F-E127-43BF-BE72-7DD4A79CB6B3}|LocationVoitures.BackOffice\\LocationVoitures.BackOffice.csproj|solutionrelative:locationvoitures.backoffice\\pages\\pagemaintenances.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2FEC284F-E127-43BF-BE72-7DD4A79CB6B3}|LocationVoitures.BackOffice\\LocationVoitures.BackOffice.csproj|e:\\4iir\\.net\\projet\\.net\\.net\\locationvoituressolution\\locationvoitures.backoffice\\pages\\addeditvoiturepage.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{2FEC284F-E127-43BF-BE72-7DD4A79CB6B3}|LocationVoitures.BackOffice\\LocationVoitures.BackOffice.csproj|solutionrelative:locationvoitures.backoffice\\pages\\addeditvoiturepage.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2FEC284F-E127-43BF-BE72-7DD4A79CB6B3}|LocationVoitures.BackOffice\\LocationVoitures.BackOffice.csproj|e:\\4iir\\.net\\projet\\.net\\.net\\locationvoituressolution\\locationvoitures.backoffice\\adminwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{2FEC284F-E127-43BF-BE72-7DD4A79CB6B3}|LocationVoitures.BackOffice\\LocationVoitures.BackOffice.csproj|solutionrelative:locationvoitures.backoffice\\adminwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0852BD6F-92F7-4F36-9204-9D825D3AEBF9}|LocationVoitures.Data\\LocationVoitures.Data.csproj|E:\\4IIR\\.Net\\projet\\.net\\.net\\LocationVoituresSolution\\locationvoitures.data\\services\\maintenanceservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0852BD6F-92F7-4F36-9204-9D825D3AEBF9}|LocationVoitures.Data\\LocationVoitures.Data.csproj|solutionrelative:locationvoitures.data\\services\\maintenanceservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0852BD6F-92F7-4F36-9204-9D825D3AEBF9}|LocationVoitures.Data\\LocationVoitures.Data.csproj|E:\\4IIR\\.Net\\projet\\.net\\.net\\LocationVoituresSolution\\locationvoitures.data\\models\\maintenanceconfig.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0852BD6F-92F7-4F36-9204-9D825D3AEBF9}|LocationVoitures.Data\\LocationVoitures.Data.csproj|solutionrelative:locationvoitures.data\\models\\maintenanceconfig.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0852BD6F-92F7-4F36-9204-9D825D3AEBF9}|LocationVoitures.Data\\LocationVoitures.Data.csproj|E:\\4IIR\\.Net\\projet\\.net\\.net\\LocationVoituresSolution\\locationvoitures.data\\services\\maintenancescheduler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0852BD6F-92F7-4F36-9204-9D825D3AEBF9}|LocationVoitures.Data\\LocationVoitures.Data.csproj|solutionrelative:locationvoitures.data\\services\\maintenancescheduler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2FEC284F-E127-43BF-BE72-7DD4A79CB6B3}|LocationVoitures.BackOffice\\LocationVoitures.BackOffice.csproj|e:\\4iir\\.net\\projet\\.net\\.net\\locationvoituressolution\\locationvoitures.backoffice\\controls\\dashboardalertes.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2FEC284F-E127-43BF-BE72-7DD4A79CB6B3}|LocationVoitures.BackOffice\\LocationVoitures.BackOffice.csproj|solutionrelative:locationvoitures.backoffice\\controls\\dashboardalertes.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2FEC284F-E127-43BF-BE72-7DD4A79CB6B3}|LocationVoitures.BackOffice\\LocationVoitures.BackOffice.csproj|e:\\4iir\\.net\\projet\\.net\\.net\\locationvoituressolution\\locationvoitures.backoffice\\controls\\dashboardalertes.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{2FEC284F-E127-43BF-BE72-7DD4A79CB6B3}|LocationVoitures.BackOffice\\LocationVoitures.BackOffice.csproj|solutionrelative:locationvoitures.backoffice\\controls\\dashboardalertes.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2FEC284F-E127-43BF-BE72-7DD4A79CB6B3}|LocationVoitures.BackOffice\\LocationVoitures.BackOffice.csproj|e:\\4iir\\.net\\projet\\.net\\.net\\locationvoituressolution\\locationvoitures.backoffice\\pages\\dashboardpage.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{2FEC284F-E127-43BF-BE72-7DD4A79CB6B3}|LocationVoitures.BackOffice\\LocationVoitures.BackOffice.csproj|solutionrelative:locationvoitures.backoffice\\pages\\dashboardpage.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2FEC284F-E127-43BF-BE72-7DD4A79CB6B3}|LocationVoitures.BackOffice\\LocationVoitures.BackOffice.csproj|e:\\4iir\\.net\\projet\\.net\\.net\\locationvoituressolution\\locationvoitures.backoffice\\pages\\dashboardpage.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2FEC284F-E127-43BF-BE72-7DD4A79CB6B3}|LocationVoitures.BackOffice\\LocationVoitures.BackOffice.csproj|solutionrelative:locationvoitures.backoffice\\pages\\dashboardpage.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2FEC284F-E127-43BF-BE72-7DD4A79CB6B3}|LocationVoitures.BackOffice\\LocationVoitures.BackOffice.csproj|e:\\4iir\\.net\\projet\\.net\\.net\\locationvoituressolution\\locationvoitures.backoffice\\pages\\voiturelistpage.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2FEC284F-E127-43BF-BE72-7DD4A79CB6B3}|LocationVoitures.BackOffice\\LocationVoitures.BackOffice.csproj|solutionrelative:locationvoitures.backoffice\\pages\\voiturelistpage.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2FEC284F-E127-43BF-BE72-7DD4A79CB6B3}|LocationVoitures.BackOffice\\LocationVoitures.BackOffice.csproj|e:\\4iir\\.net\\projet\\.net\\.net\\locationvoituressolution\\locationvoitures.backoffice\\pages\\clientspage.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{2FEC284F-E127-43BF-BE72-7DD4A79CB6B3}|LocationVoitures.BackOffice\\LocationVoitures.BackOffice.csproj|solutionrelative:locationvoitures.backoffice\\pages\\clientspage.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2FEC284F-E127-43BF-BE72-7DD4A79CB6B3}|LocationVoitures.BackOffice\\LocationVoitures.BackOffice.csproj|e:\\4iir\\.net\\projet\\.net\\.net\\locationvoituressolution\\locationvoitures.backoffice\\marquermaintenanceeffectueewindow .xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2FEC284F-E127-43BF-BE72-7DD4A79CB6B3}|LocationVoitures.BackOffice\\LocationVoitures.BackOffice.csproj|solutionrelative:locationvoitures.backoffice\\marquermaintenanceeffectueewindow .xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0852BD6F-92F7-4F36-9204-9D825D3AEBF9}|LocationVoitures.Data\\LocationVoitures.Data.csproj|E:\\4IIR\\.Net\\projet\\.net\\.net\\LocationVoituresSolution\\locationvoitures.data\\models\\logaction.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0852BD6F-92F7-4F36-9204-9D825D3AEBF9}|LocationVoitures.Data\\LocationVoitures.Data.csproj|solutionrelative:locationvoitures.data\\models\\logaction.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2FEC284F-E127-43BF-BE72-7DD4A79CB6B3}|LocationVoitures.BackOffice\\LocationVoitures.BackOffice.csproj|e:\\4iir\\.net\\projet\\.net\\.net\\locationvoituressolution\\locationvoitures.backoffice\\paiementswindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{2FEC284F-E127-43BF-BE72-7DD4A79CB6B3}|LocationVoitures.BackOffice\\LocationVoitures.BackOffice.csproj|solutionrelative:locationvoitures.backoffice\\paiementswindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2FEC284F-E127-43BF-BE72-7DD4A79CB6B3}|LocationVoitures.BackOffice\\LocationVoitures.BackOffice.csproj|e:\\4iir\\.net\\projet\\.net\\.net\\locationvoituressolution\\locationvoitures.backoffice\\pages\\pagemaintenances.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{2FEC284F-E127-43BF-BE72-7DD4A79CB6B3}|LocationVoitures.BackOffice\\LocationVoitures.BackOffice.csproj|solutionrelative:locationvoitures.backoffice\\pages\\pagemaintenances.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2FEC284F-E127-43BF-BE72-7DD4A79CB6B3}|LocationVoitures.BackOffice\\LocationVoitures.BackOffice.csproj|e:\\4iir\\.net\\projet\\.net\\.net\\locationvoituressolution\\locationvoitures.backoffice\\planifiermaintenancewindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2FEC284F-E127-43BF-BE72-7DD4A79CB6B3}|LocationVoitures.BackOffice\\LocationVoitures.BackOffice.csproj|solutionrelative:locationvoitures.backoffice\\planifiermaintenancewindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2FEC284F-E127-43BF-BE72-7DD4A79CB6B3}|LocationVoitures.BackOffice\\LocationVoitures.BackOffice.csproj|e:\\4iir\\.net\\projet\\.net\\.net\\locationvoituressolution\\locationvoitures.backoffice\\typevoitureformwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2FEC284F-E127-43BF-BE72-7DD4A79CB6B3}|LocationVoitures.BackOffice\\LocationVoitures.BackOffice.csproj|solutionrelative:locationvoitures.backoffice\\typevoitureformwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2FEC284F-E127-43BF-BE72-7DD4A79CB6B3}|LocationVoitures.BackOffice\\LocationVoitures.BackOffice.csproj|e:\\4iir\\.net\\projet\\.net\\.net\\locationvoituressolution\\locationvoitures.backoffice\\typevoitureformwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{2FEC284F-E127-43BF-BE72-7DD4A79CB6B3}|LocationVoitures.BackOffice\\LocationVoitures.BackOffice.csproj|solutionrelative:locationvoitures.backoffice\\typevoitureformwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2FEC284F-E127-43BF-BE72-7DD4A79CB6B3}|LocationVoitures.BackOffice\\LocationVoitures.BackOffice.csproj|e:\\4iir\\.net\\projet\\.net\\.net\\locationvoituressolution\\locationvoitures.backoffice\\pages\\typesvoiturespage.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2FEC284F-E127-43BF-BE72-7DD4A79CB6B3}|LocationVoitures.BackOffice\\LocationVoitures.BackOffice.csproj|solutionrelative:locationvoitures.backoffice\\pages\\typesvoiturespage.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2FEC284F-E127-43BF-BE72-7DD4A79CB6B3}|LocationVoitures.BackOffice\\LocationVoitures.BackOffice.csproj|e:\\4iir\\.net\\projet\\.net\\.net\\locationvoituressolution\\locationvoitures.backoffice\\pages\\clientformpage.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2FEC284F-E127-43BF-BE72-7DD4A79CB6B3}|LocationVoitures.BackOffice\\LocationVoitures.BackOffice.csproj|solutionrelative:locationvoitures.backoffice\\pages\\clientformpage.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0852BD6F-92F7-4F36-9204-9D825D3AEBF9}|LocationVoitures.Data\\LocationVoitures.Data.csproj|E:\\4IIR\\.Net\\projet\\.net\\.net\\LocationVoituresSolution\\locationvoitures.data\\services\\clientservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0852BD6F-92F7-4F36-9204-9D825D3AEBF9}|LocationVoitures.Data\\LocationVoitures.Data.csproj|solutionrelative:locationvoitures.data\\services\\clientservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2FEC284F-E127-43BF-BE72-7DD4A79CB6B3}|LocationVoitures.BackOffice\\LocationVoitures.BackOffice.csproj|e:\\4iir\\.net\\projet\\.net\\.net\\locationvoituressolution\\locationvoitures.backoffice\\pages\\addeditvoiturepage.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2FEC284F-E127-43BF-BE72-7DD4A79CB6B3}|LocationVoitures.BackOffice\\LocationVoitures.BackOffice.csproj|solutionrelative:locationvoitures.backoffice\\pages\\addeditvoiturepage.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2FEC284F-E127-43BF-BE72-7DD4A79CB6B3}|LocationVoitures.BackOffice\\LocationVoitures.BackOffice.csproj|e:\\4iir\\.net\\projet\\.net\\.net\\locationvoituressolution\\locationvoitures.backoffice\\pages\\locationslistpage.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{2FEC284F-E127-43BF-BE72-7DD4A79CB6B3}|LocationVoitures.BackOffice\\LocationVoitures.BackOffice.csproj|solutionrelative:locationvoitures.backoffice\\pages\\locationslistpage.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|E:\\4IIR\\.Net\\projet\\.net\\.net\\LocationVoituresSolution\\LocationVoitures.Data\\Migrations\\202512112152351_AjoutColonnesMaintenance.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:LocationVoitures.Data\\Migrations\\202512112152351_AjoutColonnesMaintenance.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0852BD6F-92F7-4F36-9204-9D825D3AEBF9}|LocationVoitures.Data\\LocationVoitures.Data.csproj|E:\\4IIR\\.Net\\projet\\.net\\.net\\LocationVoituresSolution\\locationvoitures.data\\packages.config||{FA3CD31E-987B-443A-9B81-186104E8DAC1}",
+      "RelativeMoniker": "D:0:0:{0852BD6F-92F7-4F36-9204-9D825D3AEBF9}|LocationVoitures.Data\\LocationVoitures.Data.csproj|solutionrelative:locationvoitures.data\\packages.config||{FA3CD31E-987B-443A-9B81-186104E8DAC1}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2FEC284F-E127-43BF-BE72-7DD4A79CB6B3}|LocationVoitures.BackOffice\\LocationVoitures.BackOffice.csproj|e:\\4iir\\.net\\projet\\.net\\.net\\locationvoituressolution\\locationvoitures.backoffice\\marquermaintenanceeffectueewindow .xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{2FEC284F-E127-43BF-BE72-7DD4A79CB6B3}|LocationVoitures.BackOffice\\LocationVoitures.BackOffice.csproj|solutionrelative:locationvoitures.backoffice\\marquermaintenanceeffectueewindow .xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0852BD6F-92F7-4F36-9204-9D825D3AEBF9}|LocationVoitures.Data\\LocationVoitures.Data.csproj|E:\\4IIR\\.Net\\projet\\.net\\.net\\LocationVoituresSolution\\locationvoitures.data\\services\\alerteservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0852BD6F-92F7-4F36-9204-9D825D3AEBF9}|LocationVoitures.Data\\LocationVoitures.Data.csproj|solutionrelative:locationvoitures.data\\services\\alerteservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0852BD6F-92F7-4F36-9204-9D825D3AEBF9}|LocationVoitures.Data\\LocationVoitures.Data.csproj|E:\\4IIR\\.Net\\projet\\.net\\.net\\LocationVoituresSolution\\locationvoitures.data\\models\\maintenance.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0852BD6F-92F7-4F36-9204-9D825D3AEBF9}|LocationVoitures.Data\\LocationVoitures.Data.csproj|solutionrelative:locationvoitures.data\\models\\maintenance.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0852BD6F-92F7-4F36-9204-9D825D3AEBF9}|LocationVoitures.Data\\LocationVoitures.Data.csproj|E:\\4IIR\\.Net\\projet\\.net\\.net\\LocationVoituresSolution\\locationvoitures.data\\models\\alerte.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0852BD6F-92F7-4F36-9204-9D825D3AEBF9}|LocationVoitures.Data\\LocationVoitures.Data.csproj|solutionrelative:locationvoitures.data\\models\\alerte.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2FEC284F-E127-43BF-BE72-7DD4A79CB6B3}|LocationVoitures.BackOffice\\LocationVoitures.BackOffice.csproj|e:\\4iir\\.net\\projet\\.net\\.net\\locationvoituressolution\\locationvoitures.backoffice\\pages\\voituredetailspage.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2FEC284F-E127-43BF-BE72-7DD4A79CB6B3}|LocationVoitures.BackOffice\\LocationVoitures.BackOffice.csproj|solutionrelative:locationvoitures.backoffice\\pages\\voituredetailspage.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2FEC284F-E127-43BF-BE72-7DD4A79CB6B3}|LocationVoitures.BackOffice\\LocationVoitures.BackOffice.csproj|e:\\4iir\\.net\\projet\\.net\\.net\\locationvoituressolution\\locationvoitures.backoffice\\pages\\voitureimagespage.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{2FEC284F-E127-43BF-BE72-7DD4A79CB6B3}|LocationVoitures.BackOffice\\LocationVoitures.BackOffice.csproj|solutionrelative:locationvoitures.backoffice\\pages\\voitureimagespage.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2FEC284F-E127-43BF-BE72-7DD4A79CB6B3}|LocationVoitures.BackOffice\\LocationVoitures.BackOffice.csproj|e:\\4iir\\.net\\projet\\.net\\.net\\locationvoituressolution\\locationvoitures.backoffice\\pages\\voitureimagespage.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2FEC284F-E127-43BF-BE72-7DD4A79CB6B3}|LocationVoitures.BackOffice\\LocationVoitures.BackOffice.csproj|solutionrelative:locationvoitures.backoffice\\pages\\voitureimagespage.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0852BD6F-92F7-4F36-9204-9D825D3AEBF9}|LocationVoitures.Data\\LocationVoitures.Data.csproj|E:\\4IIR\\.Net\\projet\\.net\\.net\\LocationVoituresSolution\\locationvoitures.data\\services\\imagevoitureservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0852BD6F-92F7-4F36-9204-9D825D3AEBF9}|LocationVoitures.Data\\LocationVoitures.Data.csproj|solutionrelative:locationvoitures.data\\services\\imagevoitureservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0852BD6F-92F7-4F36-9204-9D825D3AEBF9}|LocationVoitures.Data\\LocationVoitures.Data.csproj|E:\\4IIR\\.Net\\projet\\.net\\.net\\LocationVoituresSolution\\locationvoitures.data\\models\\imagevoiture.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0852BD6F-92F7-4F36-9204-9D825D3AEBF9}|LocationVoitures.Data\\LocationVoitures.Data.csproj|solutionrelative:locationvoitures.data\\models\\imagevoiture.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2FEC284F-E127-43BF-BE72-7DD4A79CB6B3}|LocationVoitures.BackOffice\\LocationVoitures.BackOffice.csproj|e:\\4iir\\.net\\projet\\.net\\.net\\locationvoituressolution\\locationvoitures.backoffice\\addemployeewindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{2FEC284F-E127-43BF-BE72-7DD4A79CB6B3}|LocationVoitures.BackOffice\\LocationVoitures.BackOffice.csproj|solutionrelative:locationvoitures.backoffice\\addemployeewindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0852BD6F-92F7-4F36-9204-9D825D3AEBF9}|LocationVoitures.Data\\LocationVoitures.Data.csproj|E:\\4IIR\\.Net\\projet\\.net\\.net\\LocationVoituresSolution\\locationvoitures.data\\models\\role.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0852BD6F-92F7-4F36-9204-9D825D3AEBF9}|LocationVoitures.Data\\LocationVoitures.Data.csproj|solutionrelative:locationvoitures.data\\models\\role.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2FEC284F-E127-43BF-BE72-7DD4A79CB6B3}|LocationVoitures.BackOffice\\LocationVoitures.BackOffice.csproj|e:\\4iir\\.net\\projet\\.net\\.net\\locationvoituressolution\\locationvoitures.backoffice\\adminwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2FEC284F-E127-43BF-BE72-7DD4A79CB6B3}|LocationVoitures.BackOffice\\LocationVoitures.BackOffice.csproj|solutionrelative:locationvoitures.backoffice\\adminwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2FEC284F-E127-43BF-BE72-7DD4A79CB6B3}|LocationVoitures.BackOffice\\LocationVoitures.BackOffice.csproj|e:\\4iir\\.net\\projet\\.net\\.net\\locationvoituressolution\\locationvoitures.backoffice\\loginwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{2FEC284F-E127-43BF-BE72-7DD4A79CB6B3}|LocationVoitures.BackOffice\\LocationVoitures.BackOffice.csproj|solutionrelative:locationvoitures.backoffice\\loginwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0852BD6F-92F7-4F36-9204-9D825D3AEBF9}|LocationVoitures.Data\\LocationVoitures.Data.csproj|E:\\4IIR\\.Net\\projet\\.net\\.net\\LocationVoituresSolution\\locationvoitures.data\\app.config||{FA3CD31E-987B-443A-9B81-186104E8DAC1}",
+      "RelativeMoniker": "D:0:0:{0852BD6F-92F7-4F36-9204-9D825D3AEBF9}|LocationVoitures.Data\\LocationVoitures.Data.csproj|solutionrelative:locationvoitures.data\\app.config||{FA3CD31E-987B-443A-9B81-186104E8DAC1}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2FEC284F-E127-43BF-BE72-7DD4A79CB6B3}|LocationVoitures.BackOffice\\LocationVoitures.BackOffice.csproj|e:\\4iir\\.net\\projet\\.net\\.net\\locationvoituressolution\\locationvoitures.backoffice\\app.config||{FA3CD31E-987B-443A-9B81-186104E8DAC1}",
+      "RelativeMoniker": "D:0:0:{2FEC284F-E127-43BF-BE72-7DD4A79CB6B3}|LocationVoitures.BackOffice\\LocationVoitures.BackOffice.csproj|solutionrelative:locationvoitures.backoffice\\app.config||{FA3CD31E-987B-443A-9B81-186104E8DAC1}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{67D13C4E-49BD-4472-8025-F1960E024299}|lovationVoiture.FrontOffice\\lovationVoiture.FrontOffice.csproj|e:\\4iir\\.net\\projet\\.net\\.net\\locationvoituressolution\\lovationvoiture.frontoffice\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{67D13C4E-49BD-4472-8025-F1960E024299}|lovationVoiture.FrontOffice\\lovationVoiture.FrontOffice.csproj|solutionrelative:lovationvoiture.frontoffice\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{67D13C4E-49BD-4472-8025-F1960E024299}|lovationVoiture.FrontOffice\\lovationVoiture.FrontOffice.csproj|e:\\4iir\\.net\\projet\\.net\\.net\\locationvoituressolution\\lovationvoiture.frontoffice\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{67D13C4E-49BD-4472-8025-F1960E024299}|lovationVoiture.FrontOffice\\lovationVoiture.FrontOffice.csproj|solutionrelative:lovationvoiture.frontoffice\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 100,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 4,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{3ae79031-e1bc-11d0-8f78-00a0c9110057}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{d78612c7-9962-4b83-95d9-268046dad23a}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{269a02dc-6af8-11d3-bdc4-00c04f688e50}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{34e76e81-ee4a-11d0-ae2e-00a0c90fffc3}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "EmployeesPage.xaml.cs",
+              "DocumentMoniker": "E:\\4IIR\\.Net\\projet\\.net\\.net\\LocationVoituresSolution\\LocationVoitures.BackOffice\\Pages\\EmployeesPage.xaml.cs",
+              "RelativeDocumentMoniker": "LocationVoitures.BackOffice\\Pages\\EmployeesPage.xaml.cs",
+              "ToolTip": "E:\\4IIR\\.Net\\projet\\.net\\.net\\LocationVoituresSolution\\LocationVoitures.BackOffice\\Pages\\EmployeesPage.xaml.cs",
+              "RelativeToolTip": "LocationVoitures.BackOffice\\Pages\\EmployeesPage.xaml.cs",
+              "ViewState": "AgIAABkAAAAAAAAAAAAQwC4AAABCAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-14T20:35:51.024Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "ImportExportService.cs",
+              "DocumentMoniker": "E:\\4IIR\\.Net\\projet\\.net\\.net\\LocationVoituresSolution\\LocationVoitures.Data\\Services\\ImportExportService.cs",
+              "RelativeDocumentMoniker": "LocationVoitures.Data\\Services\\ImportExportService.cs",
+              "ToolTip": "E:\\4IIR\\.Net\\projet\\.net\\.net\\LocationVoituresSolution\\LocationVoitures.Data\\Services\\ImportExportService.cs",
+              "RelativeToolTip": "LocationVoitures.Data\\Services\\ImportExportService.cs",
+              "ViewState": "AgIAADMAAAAAAAAAAAAYwEgAAAAqAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-14T20:31:05.296Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "ProfilPage.xaml",
+              "DocumentMoniker": "E:\\4IIR\\.Net\\projet\\.net\\.net\\LocationVoituresSolution\\LocationVoitures.BackOffice\\Pages\\ProfilPage.xaml",
+              "RelativeDocumentMoniker": "LocationVoitures.BackOffice\\Pages\\ProfilPage.xaml",
+              "ToolTip": "E:\\4IIR\\.Net\\projet\\.net\\.net\\LocationVoituresSolution\\LocationVoitures.BackOffice\\Pages\\ProfilPage.xaml",
+              "RelativeToolTip": "LocationVoitures.BackOffice\\Pages\\ProfilPage.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2025-12-14T18:43:07.068Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "CurrentUser.cs",
+              "DocumentMoniker": "E:\\4IIR\\.Net\\projet\\.net\\.net\\LocationVoituresSolution\\LocationVoitures.BackOffice\\Utils\\CurrentUser.cs",
+              "RelativeDocumentMoniker": "LocationVoitures.BackOffice\\Utils\\CurrentUser.cs",
+              "ToolTip": "E:\\4IIR\\.Net\\projet\\.net\\.net\\LocationVoituresSolution\\LocationVoitures.BackOffice\\Utils\\CurrentUser.cs",
+              "RelativeToolTip": "LocationVoitures.BackOffice\\Utils\\CurrentUser.cs",
+              "ViewState": "AgIAADgAAAAAAAAAAAAswAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-14T18:28:15.683Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "PaiementsWindow.xaml.cs",
+              "DocumentMoniker": "E:\\4IIR\\.Net\\projet\\.net\\.net\\LocationVoituresSolution\\LocationVoitures.BackOffice\\PaiementsWindow.xaml.cs",
+              "RelativeDocumentMoniker": "LocationVoitures.BackOffice\\PaiementsWindow.xaml.cs",
+              "ToolTip": "E:\\4IIR\\.Net\\projet\\.net\\.net\\LocationVoituresSolution\\LocationVoitures.BackOffice\\PaiementsWindow.xaml.cs",
+              "RelativeToolTip": "LocationVoitures.BackOffice\\PaiementsWindow.xaml.cs",
+              "ViewState": "AgIAAI8AAAAAAAAAAAAIwJgAAAAjAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-14T17:11:56.98Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "EmailHelper.cs",
+              "DocumentMoniker": "E:\\4IIR\\.Net\\projet\\.net\\.net\\LocationVoituresSolution\\LocationVoitures.BackOffice\\Utils\\EmailHelper.cs",
+              "RelativeDocumentMoniker": "LocationVoitures.BackOffice\\Utils\\EmailHelper.cs",
+              "ToolTip": "E:\\4IIR\\.Net\\projet\\.net\\.net\\LocationVoituresSolution\\LocationVoitures.BackOffice\\Utils\\EmailHelper.cs",
+              "RelativeToolTip": "LocationVoitures.BackOffice\\Utils\\EmailHelper.cs",
+              "ViewState": "AgIAAJsAAAAAAAAAAAAAAKkAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-13T21:21:08.424Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "AddLocationWindow.xaml",
+              "DocumentMoniker": "E:\\4IIR\\.Net\\projet\\.net\\.net\\LocationVoituresSolution\\LocationVoitures.BackOffice\\AddLocationWindow.xaml",
+              "RelativeDocumentMoniker": "LocationVoitures.BackOffice\\AddLocationWindow.xaml",
+              "ToolTip": "E:\\4IIR\\.Net\\projet\\.net\\.net\\LocationVoituresSolution\\LocationVoitures.BackOffice\\AddLocationWindow.xaml",
+              "RelativeToolTip": "LocationVoitures.BackOffice\\AddLocationWindow.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2025-12-13T20:54:29.513Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 21,
+              "Title": "DashboardAlertes.xaml.cs",
+              "DocumentMoniker": "E:\\4IIR\\.Net\\projet\\.net\\.net\\LocationVoituresSolution\\LocationVoitures.BackOffice\\Controls\\DashboardAlertes.xaml.cs",
+              "RelativeDocumentMoniker": "LocationVoitures.BackOffice\\Controls\\DashboardAlertes.xaml.cs",
+              "ToolTip": "E:\\4IIR\\.Net\\projet\\.net\\.net\\LocationVoituresSolution\\LocationVoitures.BackOffice\\Controls\\DashboardAlertes.xaml.cs",
+              "RelativeToolTip": "LocationVoitures.BackOffice\\Controls\\DashboardAlertes.xaml.cs",
+              "ViewState": "AgIAAAIAAAAAAAAAAAAowB8AAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-13T19:56:06.847Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 22,
+              "Title": "DashboardAlertes.xaml",
+              "DocumentMoniker": "E:\\4IIR\\.Net\\projet\\.net\\.net\\LocationVoituresSolution\\LocationVoitures.BackOffice\\Controls\\DashboardAlertes.xaml",
+              "RelativeDocumentMoniker": "LocationVoitures.BackOffice\\Controls\\DashboardAlertes.xaml",
+              "ToolTip": "E:\\4IIR\\.Net\\projet\\.net\\.net\\LocationVoituresSolution\\LocationVoitures.BackOffice\\Controls\\DashboardAlertes.xaml",
+              "RelativeToolTip": "LocationVoitures.BackOffice\\Controls\\DashboardAlertes.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2025-12-13T19:55:54.239Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 24,
+              "Title": "DashboardPage.xaml.cs",
+              "DocumentMoniker": "E:\\4IIR\\.Net\\projet\\.net\\.net\\LocationVoituresSolution\\LocationVoitures.BackOffice\\Pages\\DashboardPage.xaml.cs",
+              "RelativeDocumentMoniker": "LocationVoitures.BackOffice\\Pages\\DashboardPage.xaml.cs",
+              "ToolTip": "E:\\4IIR\\.Net\\projet\\.net\\.net\\LocationVoituresSolution\\LocationVoitures.BackOffice\\Pages\\DashboardPage.xaml.cs",
+              "RelativeToolTip": "LocationVoitures.BackOffice\\Pages\\DashboardPage.xaml.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-13T19:54:09.271Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 23,
+              "Title": "DashboardPage.xaml",
+              "DocumentMoniker": "E:\\4IIR\\.Net\\projet\\.net\\.net\\LocationVoituresSolution\\LocationVoitures.BackOffice\\Pages\\DashboardPage.xaml",
+              "RelativeDocumentMoniker": "LocationVoitures.BackOffice\\Pages\\DashboardPage.xaml",
+              "ToolTip": "E:\\4IIR\\.Net\\projet\\.net\\.net\\LocationVoituresSolution\\LocationVoitures.BackOffice\\Pages\\DashboardPage.xaml",
+              "RelativeToolTip": "LocationVoitures.BackOffice\\Pages\\DashboardPage.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2025-12-13T19:54:06.812Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 26,
+              "Title": "ClientsPage.xaml",
+              "DocumentMoniker": "E:\\4IIR\\.Net\\projet\\.net\\.net\\LocationVoituresSolution\\LocationVoitures.BackOffice\\Pages\\ClientsPage.xaml",
+              "RelativeDocumentMoniker": "LocationVoitures.BackOffice\\Pages\\ClientsPage.xaml",
+              "ToolTip": "E:\\4IIR\\.Net\\projet\\.net\\.net\\LocationVoituresSolution\\LocationVoitures.BackOffice\\Pages\\ClientsPage.xaml",
+              "RelativeToolTip": "LocationVoitures.BackOffice\\Pages\\ClientsPage.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2025-12-13T19:45:20.331Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 29,
+              "Title": "PaiementsWindow.xaml",
+              "DocumentMoniker": "E:\\4IIR\\.Net\\projet\\.net\\.net\\LocationVoituresSolution\\LocationVoitures.BackOffice\\PaiementsWindow.xaml",
+              "RelativeDocumentMoniker": "LocationVoitures.BackOffice\\PaiementsWindow.xaml",
+              "ToolTip": "E:\\4IIR\\.Net\\projet\\.net\\.net\\LocationVoituresSolution\\LocationVoitures.BackOffice\\PaiementsWindow.xaml",
+              "RelativeToolTip": "LocationVoitures.BackOffice\\PaiementsWindow.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2025-12-13T18:55:17.009Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 30,
+              "Title": "PageMaintenances.xaml",
+              "DocumentMoniker": "E:\\4IIR\\.Net\\projet\\.net\\.net\\LocationVoituresSolution\\LocationVoitures.BackOffice\\Pages\\PageMaintenances.xaml",
+              "RelativeDocumentMoniker": "LocationVoitures.BackOffice\\Pages\\PageMaintenances.xaml",
+              "ToolTip": "E:\\4IIR\\.Net\\projet\\.net\\.net\\LocationVoituresSolution\\LocationVoitures.BackOffice\\Pages\\PageMaintenances.xaml",
+              "RelativeToolTip": "LocationVoitures.BackOffice\\Pages\\PageMaintenances.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2025-12-13T18:44:08.511Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 15,
+              "Title": "PageMaintenances.xaml.cs",
+              "DocumentMoniker": "E:\\4IIR\\.Net\\projet\\.net\\.net\\LocationVoituresSolution\\LocationVoitures.BackOffice\\Pages\\PageMaintenances.xaml.cs",
+              "RelativeDocumentMoniker": "LocationVoitures.BackOffice\\Pages\\PageMaintenances.xaml.cs",
+              "ToolTip": "E:\\4IIR\\.Net\\projet\\.net\\.net\\LocationVoituresSolution\\LocationVoitures.BackOffice\\Pages\\PageMaintenances.xaml.cs",
+              "RelativeToolTip": "LocationVoitures.BackOffice\\Pages\\PageMaintenances.xaml.cs",
+              "ViewState": "AgIAAP0AAAAAAAAAAADwvwsBAAAVAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-13T18:35:48.595Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 31,
+              "Title": "PlanifierMaintenanceWindow.xaml.cs",
+              "DocumentMoniker": "E:\\4IIR\\.Net\\projet\\.net\\.net\\LocationVoituresSolution\\LocationVoitures.BackOffice\\PlanifierMaintenanceWindow.xaml.cs",
+              "RelativeDocumentMoniker": "LocationVoitures.BackOffice\\PlanifierMaintenanceWindow.xaml.cs",
+              "ToolTip": "E:\\4IIR\\.Net\\projet\\.net\\.net\\LocationVoituresSolution\\LocationVoitures.BackOffice\\PlanifierMaintenanceWindow.xaml.cs",
+              "RelativeToolTip": "LocationVoitures.BackOffice\\PlanifierMaintenanceWindow.xaml.cs",
+              "ViewState": "AgIAALUAAAAAAAAAAAAkwNAAAAApAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-13T18:33:30.407Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "AddLocationWindow.xaml.cs",
+              "DocumentMoniker": "E:\\4IIR\\.Net\\projet\\.net\\.net\\LocationVoituresSolution\\LocationVoitures.BackOffice\\AddLocationWindow.xaml.cs",
+              "RelativeDocumentMoniker": "LocationVoitures.BackOffice\\AddLocationWindow.xaml.cs",
+              "ToolTip": "E:\\4IIR\\.Net\\projet\\.net\\.net\\LocationVoituresSolution\\LocationVoitures.BackOffice\\AddLocationWindow.xaml.cs",
+              "RelativeToolTip": "LocationVoitures.BackOffice\\AddLocationWindow.xaml.cs",
+              "ViewState": "AgIAAJYBAAAAAAAAAADwv68BAAAfAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-13T17:40:52.875Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 32,
+              "Title": "TypeVoitureFormWindow.xaml.cs",
+              "DocumentMoniker": "E:\\4IIR\\.Net\\projet\\.net\\.net\\LocationVoituresSolution\\LocationVoitures.BackOffice\\TypeVoitureFormWindow.xaml.cs",
+              "RelativeDocumentMoniker": "LocationVoitures.BackOffice\\TypeVoitureFormWindow.xaml.cs",
+              "ToolTip": "E:\\4IIR\\.Net\\projet\\.net\\.net\\LocationVoituresSolution\\LocationVoitures.BackOffice\\TypeVoitureFormWindow.xaml.cs",
+              "RelativeToolTip": "LocationVoitures.BackOffice\\TypeVoitureFormWindow.xaml.cs",
+              "ViewState": "AgIAABsAAAAAAAAAAAAYwC8AAAAUAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-13T17:40:12.385Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 33,
+              "Title": "TypeVoitureFormWindow.xaml",
+              "DocumentMoniker": "E:\\4IIR\\.Net\\projet\\.net\\.net\\LocationVoituresSolution\\LocationVoitures.BackOffice\\TypeVoitureFormWindow.xaml",
+              "RelativeDocumentMoniker": "LocationVoitures.BackOffice\\TypeVoitureFormWindow.xaml",
+              "ToolTip": "E:\\4IIR\\.Net\\projet\\.net\\.net\\LocationVoituresSolution\\LocationVoitures.BackOffice\\TypeVoitureFormWindow.xaml",
+              "RelativeToolTip": "LocationVoitures.BackOffice\\TypeVoitureFormWindow.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2025-12-13T17:40:09.872Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 34,
+              "Title": "TypesVoituresPage.xaml.cs",
+              "DocumentMoniker": "E:\\4IIR\\.Net\\projet\\.net\\.net\\LocationVoituresSolution\\LocationVoitures.BackOffice\\Pages\\TypesVoituresPage.xaml.cs",
+              "RelativeDocumentMoniker": "LocationVoitures.BackOffice\\Pages\\TypesVoituresPage.xaml.cs",
+              "ToolTip": "E:\\4IIR\\.Net\\projet\\.net\\.net\\LocationVoituresSolution\\LocationVoitures.BackOffice\\Pages\\TypesVoituresPage.xaml.cs",
+              "RelativeToolTip": "LocationVoitures.BackOffice\\Pages\\TypesVoituresPage.xaml.cs",
+              "ViewState": "AgIAABMAAAAAAAAAAAAQwB4AAAA2AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-13T17:38:49.528Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 35,
+              "Title": "ClientFormPage.xaml.cs",
+              "DocumentMoniker": "E:\\4IIR\\.Net\\projet\\.net\\.net\\LocationVoituresSolution\\LocationVoitures.BackOffice\\Pages\\ClientFormPage.xaml.cs",
+              "RelativeDocumentMoniker": "LocationVoitures.BackOffice\\Pages\\ClientFormPage.xaml.cs",
+              "ToolTip": "E:\\4IIR\\.Net\\projet\\.net\\.net\\LocationVoituresSolution\\LocationVoitures.BackOffice\\Pages\\ClientFormPage.xaml.cs",
+              "RelativeToolTip": "LocationVoitures.BackOffice\\Pages\\ClientFormPage.xaml.cs",
+              "ViewState": "AgIAAHIAAAAAAAAAAAAIwIYAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-13T15:14:27.518Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "ClientsPage.xaml.cs",
+              "DocumentMoniker": "E:\\4IIR\\.Net\\projet\\.net\\.net\\LocationVoituresSolution\\LocationVoitures.BackOffice\\Pages\\ClientsPage.xaml.cs",
+              "RelativeDocumentMoniker": "LocationVoitures.BackOffice\\Pages\\ClientsPage.xaml.cs",
+              "ToolTip": "E:\\4IIR\\.Net\\projet\\.net\\.net\\LocationVoituresSolution\\LocationVoitures.BackOffice\\Pages\\ClientsPage.xaml.cs",
+              "RelativeToolTip": "LocationVoitures.BackOffice\\Pages\\ClientsPage.xaml.cs",
+              "ViewState": "AgIAAC4AAAAAAAAAAAAzwEEAAABGAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-13T15:14:03.629Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 25,
+              "Title": "VoitureListPage.xaml.cs",
+              "DocumentMoniker": "E:\\4IIR\\.Net\\projet\\.net\\.net\\LocationVoituresSolution\\LocationVoitures.BackOffice\\Pages\\VoitureListPage.xaml.cs",
+              "RelativeDocumentMoniker": "LocationVoitures.BackOffice\\Pages\\VoitureListPage.xaml.cs",
+              "ToolTip": "E:\\4IIR\\.Net\\projet\\.net\\.net\\LocationVoituresSolution\\LocationVoitures.BackOffice\\Pages\\VoitureListPage.xaml.cs",
+              "RelativeToolTip": "LocationVoitures.BackOffice\\Pages\\VoitureListPage.xaml.cs",
+              "ViewState": "AgIAACUAAAAAAAAAAAAQwDYAAAALAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-13T15:11:10.529Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 16,
+              "Title": "AddEditVoiturePage.xaml",
+              "DocumentMoniker": "E:\\4IIR\\.Net\\projet\\.net\\.net\\LocationVoituresSolution\\LocationVoitures.BackOffice\\Pages\\AddEditVoiturePage.xaml",
+              "RelativeDocumentMoniker": "LocationVoitures.BackOffice\\Pages\\AddEditVoiturePage.xaml",
+              "ToolTip": "E:\\4IIR\\.Net\\projet\\.net\\.net\\LocationVoituresSolution\\LocationVoitures.BackOffice\\Pages\\AddEditVoiturePage.xaml",
+              "RelativeToolTip": "LocationVoitures.BackOffice\\Pages\\AddEditVoiturePage.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2025-12-13T15:10:41.789Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 37,
+              "Title": "AddEditVoiturePage.xaml.cs",
+              "DocumentMoniker": "E:\\4IIR\\.Net\\projet\\.net\\.net\\LocationVoituresSolution\\LocationVoitures.BackOffice\\Pages\\AddEditVoiturePage.xaml.cs",
+              "RelativeDocumentMoniker": "LocationVoitures.BackOffice\\Pages\\AddEditVoiturePage.xaml.cs",
+              "ToolTip": "E:\\4IIR\\.Net\\projet\\.net\\.net\\LocationVoituresSolution\\LocationVoitures.BackOffice\\Pages\\AddEditVoiturePage.xaml.cs",
+              "RelativeToolTip": "LocationVoitures.BackOffice\\Pages\\AddEditVoiturePage.xaml.cs",
+              "ViewState": "AgIAAHYAAAAAAAAAAAAkwIQAAAAsAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-13T15:05:16.562Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 38,
+              "Title": "LocationsListPage.xaml",
+              "DocumentMoniker": "E:\\4IIR\\.Net\\projet\\.net\\.net\\LocationVoituresSolution\\LocationVoitures.BackOffice\\Pages\\LocationsListPage.xaml",
+              "RelativeDocumentMoniker": "LocationVoitures.BackOffice\\Pages\\LocationsListPage.xaml",
+              "ToolTip": "E:\\4IIR\\.Net\\projet\\.net\\.net\\LocationVoituresSolution\\LocationVoitures.BackOffice\\Pages\\LocationsListPage.xaml",
+              "RelativeToolTip": "LocationVoitures.BackOffice\\Pages\\LocationsListPage.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2025-12-13T09:18:50.047Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "LocationDetailsPage.xaml",
+              "DocumentMoniker": "E:\\4IIR\\.Net\\projet\\.net\\.net\\LocationVoituresSolution\\LocationVoitures.BackOffice\\Pages\\LocationDetailsPage.xaml",
+              "RelativeDocumentMoniker": "LocationVoitures.BackOffice\\Pages\\LocationDetailsPage.xaml",
+              "ToolTip": "E:\\4IIR\\.Net\\projet\\.net\\.net\\LocationVoituresSolution\\LocationVoitures.BackOffice\\Pages\\LocationDetailsPage.xaml",
+              "RelativeToolTip": "LocationVoitures.BackOffice\\Pages\\LocationDetailsPage.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2025-12-12T20:55:43.182Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "LocationsListPage.xaml.cs",
+              "DocumentMoniker": "E:\\4IIR\\.Net\\projet\\.net\\.net\\LocationVoituresSolution\\LocationVoitures.BackOffice\\Pages\\LocationsListPage.xaml.cs",
+              "RelativeDocumentMoniker": "LocationVoitures.BackOffice\\Pages\\LocationsListPage.xaml.cs",
+              "ToolTip": "E:\\4IIR\\.Net\\projet\\.net\\.net\\LocationVoituresSolution\\LocationVoitures.BackOffice\\Pages\\LocationsListPage.xaml.cs",
+              "RelativeToolTip": "LocationVoitures.BackOffice\\Pages\\LocationsListPage.xaml.cs",
+              "ViewState": "AgIAALgAAAAAAAAAAAAiwLgAAABRAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-12T20:45:43.795Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "TerminerLocationWindow.xaml.cs",
+              "DocumentMoniker": "E:\\4IIR\\.Net\\projet\\.net\\.net\\LocationVoituresSolution\\LocationVoitures.BackOffice\\TerminerLocationWindow.xaml.cs",
+              "RelativeDocumentMoniker": "LocationVoitures.BackOffice\\TerminerLocationWindow.xaml.cs",
+              "ToolTip": "E:\\4IIR\\.Net\\projet\\.net\\.net\\LocationVoituresSolution\\LocationVoitures.BackOffice\\TerminerLocationWindow.xaml.cs",
+              "RelativeToolTip": "LocationVoitures.BackOffice\\TerminerLocationWindow.xaml.cs",
+              "ViewState": "AgIAAOkAAAAAAAAAAAAiwPEAAAAjAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-12T20:45:20.119Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "TerminerLocationWindow.xaml",
+              "DocumentMoniker": "E:\\4IIR\\.Net\\projet\\.net\\.net\\LocationVoituresSolution\\LocationVoitures.BackOffice\\TerminerLocationWindow.xaml",
+              "RelativeDocumentMoniker": "LocationVoitures.BackOffice\\TerminerLocationWindow.xaml",
+              "ToolTip": "E:\\4IIR\\.Net\\projet\\.net\\.net\\LocationVoituresSolution\\LocationVoitures.BackOffice\\TerminerLocationWindow.xaml",
+              "RelativeToolTip": "LocationVoitures.BackOffice\\TerminerLocationWindow.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2025-12-12T20:45:10.572Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 39,
+              "Title": "202512112152351_AjoutColonnesMaintenance.cs",
+              "DocumentMoniker": "E:\\4IIR\\.Net\\projet\\.net\\.net\\LocationVoituresSolution\\LocationVoitures.Data\\Migrations\\202512112152351_AjoutColonnesMaintenance.cs",
+              "RelativeDocumentMoniker": "LocationVoitures.Data\\Migrations\\202512112152351_AjoutColonnesMaintenance.cs",
+              "ToolTip": "E:\\4IIR\\.Net\\projet\\.net\\.net\\LocationVoituresSolution\\LocationVoitures.Data\\Migrations\\202512112152351_AjoutColonnesMaintenance.cs",
+              "RelativeToolTip": "LocationVoitures.Data\\Migrations\\202512112152351_AjoutColonnesMaintenance.cs",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-11T21:52:44.29Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 27,
+              "Title": "MarquerMaintenanceEffectueeWindow .xaml.cs",
+              "DocumentMoniker": "E:\\4IIR\\.Net\\projet\\.net\\.net\\LocationVoituresSolution\\LocationVoitures.BackOffice\\MarquerMaintenanceEffectueeWindow .xaml.cs",
+              "RelativeDocumentMoniker": "LocationVoitures.BackOffice\\MarquerMaintenanceEffectueeWindow .xaml.cs",
+              "ToolTip": "E:\\4IIR\\.Net\\projet\\.net\\.net\\LocationVoituresSolution\\LocationVoitures.BackOffice\\MarquerMaintenanceEffectueeWindow .xaml.cs",
+              "RelativeToolTip": "LocationVoitures.BackOffice\\MarquerMaintenanceEffectueeWindow .xaml.cs",
+              "ViewState": "AgIAAEMAAAAAAAAAAAAIwGMAAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-11T21:39:26.922Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 41,
+              "Title": "MarquerMaintenanceEffectueeWindow .xaml",
+              "DocumentMoniker": "E:\\4IIR\\.Net\\projet\\.net\\.net\\LocationVoituresSolution\\LocationVoitures.BackOffice\\MarquerMaintenanceEffectueeWindow .xaml",
+              "RelativeDocumentMoniker": "LocationVoitures.BackOffice\\MarquerMaintenanceEffectueeWindow .xaml",
+              "ToolTip": "E:\\4IIR\\.Net\\projet\\.net\\.net\\LocationVoituresSolution\\LocationVoitures.BackOffice\\MarquerMaintenanceEffectueeWindow .xaml",
+              "RelativeToolTip": "LocationVoitures.BackOffice\\MarquerMaintenanceEffectueeWindow .xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2025-12-11T21:39:15.021Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 45,
+              "Title": "VoitureDetailsPage.xaml.cs",
+              "DocumentMoniker": "E:\\4IIR\\.Net\\projet\\.net\\.net\\LocationVoituresSolution\\LocationVoitures.BackOffice\\Pages\\VoitureDetailsPage.xaml.cs",
+              "RelativeDocumentMoniker": "LocationVoitures.BackOffice\\Pages\\VoitureDetailsPage.xaml.cs",
+              "ToolTip": "E:\\4IIR\\.Net\\projet\\.net\\.net\\LocationVoituresSolution\\LocationVoitures.BackOffice\\Pages\\VoitureDetailsPage.xaml.cs",
+              "RelativeToolTip": "LocationVoitures.BackOffice\\Pages\\VoitureDetailsPage.xaml.cs",
+              "ViewState": "AgIAADkAAAAAAAAAAAAcwF8AAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-11T10:28:53.335Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 47,
+              "Title": "VoitureImagesPage.xaml.cs",
+              "DocumentMoniker": "E:\\4IIR\\.Net\\projet\\.net\\.net\\LocationVoituresSolution\\LocationVoitures.BackOffice\\Pages\\VoitureImagesPage.xaml.cs",
+              "RelativeDocumentMoniker": "LocationVoitures.BackOffice\\Pages\\VoitureImagesPage.xaml.cs",
+              "ToolTip": "E:\\4IIR\\.Net\\projet\\.net\\.net\\LocationVoituresSolution\\LocationVoitures.BackOffice\\Pages\\VoitureImagesPage.xaml.cs",
+              "RelativeToolTip": "LocationVoitures.BackOffice\\Pages\\VoitureImagesPage.xaml.cs",
+              "ViewState": "AgIAACcAAAAAAAAAAAAqwDEAAAA0AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-11T10:32:14.053Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 46,
+              "Title": "VoitureImagesPage.xaml",
+              "DocumentMoniker": "E:\\4IIR\\.Net\\projet\\.net\\.net\\LocationVoituresSolution\\LocationVoitures.BackOffice\\Pages\\VoitureImagesPage.xaml",
+              "RelativeDocumentMoniker": "LocationVoitures.BackOffice\\Pages\\VoitureImagesPage.xaml",
+              "ToolTip": "E:\\4IIR\\.Net\\projet\\.net\\.net\\LocationVoituresSolution\\LocationVoitures.BackOffice\\Pages\\VoitureImagesPage.xaml",
+              "RelativeToolTip": "LocationVoitures.BackOffice\\Pages\\VoitureImagesPage.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2025-12-11T10:32:09.359Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 50,
+              "Title": "AddEmployeeWindow.xaml",
+              "DocumentMoniker": "E:\\4IIR\\.Net\\projet\\.net\\.net\\LocationVoituresSolution\\LocationVoitures.BackOffice\\AddEmployeeWindow.xaml",
+              "RelativeDocumentMoniker": "LocationVoitures.BackOffice\\AddEmployeeWindow.xaml",
+              "ToolTip": "E:\\4IIR\\.Net\\projet\\.net\\.net\\LocationVoituresSolution\\LocationVoitures.BackOffice\\AddEmployeeWindow.xaml",
+              "RelativeToolTip": "LocationVoitures.BackOffice\\AddEmployeeWindow.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2025-12-11T10:27:10.371Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 52,
+              "Title": "AdminWindow.xaml.cs",
+              "DocumentMoniker": "E:\\4IIR\\.Net\\projet\\.net\\.net\\LocationVoituresSolution\\LocationVoitures.BackOffice\\AdminWindow.xaml.cs",
+              "RelativeDocumentMoniker": "LocationVoitures.BackOffice\\AdminWindow.xaml.cs",
+              "ToolTip": "E:\\4IIR\\.Net\\projet\\.net\\.net\\LocationVoituresSolution\\LocationVoitures.BackOffice\\AdminWindow.xaml.cs",
+              "RelativeToolTip": "LocationVoitures.BackOffice\\AdminWindow.xaml.cs",
+              "ViewState": "AgIAAKUAAAAAAAAAAAAowMMAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-11T10:24:24.039Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 17,
+              "Title": "AdminWindow.xaml",
+              "DocumentMoniker": "E:\\4IIR\\.Net\\projet\\.net\\.net\\LocationVoituresSolution\\LocationVoitures.BackOffice\\AdminWindow.xaml",
+              "RelativeDocumentMoniker": "LocationVoitures.BackOffice\\AdminWindow.xaml",
+              "ToolTip": "E:\\4IIR\\.Net\\projet\\.net\\.net\\LocationVoituresSolution\\LocationVoitures.BackOffice\\AdminWindow.xaml",
+              "RelativeToolTip": "LocationVoitures.BackOffice\\AdminWindow.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2025-12-11T10:21:23.6Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 53,
+              "Title": "LoginWindow.xaml",
+              "DocumentMoniker": "E:\\4IIR\\.Net\\projet\\.net\\.net\\LocationVoituresSolution\\LocationVoitures.BackOffice\\LoginWindow.xaml",
+              "RelativeDocumentMoniker": "LocationVoitures.BackOffice\\LoginWindow.xaml",
+              "ToolTip": "E:\\4IIR\\.Net\\projet\\.net\\.net\\LocationVoituresSolution\\LocationVoitures.BackOffice\\LoginWindow.xaml",
+              "RelativeToolTip": "LocationVoitures.BackOffice\\LoginWindow.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2025-12-11T10:21:08.636Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "App.xaml",
+              "DocumentMoniker": "E:\\4IIR\\.Net\\projet\\.net\\.net\\LocationVoituresSolution\\LocationVoitures.BackOffice\\App.xaml",
+              "RelativeDocumentMoniker": "LocationVoitures.BackOffice\\App.xaml",
+              "ToolTip": "E:\\4IIR\\.Net\\projet\\.net\\.net\\LocationVoituresSolution\\LocationVoitures.BackOffice\\App.xaml",
+              "RelativeToolTip": "LocationVoitures.BackOffice\\App.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2025-12-11T10:20:10.016Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 55,
+              "Title": "App.config",
+              "DocumentMoniker": "E:\\4IIR\\.Net\\projet\\.net\\.net\\LocationVoituresSolution\\LocationVoitures.BackOffice\\App.config",
+              "RelativeDocumentMoniker": "LocationVoitures.BackOffice\\App.config",
+              "ToolTip": "E:\\4IIR\\.Net\\projet\\.net\\.net\\LocationVoituresSolution\\LocationVoitures.BackOffice\\App.config",
+              "RelativeToolTip": "LocationVoitures.BackOffice\\App.config",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAA+AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000601|",
+              "WhenOpened": "2025-12-11T10:17:51.818Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 56,
+              "Title": "appsettings.json",
+              "DocumentMoniker": "E:\\4IIR\\.Net\\projet\\.net\\.net\\LocationVoituresSolution\\lovationVoiture.FrontOffice\\appsettings.json",
+              "RelativeDocumentMoniker": "lovationVoiture.FrontOffice\\appsettings.json",
+              "ToolTip": "E:\\4IIR\\.Net\\projet\\.net\\.net\\LocationVoituresSolution\\lovationVoiture.FrontOffice\\appsettings.json",
+              "RelativeToolTip": "lovationVoiture.FrontOffice\\appsettings.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAIAAACsAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2025-12-11T10:17:39.034Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 57,
+              "Title": "Program.cs",
+              "DocumentMoniker": "E:\\4IIR\\.Net\\projet\\.net\\.net\\LocationVoituresSolution\\lovationVoiture.FrontOffice\\Program.cs",
+              "RelativeDocumentMoniker": "lovationVoiture.FrontOffice\\Program.cs",
+              "ToolTip": "E:\\4IIR\\.Net\\projet\\.net\\.net\\LocationVoituresSolution\\lovationVoiture.FrontOffice\\Program.cs",
+              "RelativeToolTip": "lovationVoiture.FrontOffice\\Program.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-11T10:17:37.45Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 28,
+              "Title": "LogAction.cs",
+              "DocumentMoniker": "E:\\4IIR\\.Net\\projet\\.net\\.net\\LocationVoituresSolution\\LocationVoitures.Data\\models\\LogAction.cs",
+              "RelativeDocumentMoniker": "LocationVoitures.Data\\models\\LogAction.cs",
+              "ToolTip": "E:\\4IIR\\.Net\\projet\\.net\\.net\\LocationVoituresSolution\\LocationVoitures.Data\\models\\LogAction.cs",
+              "RelativeToolTip": "LocationVoitures.Data\\models\\LogAction.cs",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-13T19:36:59.536Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 36,
+              "Title": "ClientService.cs",
+              "DocumentMoniker": "E:\\4IIR\\.Net\\projet\\.net\\.net\\LocationVoituresSolution\\LocationVoitures.Data\\Services\\ClientService.cs",
+              "RelativeDocumentMoniker": "LocationVoitures.Data\\Services\\ClientService.cs",
+              "ToolTip": "E:\\4IIR\\.Net\\projet\\.net\\.net\\LocationVoituresSolution\\LocationVoitures.Data\\Services\\ClientService.cs",
+              "RelativeToolTip": "LocationVoitures.Data\\Services\\ClientService.cs",
+              "ViewState": "AgIAABMBAAAAAAAAAAAwwDIBAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-13T15:23:47.483Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
+              "Title": "LocationService.cs",
+              "DocumentMoniker": "E:\\4IIR\\.Net\\projet\\.net\\.net\\LocationVoituresSolution\\LocationVoitures.Data\\Services\\LocationService.cs",
+              "RelativeDocumentMoniker": "LocationVoitures.Data\\Services\\LocationService.cs",
+              "ToolTip": "E:\\4IIR\\.Net\\projet\\.net\\.net\\LocationVoituresSolution\\LocationVoitures.Data\\Services\\LocationService.cs",
+              "RelativeToolTip": "LocationVoitures.Data\\Services\\LocationService.cs",
+              "ViewState": "AgIAACABAAAAAAAAAAAIwDABAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-12T20:54:43.719Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 40,
+              "Title": "packages.config",
+              "DocumentMoniker": "E:\\4IIR\\.Net\\projet\\.net\\.net\\LocationVoituresSolution\\LocationVoitures.Data\\packages.config",
+              "RelativeDocumentMoniker": "LocationVoitures.Data\\packages.config",
+              "ToolTip": "E:\\4IIR\\.Net\\projet\\.net\\.net\\LocationVoituresSolution\\LocationVoitures.Data\\packages.config",
+              "RelativeToolTip": "LocationVoitures.Data\\packages.config",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAIAAABCAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000601|",
+              "WhenOpened": "2025-12-11T21:46:19.822Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 20,
+              "Title": "MaintenanceScheduler.cs",
+              "DocumentMoniker": "E:\\4IIR\\.Net\\projet\\.net\\.net\\LocationVoituresSolution\\LocationVoitures.Data\\Services\\MaintenanceScheduler.cs",
+              "RelativeDocumentMoniker": "LocationVoitures.Data\\Services\\MaintenanceScheduler.cs",
+              "ToolTip": "E:\\4IIR\\.Net\\projet\\.net\\.net\\LocationVoituresSolution\\LocationVoitures.Data\\Services\\MaintenanceScheduler.cs",
+              "RelativeToolTip": "LocationVoitures.Data\\Services\\MaintenanceScheduler.cs",
+              "ViewState": "AgIAAIUAAAAAAAAAAADwv6QAAAADAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-11T21:38:30.573Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 42,
+              "Title": "AlerteService.cs",
+              "DocumentMoniker": "E:\\4IIR\\.Net\\projet\\.net\\.net\\LocationVoituresSolution\\LocationVoitures.Data\\Services\\AlerteService.cs",
+              "RelativeDocumentMoniker": "LocationVoitures.Data\\Services\\AlerteService.cs",
+              "ToolTip": "E:\\4IIR\\.Net\\projet\\.net\\.net\\LocationVoituresSolution\\LocationVoitures.Data\\Services\\AlerteService.cs",
+              "RelativeToolTip": "LocationVoitures.Data\\Services\\AlerteService.cs",
+              "ViewState": "AgIAAGgAAAAAAAAAAAAgwBkBAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-11T21:32:19.037Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 18,
+              "Title": "MaintenanceService.cs",
+              "DocumentMoniker": "E:\\4IIR\\.Net\\projet\\.net\\.net\\LocationVoituresSolution\\LocationVoitures.Data\\Services\\MaintenanceService.cs",
+              "RelativeDocumentMoniker": "LocationVoitures.Data\\Services\\MaintenanceService.cs",
+              "ToolTip": "E:\\4IIR\\.Net\\projet\\.net\\.net\\LocationVoituresSolution\\LocationVoitures.Data\\Services\\MaintenanceService.cs",
+              "RelativeToolTip": "LocationVoitures.Data\\Services\\MaintenanceService.cs",
+              "ViewState": "AgIAAP8AAAAAAAAAAAAIwAYBAAA1AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-11T21:31:49.972Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 19,
+              "Title": "MaintenanceConfig.cs",
+              "DocumentMoniker": "E:\\4IIR\\.Net\\projet\\.net\\.net\\LocationVoituresSolution\\LocationVoitures.Data\\models\\MaintenanceConfig.cs",
+              "RelativeDocumentMoniker": "LocationVoitures.Data\\models\\MaintenanceConfig.cs",
+              "ToolTip": "E:\\4IIR\\.Net\\projet\\.net\\.net\\LocationVoituresSolution\\LocationVoitures.Data\\models\\MaintenanceConfig.cs",
+              "RelativeToolTip": "LocationVoitures.Data\\models\\MaintenanceConfig.cs",
+              "ViewState": "AgIAAHoAAAAAAAAAAAAowJcAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-11T21:31:19.626Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 44,
+              "Title": "Alerte.cs",
+              "DocumentMoniker": "E:\\4IIR\\.Net\\projet\\.net\\.net\\LocationVoituresSolution\\LocationVoitures.Data\\models\\Alerte.cs",
+              "RelativeDocumentMoniker": "LocationVoitures.Data\\models\\Alerte.cs",
+              "ToolTip": "E:\\4IIR\\.Net\\projet\\.net\\.net\\LocationVoituresSolution\\LocationVoitures.Data\\models\\Alerte.cs",
+              "RelativeToolTip": "LocationVoitures.Data\\models\\Alerte.cs",
+              "ViewState": "AgIAAA0AAAAAAAAAAAAUwCIAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-11T10:50:29.225Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 43,
+              "Title": "Maintenance.cs",
+              "DocumentMoniker": "E:\\4IIR\\.Net\\projet\\.net\\.net\\LocationVoituresSolution\\LocationVoitures.Data\\models\\Maintenance.cs",
+              "RelativeDocumentMoniker": "LocationVoitures.Data\\models\\Maintenance.cs",
+              "ToolTip": "E:\\4IIR\\.Net\\projet\\.net\\.net\\LocationVoituresSolution\\LocationVoitures.Data\\models\\Maintenance.cs",
+              "RelativeToolTip": "LocationVoitures.Data\\models\\Maintenance.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAFAAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-11T10:50:09.517Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 48,
+              "Title": "ImageVoitureService.cs",
+              "DocumentMoniker": "E:\\4IIR\\.Net\\projet\\.net\\.net\\LocationVoituresSolution\\LocationVoitures.Data\\Services\\ImageVoitureService.cs",
+              "RelativeDocumentMoniker": "LocationVoitures.Data\\Services\\ImageVoitureService.cs",
+              "ToolTip": "E:\\4IIR\\.Net\\projet\\.net\\.net\\LocationVoituresSolution\\LocationVoitures.Data\\Services\\ImageVoitureService.cs",
+              "RelativeToolTip": "LocationVoitures.Data\\Services\\ImageVoitureService.cs",
+              "ViewState": "AgIAAG4AAAAAAAAAAAAswHwAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-11T10:29:43.18Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 49,
+              "Title": "ImageVoiture.cs",
+              "DocumentMoniker": "E:\\4IIR\\.Net\\projet\\.net\\.net\\LocationVoituresSolution\\LocationVoitures.Data\\models\\ImageVoiture.cs",
+              "RelativeDocumentMoniker": "LocationVoitures.Data\\models\\ImageVoiture.cs",
+              "ToolTip": "E:\\4IIR\\.Net\\projet\\.net\\.net\\LocationVoituresSolution\\LocationVoitures.Data\\models\\ImageVoiture.cs",
+              "RelativeToolTip": "LocationVoitures.Data\\models\\ImageVoiture.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-11T10:29:37.98Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 51,
+              "Title": "Role.cs",
+              "DocumentMoniker": "E:\\4IIR\\.Net\\projet\\.net\\.net\\LocationVoituresSolution\\LocationVoitures.Data\\models\\Role.cs",
+              "RelativeDocumentMoniker": "LocationVoitures.Data\\models\\Role.cs",
+              "ToolTip": "E:\\4IIR\\.Net\\projet\\.net\\.net\\LocationVoituresSolution\\LocationVoitures.Data\\models\\Role.cs",
+              "RelativeToolTip": "LocationVoitures.Data\\models\\Role.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABoAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-11T10:25:14.592Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 54,
+              "Title": "App.config",
+              "DocumentMoniker": "E:\\4IIR\\.Net\\projet\\.net\\.net\\LocationVoituresSolution\\LocationVoitures.Data\\App.config",
+              "RelativeDocumentMoniker": "LocationVoitures.Data\\App.config",
+              "ToolTip": "E:\\4IIR\\.Net\\projet\\.net\\.net\\LocationVoituresSolution\\LocationVoitures.Data\\App.config",
+              "RelativeToolTip": "LocationVoitures.Data\\App.config",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAMAAABZAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000601|",
+              "WhenOpened": "2025-12-11T10:18:05.124Z"
+            }
+          ]
+        },
+        {
+          "DockedWidth": 14,
+          "SelectedChildIndex": -1,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:1:0:{e8b06f52-6d01-11d2-aa7d-00c04f990343}"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

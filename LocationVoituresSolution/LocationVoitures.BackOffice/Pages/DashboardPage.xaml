@@ -155,7 +155,8 @@
                 <Border Grid.Column="1" Style="{StaticResource CardStyle}">
                     <StackPanel>
                         <TextBlock Text="🚙 Types de Véhicules" Style="{StaticResource CardTitleStyle}"/>
-                        <lvc:PieChart Series="{Binding VehicleTypeSeries}" 
+                        <lvc:PieChart  Series="{Binding VehicleTypeSeries}" 
+                                      x:Name="TypeVoituresChart" 
                                      Height="300" 
                                      LegendLocation="Bottom"
                                      InnerRadius="40"

@@ -1,4 +1,5 @@
-﻿using LocationVoitures.Data.Models;
+﻿using LocationVoitures.BackOffice.Utils;
+using LocationVoitures.Data.Models;
 using LocationVoitures.Data.Services;
 using Microsoft.Win32;
 using System;
@@ -33,104 +34,127 @@ namespace LocationVoitures.BackOffice
             _isInitialized = true;
         }
 
+        // ✅✅✅ MÉTHODE CORRIGÉE - FORCE LE RECHARGEMENT COMPLET
         public void LoadLocations()
         {
             if (_locationService == null || DgLocations == null) return;
 
             try
             {
-                // ✅ Vider la grille avant de recharger
-                DgLocations.ItemsSource = null;
-                
-                var result = _locationService.GetPagedLocations(_currentPage, _pageSize, _searchTerm, _statutFilter);
+                Debug.WriteLine("═══════════════════════════════════════════");
+                Debug.WriteLine($"[LoadLocations] DÉBUT - Page {_currentPage}");
 
-                // ✅ Recharger les données
+                // ✅ 1. VIDER COMPLÈTEMENT la grille
+                DgLocations.ItemsSource = null;
+                DgLocations.Items.Refresh();
+
+                // ✅ 2. FORCER la mise à jour visuelle
+                DgLocations.UpdateLayout();
+
+                // ✅ 3. CRÉER UN NOUVEAU SERVICE (nouveau contexte)
+                var freshService = new LocationService();
+
+                // ✅ 4. CHARGER les données avec le nouveau service
+                var result = freshService.GetPagedLocations(_currentPage, _pageSize, _searchTerm, _statutFilter);
+
+                Debug.WriteLine($"[LoadLocations] {result.Items.Count} items chargés");
+                Debug.WriteLine($"[LoadLocations] Total: {result.TotalItems}, Page: {result.Page}/{result.TotalPages}");
+
+                // ✅ 5. AFFECTER les nouvelles données
                 DgLocations.ItemsSource = result.Items;
 
-                TxtTotalItems.Text = result.TotalItems.ToString();
-                TxtPageInfo.Text = $"Page {result.Page} / {result.TotalPages}";
+                // ✅ 6. Mettre à jour les infos de pagination
+                if (TxtTotalItems != null)
+                    TxtTotalItems.Text = result.TotalItems.ToString();
 
-                BtnPrevious.IsEnabled = result.Page > 1;
-                BtnNext.IsEnabled = result.Page < result.TotalPages;
+                if (TxtPageInfo != null)
+                    TxtPageInfo.Text = $"Page {result.Page} / {result.TotalPages}";
 
-                // ✅ Forcer la mise à jour visuelle
+                if (BtnPrevious != null)
+                    BtnPrevious.IsEnabled = result.Page > 1;
+
+                if (BtnNext != null)
+                    BtnNext.IsEnabled = result.Page < result.TotalPages;
+
+                // ✅ 7. FORCER le rafraîchissement de la vue
+                DgLocations.Items.Refresh();
                 DgLocations.UpdateLayout();
-                CollectionViewSource.GetDefaultView(DgLocations.ItemsSource)?.Refresh();
 
+                var view = CollectionViewSource.GetDefaultView(DgLocations.ItemsSource);
+                if (view != null)
+                {
+                    view.Refresh();
+                }
 
-                // ✅ AJOUTÉ: Log pour debug
-                System.Diagnostics.Debug.WriteLine($"[LoadLocations] Chargé {result.Items.Count} locations");
+                Debug.WriteLine($"[LoadLocations] ✅ TERMINÉ AVEC SUCCÈS");
+                Debug.WriteLine("═══════════════════════════════════════════");
             }
             catch (Exception ex)
             {
+                Debug.WriteLine($"[LoadLocations] ❌ ERREUR : {ex.Message}");
+                Debug.WriteLine($"[LoadLocations] Stack: {ex.StackTrace}");
                 MessageBox.Show($"Erreur de chargement : {ex.Message}", "Erreur",
                     MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
 
+        // ✅✅✅ MÉTHODE BtnTerminer_Click CORRIGÉE
+        private void BtnTerminer_Click(object sender, RoutedEventArgs e)
+        {
+            if (sender is Button btn && btn.Tag is Location location)
+            {
+                Debug.WriteLine($"[BtnTerminer] Début pour location {location.Id}");
+
+                // ✅ Vérification du statut
+                if (location.Statut != "En cours")
+                {
+                    MessageBox.Show(
+                        $"Cette location ne peut pas être terminée.\nStatut actuel: {location.Statut}",
+                        "Information",
+                        MessageBoxButton.OK,
+                        MessageBoxImage.Information);
+                    return;
+                }
+
+                try
+                {
+                    // ✅ Ouvrir la fenêtre
+                    var window = new TerminerLocationWindow(location.Id);
+                   // window.Owner = Window.GetWindow(this);
+                    if (window.ShowDialog() == true)
+                    {
+                        MessageBox.Show(
+                            "✅ La location a été terminée avec succès !",
+                            "Succès",
+                            MessageBoxButton.OK,
+                            MessageBoxImage.Information);
+                        LoadLocations();
+                    }
+                    else
+                    {
+                        MessageBox.Show($"[BtnTerminer] ❌ Annulé ou erreur");
+                    }
+                }
+                catch (Exception ex)
+                {
+                   
+                    MessageBox.Show(
+                        $"❌ Erreur : {ex.Message}",
+                        "Erreur",
+                        MessageBoxButton.OK,
+                        MessageBoxImage.Error);
+                }
+            }
+        }
+
+        // Les autres méthodes restent identiques...
         private void BtnNouvelleLocation_Click(object sender, RoutedEventArgs e)
         {
             var window = new AddLocationWindow();
             if (window.ShowDialog() == true)
             {
-                LoadLocations(); // Rafraîchir après ajout
-            }
-        }
-
-        private void TxtSearch_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            if (!_isInitialized || _locationService == null || TxtSearch == null) return;
-
-            _searchTerm = TxtSearch.Text ?? "";
-            _currentPage = 1;
-            LoadLocations();
-        }
-
-        private void CmbStatut_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            if (!_isInitialized || _locationService == null || CmbStatut?.SelectedItem == null) return;
-
-            if (CmbStatut.SelectedItem is ComboBoxItem item && item.Content != null)
-            {
-                _statutFilter = item.Content.ToString() == "Tous les statuts" ? "Tous" : item.Content.ToString();
-                _currentPage = 1;
                 LoadLocations();
             }
-        }
-
-        private void BtnExport_Click(object sender, RoutedEventArgs e)
-        {
-            if (_locationService == null || _importExportService == null) return;
-
-            try
-            {
-                SaveFileDialog saveDialog = new SaveFileDialog
-                {
-                    Filter = "Fichier CSV (*.csv)|*.csv",
-                    FileName = $"Locations_{DateTime.Now:yyyyMMdd_HHmmss}.csv"
-                };
-
-                if (saveDialog.ShowDialog() == true)
-                {
-                    var locations = _locationService.GetAll();
-                    _importExportService.ExportLocations(saveDialog.FileName, locations);
-
-                    MessageBox.Show($"Export réussi !\n{locations.Count} locations exportées.",
-                        "Succès", MessageBoxButton.OK, MessageBoxImage.Information);
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Erreur d'export : {ex.Message}", "Erreur",
-                    MessageBoxButton.OK, MessageBoxImage.Error);
-            }
-        }
-
-        private void BtnImport_Click(object sender, RoutedEventArgs e)
-        {
-            MessageBox.Show("L'import de locations n'est pas disponible pour des raisons de sécurité.\n" +
-                           "Les locations doivent être créées manuellement pour garantir la validité des données.",
-                           "Information", MessageBoxButton.OK, MessageBoxImage.Information);
         }
 
         private void BtnDetails_Click(object sender, RoutedEventArgs e)
@@ -139,7 +163,6 @@ namespace LocationVoitures.BackOffice
             {
                 var window = new LocationDetailsWindow(location);
                 window.ShowDialog();
-                // Pas besoin de rafraîchir car c'est juste une consultation
             }
         }
 
@@ -149,112 +172,7 @@ namespace LocationVoitures.BackOffice
             {
                 var window = new PaiementsWindow(location.Id);
                 window.ShowDialog();
-                LoadLocations(); // ✅ Rafraîchir après gestion des paiements
-            }
-        }
-
-        private void BtnGeneratePdf_Click(object sender, RoutedEventArgs e)
-        {
-            if (sender is Button btn && btn.Tag is Location location)
-            {
-                try
-                {
-                    SaveFileDialog saveDialog = new SaveFileDialog
-                    {
-                        Filter = "Fichier PDF (*.pdf)|*.pdf",
-                        FileName = $"Contrat_Location_{location.Id}.pdf"
-                    };
-
-                    if (saveDialog.ShowDialog() == true)
-                    {
-                        var fullLocation = _locationService.GetById(location.Id);
-
-                        // Assure que le dossier existe
-                        Directory.CreateDirectory(Path.GetDirectoryName(saveDialog.FileName));
-
-                        QRCodePdfService.GenerateLocationPdf(fullLocation, saveDialog.FileName);
-
-                        MessageBox.Show(
-                            "PDF généré avec succès !",
-                            "Succès",
-                            MessageBoxButton.OK,
-                            MessageBoxImage.Information);
-
-                        // 👉 OUVERTURE DU PDF (version corrigée)
-                        ProcessStartInfo psi = new ProcessStartInfo
-                        {
-                            FileName = saveDialog.FileName,
-                            UseShellExecute = true
-                        };
-
-                        Process.Start(psi);
-                    }
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show(
-                        $"Erreur génération PDF : {ex.Message}",
-                        "Erreur",
-                        MessageBoxButton.OK,
-                        MessageBoxImage.Error);
-                }
-            }
-        }
-
-
-        private void BtnTerminer_Click(object sender, RoutedEventArgs e)
-        {
-            if (sender is Button btn && btn.Tag is Location location)
-            {
-                // ✅ AJOUTÉ: Log pour debug
-                System.Diagnostics.Debug.WriteLine($"[BtnTerminer_Click] Location ID: {location.Id}, Statut: {location.Statut}");
-
-                // ✅ Vérification du statut avant d'ouvrir la fenêtre
-                if (location.Statut != "En cours")
-                {
-                    MessageBox.Show($"Cette location ne peut pas être terminée.\nStatut actuel: {location.Statut}",
-                        "Information", MessageBoxButton.OK, MessageBoxImage.Information);
-                    return;
-                }
-
-                try
-                {
-                    var window = new TerminerLocationWindow(location.Id);
-
-                    // ✅✅✅ CRITIQUE: Vérifier DialogResult = true
-                    var dialogResult = window.ShowDialog();
-
-                    System.Diagnostics.Debug.WriteLine($"[BtnTerminer_Click] DialogResult: {dialogResult}");
-
-                    if (dialogResult == true)
-                    {
-                        System.Diagnostics.Debug.WriteLine("[BtnTerminer_Click] Rafraîchissement de la liste...");
-
-                        // ✅ Vider complètement la grille
-                        DgLocations.ItemsSource = null;
-                        
-                        // ✅ Rafraîchir immédiatement la liste avec les nouvelles données
-                        LoadLocations();
-                        
-                        // ✅ Forcer la mise à jour de l'interface de manière asynchrone
-                        this.Dispatcher.BeginInvoke(new Action(() =>
-                        {
-                            LoadLocations();
-                        }), System.Windows.Threading.DispatcherPriority.Render);
-
-                        MessageBox.Show("✅ La location a été terminée avec succès !\nLa liste a été mise à jour.",
-                            "Succès", MessageBoxButton.OK, MessageBoxImage.Information);
-                    }
-                    else
-                    {
-                        System.Diagnostics.Debug.WriteLine("[BtnTerminer_Click] Opération annulée par l'utilisateur");
-                    }
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show($"❌ Erreur : {ex.Message}\n\n{ex.StackTrace}", "Erreur",
-                        MessageBoxButton.OK, MessageBoxImage.Error);
-                }
+                LoadLocations();
             }
         }
 
@@ -276,9 +194,28 @@ namespace LocationVoitures.BackOffice
                     try
                     {
                         _locationService.AnnulerLocation(location.Id);
+
+                        // 🔹 Envoi automatique de l'e-mail de notification
+                        if (!string.IsNullOrEmpty(location.Client.Email))
+                        {
+                            try
+                            {
+                                EmailHelper.SendCancellationNotification(
+                                    email: location.Client.Email,
+                                    nomClient: location.Client.Nom + " " + location.Client.Prenom,
+                                    numeroLocation: location.Id.ToString()
+                                );
+                            }
+                            catch (Exception mailEx)
+                            {
+                                MessageBox.Show($"Erreur lors de l'envoi du mail : {mailEx.Message}", "Erreur",
+                                    MessageBoxButton.OK, MessageBoxImage.Error);
+                            }
+                        }
+
                         MessageBox.Show("Location annulée avec succès !", "Succès",
                             MessageBoxButton.OK, MessageBoxImage.Information);
-                        LoadLocations(); // ✅ Rafraîchir après annulation
+                        LoadLocations();
                     }
                     catch (Exception ex)
                     {
@@ -286,6 +223,25 @@ namespace LocationVoitures.BackOffice
                             MessageBoxButton.OK, MessageBoxImage.Error);
                     }
                 }
+            }
+        }
+
+        private void TxtSearch_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (!_isInitialized || _locationService == null || TxtSearch == null) return;
+            _searchTerm = TxtSearch.Text ?? "";
+            _currentPage = 1;
+            LoadLocations();
+        }
+
+        private void CmbStatut_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (!_isInitialized || _locationService == null || CmbStatut?.SelectedItem == null) return;
+            if (CmbStatut.SelectedItem is ComboBoxItem item && item.Content != null)
+            {
+                _statutFilter = item.Content.ToString() == "Tous les statuts" ? "Tous" : item.Content.ToString();
+                _currentPage = 1;
+                LoadLocations();
             }
         }
 
@@ -307,7 +263,6 @@ namespace LocationVoitures.BackOffice
         private void CmbPageSize_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (!_isInitialized || _locationService == null || CmbPageSize?.SelectedItem == null) return;
-
             if (CmbPageSize.SelectedItem is ComboBoxItem item && item.Content != null)
             {
                 _pageSize = int.Parse(item.Content.ToString());
@@ -315,19 +270,88 @@ namespace LocationVoitures.BackOffice
                 LoadLocations();
             }
         }
+
+        private void BtnExport_Click(object sender, RoutedEventArgs e)
+        {
+            if (_locationService == null || _importExportService == null) return;
+            try
+            {
+                SaveFileDialog saveDialog = new SaveFileDialog
+                {
+                    Filter = "Fichier CSV (*.csv)|*.csv",
+                    FileName = $"Locations_{DateTime.Now:yyyyMMdd_HHmmss}.csv"
+                };
+
+                if (saveDialog.ShowDialog() == true)
+                {
+                    var locations = _locationService.GetAll();
+                    _importExportService.ExportLocations(saveDialog.FileName, locations);
+                    MessageBox.Show($"Export réussi !\n{locations.Count} locations exportées.",
+                        "Succès", MessageBoxButton.OK, MessageBoxImage.Information);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Erreur d'export : {ex.Message}", "Erreur",
+                    MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+
+        private void BtnGeneratePdf_Click(object sender, RoutedEventArgs e)
+        {
+            if (sender is Button btn && btn.Tag is Location location)
+            {
+                try
+                {
+                    SaveFileDialog saveDialog = new SaveFileDialog
+                    {
+                        Filter = "Fichier PDF (*.pdf)|*.pdf",
+                        FileName = $"Contrat_Location_{location.Id}.pdf"
+                    };
+
+                    if (saveDialog.ShowDialog() == true)
+                    {
+                        var fullLocation = _locationService.GetById(location.Id);
+                        Directory.CreateDirectory(Path.GetDirectoryName(saveDialog.FileName));
+                        QRCodePdfService.GenerateLocationPdf(fullLocation, saveDialog.FileName);
+
+                        MessageBox.Show("PDF généré avec succès !", "Succès",
+                            MessageBoxButton.OK, MessageBoxImage.Information);
+
+                        ProcessStartInfo psi = new ProcessStartInfo
+                        {
+                            FileName = saveDialog.FileName,
+                            UseShellExecute = true
+                        };
+                        Process.Start(psi);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"Erreur génération PDF : {ex.Message}", "Erreur",
+                        MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+            }
+        }
     }
 
+    // ✅✅✅ CONVERTISSEUR AJOUTÉ ICI
     /// <summary>
-    /// Convertisseur pour afficher les boutons uniquement pour les locations "En cours"
+    /// Convertisseur pour afficher/masquer les boutons "Terminer" et "Annuler" selon le statut
     /// </summary>
     public class StatutToVisibilityConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            if (value is string statut)
-            {
-                return statut == "En cours" ? Visibility.Visible : Visibility.Collapsed;
-            }
+            if (value == null)
+                return Visibility.Collapsed;
+
+            string statut = value.ToString();
+
+            // Afficher les boutons uniquement si le statut est "En cours"
+            if (statut == "En cours")
+                return Visibility.Visible;
+
             return Visibility.Collapsed;
         }
 

@@ -10,7 +10,7 @@ namespace LocationVoitures.Data.Models
         public string Nom { get; set; }    
 
         // Navigation : un rôle peut avoir plusieurs utilisateurs
-        public virtual ICollection<Utilisateur> Utilisateurs { get; set; }
+        public virtual ICollection<Employe> Employes { get; set; }
 
         [Column("created_at")]
         public DateTime CreatedAt { get; set; }
@@ -20,7 +20,7 @@ namespace LocationVoitures.Data.Models
 
         public Role()
         {
-            Utilisateurs = new HashSet<Utilisateur>();
+            Employes = new HashSet<Employe>();
         }
     }
 }

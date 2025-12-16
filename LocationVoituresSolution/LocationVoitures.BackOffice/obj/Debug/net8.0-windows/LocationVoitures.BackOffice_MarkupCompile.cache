@@ -4,17 +4,17 @@
 winexe
 C#
 .cs
-C:\dotNet\.net\LocationVoituresSolution\LocationVoitures.BackOffice\obj\Debug\net8.0-windows\
+E:\4IIR\.Net\projet\.net\.net\LocationVoituresSolution\LocationVoitures.BackOffice\obj\Debug\net8.0-windows\
 LocationVoitures.BackOffice
 none
 false
 TRACE;DEBUG;NET;NET8_0;NETCOREAPP;WINDOWS;WINDOWS7_0;NET5_0_OR_GREATER;NET6_0_OR_GREATER;NET7_0_OR_GREATER;NET8_0_OR_GREATER;NETCOREAPP3_0_OR_GREATER;NETCOREAPP3_1_OR_GREATER;WINDOWS7_0_OR_GREATER
-C:\dotNet\.net\LocationVoituresSolution\LocationVoitures.BackOffice\App.xaml
-28862984655
+E:\4IIR\.Net\projet\.net\.net\LocationVoituresSolution\LocationVoitures.BackOffice\App.xaml
+282145912730
 
-331999816251
-2391788703063
-AddEmployeeWindow.xaml;AddLocationWindow.xaml;AdminWindow.xaml;Controls\DashboardAlertes.xaml;EmployeWindow.xaml;LocationDetailsWindow.xaml;LoginWindow.xaml;MainWindow.xaml;Pages\AddEditVoiturePage.xaml;Pages\AddLocationPage.xaml;Pages\AlertesPage.xaml;Pages\ClientFormPage.xaml;Pages\ClientsPage.xaml;Pages\DashboardPage.xaml;Pages\EmployeesPage.xaml;Pages\LocationDetailsPage.xaml;Pages\LocationsListPage.xaml;Pages\PageMaintenances.xaml;Pages\ProfilPage.xaml;Pages\TypesVoituresPage.xaml;Pages\VoitureDetailsPage.xaml;Pages\VoitureImagesPage.xaml;Pages\VoitureListPage.xaml;PaiementsWindow.xaml;PlanifierMaintenanceWindow.xaml;Resources\SharedStyles.xaml;TerminerLocationWindow.xaml;TypeVoitureFormWindow.xaml;
+332123054267
+239-1483312770
+AddEmployeeWindow.xaml;AddLocationWindow.xaml;AdminWindow.xaml;Controls\DashboardAlertes.xaml;EmployeWindow.xaml;LocationDetailsWindow.xaml;LoginWindow.xaml;MainWindow.xaml;MarquerMaintenanceEffectueeWindow .xaml;Pages\AddEditVoiturePage.xaml;Pages\AlertesPage.xaml;Pages\ClientFormPage.xaml;Pages\ClientsPage.xaml;Pages\DashboardPage.xaml;Pages\EmployeesPage.xaml;Pages\LocationDetailsPage.xaml;Pages\LocationsListPage.xaml;Pages\PageMaintenances.xaml;Pages\ProfilPage.xaml;Pages\TypesVoituresPage.xaml;Pages\VoitureDetailsPage.xaml;Pages\VoitureImagesPage.xaml;Pages\VoitureListPage.xaml;PaiementsWindow.xaml;PlanifierMaintenanceWindow.xaml;Resources\SharedStyles.xaml;TerminerLocationWindow.xaml;TypeVoitureFormWindow.xaml;
 
 False
 

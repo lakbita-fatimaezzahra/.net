@@ -51,6 +51,9 @@ namespace LocationVoitures.BackOffice
             var result = _service.GetPagedVoitures(_page, _pageSize);
 
             DataGridVoitures.ItemsSource = result.Items;
+           
+           TxtTotalItems.Text = result.TotalItems.ToString();
+
             _totalPages = result.TotalPages;
             TxtPageInfo.Text = $"Page {_page} / {_totalPages}";
 
@@ -310,26 +313,21 @@ namespace LocationVoitures.BackOffice
             try
             {
                 var voituresAvecAlertes = _service.GetVoituresAvecAlertes();
+                DataGridVoitures.ItemsSource = voituresAvecAlertes;
 
                 if (voituresAvecAlertes.Count == 0)
                 {
                     MessageBox.Show(
-                        "✅ Aucune voiture ne nécessite de maintenance pour le moment.",
+                        "✅ Aucune voiture  en maintenance pour le moment.",
                         "Maintenance à jour",
                         MessageBoxButton.OK,
                         MessageBoxImage.Information);
-                    return;
+                    LoadVoitures();
+                  
                 }
 
-                // ✅ Utiliser la propriété Voiture au lieu de Item1
-                var voitures = voituresAvecAlertes.Select(v => v.Voiture).ToList();
-                DataGridVoitures.ItemsSource = voitures;
-
-                MessageBox.Show(
-                    $"{voituresAvecAlertes.Count} voiture(s) nécessite(nt) une maintenance.\nLa liste a été filtrée.",
-                    "Filtrage appliqué",
-                    MessageBoxButton.OK,
-                    MessageBoxImage.Information);
+            
+              
             }
             catch (Exception ex)
             {

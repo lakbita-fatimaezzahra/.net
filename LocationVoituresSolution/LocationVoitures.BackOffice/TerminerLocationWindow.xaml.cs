@@ -1,6 +1,8 @@
-﻿using LocationVoitures.Data.Models;
+﻿using LocationVoitures.BackOffice.Utils;
+using LocationVoitures.Data.Models;
 using LocationVoitures.Data.Services;
 using System;
+using System.Diagnostics;
 using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Input;
@@ -186,50 +188,81 @@ namespace LocationVoitures.BackOffice
         {
             try
             {
-                // Vérification de base
+                // Validation du kilométrage final
                 if (!double.TryParse(TxtKmFinal.Text, out double kmFinal))
                 {
-                    MessageBox.Show("Kilométrage final invalide.", "Erreur", MessageBoxButton.OK, MessageBoxImage.Warning);
+                    MessageBox.Show("Veuillez entrer un kilométrage final valide.", "Erreur",
+                        MessageBoxButton.OK, MessageBoxImage.Warning);
                     return;
                 }
 
                 if (kmFinal < _kmInitial)
                 {
-                    MessageBox.Show("Le kilométrage final ne peut pas être inférieur au kilométrage initial.",
+                    MessageBox.Show(
+                        $"Le kilométrage final ({kmFinal:F2} km) ne peut pas être inférieur au kilométrage initial ({_kmInitial:F2} km).",
                         "Erreur", MessageBoxButton.OK, MessageBoxImage.Warning);
                     return;
                 }
 
-                // Calcul automatique
+                // Calcul final des frais
                 CalculerFrais();
+                string prixFinalText = TxtPrixFinal.Text.Replace(" MAD", "").Trim();
+                if (!double.TryParse(prixFinalText, out double prixFinal))
+                {
+                    MessageBox.Show("Erreur lors du calcul du prix final.", "Erreur",
+                        MessageBoxButton.OK, MessageBoxImage.Error);
+                    return;
+                }
 
-                double prixFinal = double.Parse(TxtPrixFinal.Text.Replace(" MAD", ""));
                 double fraisSupplementaires = prixFinal - _prixInitial;
 
-                // Confirmation simple
-                if (MessageBox.Show("Voulez-vous terminer cette location ?",
-                                    "Confirmation",
-                                    MessageBoxButton.YesNo,
-                                    MessageBoxImage.Question) != MessageBoxResult.Yes)
-                    return;
+                // Confirmation
+                string recap = $"📋 RÉCAPITULATIF\n\n";
+                recap += $"Prix initial: {_prixInitial:F2} MAD\n";
+                recap += $"Frais supplémentaires: {fraisSupplementaires:F2} MAD\n";
+                recap += $"Prix final: {prixFinal:F2} MAD\n\n";
+                recap += $"Confirmer la terminaison ?";
 
-                // ✔ Terminer dans la base
+                var confirmation = MessageBox.Show(recap, "Confirmer",
+                    MessageBoxButton.YesNo, MessageBoxImage.Question);
+
+                if (confirmation != MessageBoxResult.Yes)
+                {
+                    return;
+                }
+
+                // Terminer la location
                 _locationService.TerminerLocation(_location.Id, kmFinal, fraisSupplementaires);
 
-                // ✔ Mise à jour auto de la page sans duplication popup
-                _locationListPage?.LoadLocations();
+                // 🔹 Envoi automatique de l'e-mail de clôture
+                if (!string.IsNullOrEmpty(_location.Client.Email))
+                {
+                    try
+                    {
+                        EmailHelper.SendLocationClosed(
+                            email: _location.Client.Email,
+                            nomClient: _location.Client.Nom + " " + _location.Client.Prenom,
+                            numeroLocation: _location.Id.ToString(),
+                            prixBase: _prixInitial,
+                            fraisSupplementaires: fraisSupplementaires,
+                            montantTotal: prixFinal
+                        );
+                    }
+                    catch (Exception mailEx)
+                    {
+                        MessageBox.Show($"Erreur lors de l'envoi du mail : {mailEx.Message}", "Erreur",
+                            MessageBoxButton.OK, MessageBoxImage.Error);
+                    }
+                }
 
-                // ✔ Message final unique
-                MessageBox.Show("Location terminée avec succès.", "Succès",
-                                MessageBoxButton.OK, MessageBoxImage.Information);
-
-                DialogResult = true;
-                Close();
+                this.DialogResult = true;
+                this.Close();
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Erreur : {ex.Message}", "Erreur",
-                    MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show(
+                    $"❌ Erreur :\n\n{ex.Message}\n\n{ex.InnerException?.Message}",
+                    "Erreur", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
 

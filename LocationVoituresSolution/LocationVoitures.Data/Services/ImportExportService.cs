@@ -70,7 +70,7 @@ namespace LocationVoitures.Data.Services
                             $"\"{emp.Prenom}\"," +
                             $"\"{emp.Email}\"," +
                             $"\"{emp.Poste}\"," +
-                            $"{emp.Salaire:F2}," +
+                            $"{emp.Salaire}," +
                             $"\"{emp.Role?.Nom ?? ""}\"," +
                             $"{emp.CreatedAt:dd/MM/yyyy}");
                     }
@@ -122,7 +122,7 @@ namespace LocationVoitures.Data.Services
                 using (var writer = new StreamWriter(filePath, false, Encoding.UTF8))
                 {
                     // En-tête
-                    writer.WriteLine("ID,Matricule,Marque,Modèle,Année,Prix/Jour,Statut,Kilométrage,Dernière Maintenance,Type");
+                    writer.WriteLine("ID,Matricule,Marque,Modèle,Type,Année,Kilométrage,Prix/Jour,Statut,Dernière Maintenance");
 
                     // Données
                     foreach (var voiture in voitures)
@@ -131,12 +131,13 @@ namespace LocationVoitures.Data.Services
                             $"\"{voiture.Matricule}\"," +
                             $"\"{voiture.Marque}\"," +
                             $"\"{voiture.Modele}\"," +
+                            $"\"{voiture.TypeVoiture?.Nom ?? ""}\"," +
                             $"{voiture.Annee:yyyy}," +
-                            $"{voiture.PrixJour:F2}," +
-                            $"\"{voiture.Statut}\"," +
                             $"{voiture.Kilometrage:F0}," +
-                            $"{voiture.DerniereMaintenance:dd/MM/yyyy}," +
-                            $"\"{voiture.TypeVoiture?.Nom ?? ""}\"");
+                            $"{voiture.PrixJour}," +
+                            $"\"{voiture.Statut}\"," +
+                            $"{voiture.DerniereMaintenance:dd/MM/yyyy},");
+                            
                     }
                 }
             }
@@ -323,7 +324,8 @@ namespace LocationVoitures.Data.Services
                         }
 
                         // Trouver le type de voiture
-                        var typeName = parts[9];
+                       
+                        var typeName = parts[4].Trim('"');
                         var type = _context.TypesVoitures.FirstOrDefault(t => t.Nom == typeName);
 
                         if (type == null)
@@ -334,15 +336,15 @@ namespace LocationVoitures.Data.Services
 
                         var voiture = new Voiture
                         {
-                            Matricule = parts[1],
-                            Marque = parts[2],
-                            Modele = parts[3],
-                            Annee = DateTime.ParseExact(parts[4], "yyyy", null),
-                            PrixJour = double.Parse(parts[5]),
-                            Statut = parts[6],
-                            Kilometrage = double.Parse(parts[7]),
-                            DerniereMaintenance = DateTime.ParseExact(parts[8], "dd/MM/yyyy", null),
-                            TypeId = type.Id
+                            Matricule = parts[1].Trim('"'),
+                            Marque = parts[2].Trim('"'),
+                            Modele = parts[3].Trim('"'),
+                            TypeId = type.Id,
+                            Annee = DateTime.ParseExact(parts[5], "yyyy", null),
+                            Kilometrage = double.Parse(parts[6]),
+                            PrixJour = double.Parse(parts[7]),
+                            Statut = parts[8].Trim('"'),
+                            DerniereMaintenance = DateTime.ParseExact(parts[9], "dd/MM/yyyy", null)
                         };
 
                         // Vérifier si le matricule existe déjà

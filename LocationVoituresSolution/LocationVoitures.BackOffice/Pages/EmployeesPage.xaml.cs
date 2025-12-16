@@ -43,6 +43,8 @@ namespace LocationVoitures.BackOffice
             var result = _EmployeeService.GetPagedEmployees(_page, _pageSize);
 
             dgEmployees.ItemsSource = result.Items;
+            if (TxtTotalItems != null)
+                TxtTotalItems.Text = result.TotalItems.ToString();
             _totalPages = result.TotalPages;
             TxtPageInfo.Text = $"Page {_page} / {_totalPages}";
         }

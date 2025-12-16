@@ -18,7 +18,8 @@ namespace LocationVoitures.Data.Services
             _alerteService = new AlerteService();
         }
 
-        // Récupérer toutes les maintenances
+        #region CRUD de base
+
         public List<Maintenance> GetAllMaintenances()
         {
             return _context.Maintenances
@@ -28,7 +29,6 @@ namespace LocationVoitures.Data.Services
                 .ToList();
         }
 
-        // Récupérer les maintenances d'une voiture
         public List<Maintenance> GetMaintenancesByVoiture(int voitureId)
         {
             return _context.Maintenances
@@ -37,49 +37,98 @@ namespace LocationVoitures.Data.Services
                 .ToList();
         }
 
-        // Ajouter une maintenance
-        public void Add(Maintenance maintenance)
+        public List<Maintenance> GetAllMaintenancesWithVoiture()
         {
-            // 1. Corriger problème datetime SQL
-            if (maintenance.DateMaintenance < new DateTime(1900, 1, 1))
-                maintenance.DateMaintenance = DateTime.Now;
-
-            maintenance.DateCreation = DateTime.Now;
-            _context.Maintenances.Add(maintenance);
-
-            // 2. Mise à jour de la voiture liée
-            var voiture = _context.Voitures.Find(maintenance.VoitureId);
-            if (voiture != null)
-            {
-                voiture.DerniereMaintenance = maintenance.DateMaintenance;
-                voiture.Kilometrage = maintenance.KilometrageMaintenance;
-
-                // 3. Changer le statut de la voiture
-                voiture.Statut = "Maintenance";
-            }
-
-            _context.SaveChanges();
-
-            // 4. Vérifier les alertes
-            VerifierEtCreerAlertes(maintenance.VoitureId);
+            return _context.Maintenances
+                .Include(m => m.Voiture)
+                .OrderByDescending(m => m.DateCreation)
+                .ToList();
         }
 
         public List<Maintenance> GetMaintenancesPlanifiees()
         {
             return _context.Maintenances
+                .Include(m => m.Voiture)
                 .Where(m => m.Statut == "Planifiée")
                 .OrderBy(m => m.DateMaintenance)
                 .ToList();
         }
-        public List<Maintenance> GetAllMaintenancesWithVoiture()
+
+        public Maintenance CreateMaintenance(Maintenance maintenance)
         {
-            return _context.Maintenances.Include(m => m.Voiture)
-                       .OrderByDescending(m => m.DateCreation)
-                       .ToList();
+            if (maintenance == null)
+                throw new ArgumentNullException(nameof(maintenance));
+
+            var voiture = _context.Voitures.Find(maintenance.VoitureId);
+            if (voiture == null)
+                throw new Exception("Voiture introuvable");
+
+            _context.Maintenances.Add(maintenance);
+            _context.SaveChanges();
+
+            return maintenance;
         }
 
+        public void DeleteMaintenance(int id)
+        {
+            var maintenance = _context.Maintenances.Find(id);
+            if (maintenance != null)
+            {
+                _context.Maintenances.Remove(maintenance);
+                _context.SaveChanges();
+            }
+        }
 
-        // Mettre à jour une maintenance
+        #endregion
+
+        #region Ajout de Maintenance avec Logique Intelligente
+
+        /// <summary>
+        /// Ajouter une maintenance avec calcul automatique des prochaines échéances
+        /// </summary>
+        public void Add(Maintenance maintenance)
+        {
+            // 1. Valider la date
+            if (maintenance.DateMaintenance < new DateTime(1900, 1, 1))
+                maintenance.DateMaintenance = DateTime.Now;
+
+            maintenance.DateCreation = DateTime.Now;
+
+            // 2. ✅ Calculer automatiquement les prochaines échéances selon le type
+            maintenance.DateProchaineMaintenance = MaintenanceConfig.CalculerProchaineDateMaintenance(
+                maintenance.TypeMaintenance,
+                maintenance.DateMaintenance);
+
+            maintenance.KilometrageProchain = MaintenanceConfig.CalculerProchainKilometrage(
+                maintenance.TypeMaintenance,
+                maintenance.KilometrageMaintenance);
+
+            // 3. ✅ Déterminer la priorité
+            var voiture = _context.Voitures.Find(maintenance.VoitureId);
+            if (voiture != null)
+            {
+                int joursRestants = (maintenance.DateProchaineMaintenance - DateTime.Now).Days;
+                double kmRestants = maintenance.KilometrageProchain - voiture.Kilometrage;
+                string urgence = MaintenanceConfig.DeterminerUrgence(joursRestants, kmRestants);
+
+                maintenance.Priorite = MaintenanceConfig.ObtenirPriorite(urgence);
+
+                // 4. Mise à jour de la voiture
+                voiture.DerniereMaintenance = maintenance.DateMaintenance;
+                voiture.Kilometrage = maintenance.KilometrageMaintenance;
+                voiture.Statut = "Maintenance";
+            }
+
+            _context.Maintenances.Add(maintenance);
+            _context.SaveChanges();
+
+            // 5. Vérifier et créer des alertes
+            VerifierEtCreerAlertes(maintenance.VoitureId);
+        }
+
+        /// <summary>
+        /// Mettre à jour une maintenance
+        /// </summary>
         public void Update(Maintenance maintenance)
         {
             var existing = _context.Maintenances.Find(maintenance.Id);
@@ -94,6 +143,9 @@ namespace LocationVoitures.Data.Services
             existing.Garage = maintenance.Garage;
             existing.Description = maintenance.Description;
             existing.Statut = maintenance.Statut;
+            existing.NotesGarage = maintenance.NotesGarage;
+            existing.CoutReel = maintenance.CoutReel;
+            existing.DateExecution = maintenance.DateExecution;
 
             _context.SaveChanges();
 
@@ -101,256 +153,270 @@ namespace LocationVoitures.Data.Services
             VerifierEtCreerAlertes(maintenance.VoitureId);
         }
 
-        // Supprimer une maintenance
-        public void DeleteMaintenance(int id)
-        {
-            var maintenance = _context.Maintenances.Find(id);
-            if (maintenance != null)
-            {
-                _context.Maintenances.Remove(maintenance);
-                _context.SaveChanges();
-            }
-        }
+        #endregion
 
-       
-        // Calculer la prochaine date de maintenance (par défaut 6 mois)
-        public DateTime CalculerProchaineDateMaintenance(DateTime derniereMaintenance, int moisIntervalle = 6)
-        {
-            return derniereMaintenance.AddMonths(moisIntervalle);
-        }
+        #region Vérification et Création d'Alertes
 
-        // Calculer le prochain kilométrage de maintenance (par défaut 10 000 km)
-        public double CalculerProchainKilometrage(double kilometrageActuel, double intervalleKm = 10000)
-        {
-            return kilometrageActuel + intervalleKm;
-        }
-
-        // Déterminer le niveau d'urgence
-        private string DeterminerUrgence(int joursRestants, double kmRestants)
-        {
-            if (joursRestants < 0 || kmRestants < 0)
-                return "🔴 CRITIQUE";
-            if (joursRestants <= 3 || kmRestants <= 300)
-                return "🔴 URGENT";
-            if (joursRestants <= 7 || kmRestants <= 500)
-                return "🟠 ATTENTION";
-            if (joursRestants <= 15 || kmRestants <= 1000)
-                return "🟡 À PRÉVOIR";
-            return "🟢 INFO";
-        }
-
-        // Calculer les jours restants avant la prochaine maintenance
-        public int CalculerJoursRestants(DateTime prochaineMaintenance)
-        {
-            return (prochaineMaintenance - DateTime.Now).Days;
-        }
-
-        // Calculer les km restants avant la prochaine maintenance
-        public double CalculerKmRestants(double kilometrageActuel, double kilometrageProchain)
-        {
-            return kilometrageProchain - kilometrageActuel;
-        }
-
-        // ✅ CORRIGÉ: Tuple nommé pour éviter les erreurs
-        public (bool Necessaire, string Urgence, string Message) VerifierMaintenanceAvecUrgence(int voitureId)
-        {
-            var voiture = _context.Voitures.Find(voitureId);
-            if (voiture == null) return (false, "🟢 INFO", "Voiture introuvable");
-
-            var derniereMaintenance = GetMaintenancesByVoiture(voitureId)
-                .OrderByDescending(m => m.DateMaintenance)
-                .FirstOrDefault();
-
-            if (derniereMaintenance == null)
-            {
-                // Pas de maintenance enregistrée
-                var moisDepuisMaintenance = (DateTime.Now - voiture.DerniereMaintenance).TotalDays / 30;
-                if (moisDepuisMaintenance >= 6)
-                {
-                    return (true, "🔴 CRITIQUE",
-                        $"Aucune maintenance enregistrée depuis {moisDepuisMaintenance:N0} mois");
-                }
-                return (false, "🟢 INFO", "Maintenance à jour");
-            }
-
-            // Calculer les jours et km restants
-            int joursRestants = CalculerJoursRestants(derniereMaintenance.DateProchaineMaintenance);
-            double kmRestants = CalculerKmRestants(voiture.Kilometrage, derniereMaintenance.KilometrageProchain);
-
-            // Déterminer l'urgence
-            string urgence = DeterminerUrgence(joursRestants, kmRestants);
-
-            // Construire le message
-            string message;
-            if (joursRestants < 0)
-                message = $"Maintenance en retard de {Math.Abs(joursRestants)} jours";
-            else if (kmRestants < 0)
-                message = $"Kilométrage dépassé de {Math.Abs(kmRestants):N0} km";
-            else
-                message = $"Maintenance dans {joursRestants} jours ou {kmRestants:N0} km";
-
-            bool necessaire = urgence != "🟢 INFO";
-
-            return (necessaire, urgence, message);
-        }
-
-        // Vérifier si une voiture nécessite une maintenance (version simple)
-        public bool NecessiteMaintenance(int voitureId)
-        {
-            var result = VerifierMaintenanceAvecUrgence(voitureId);
-            return result.Necessaire;
-        }
-
-        // Obtenir les voitures nécessitant une maintenance
-        public List<Voiture> GetVoituresNecessitantMaintenance()
-        {
-            var voitures = _context.Voitures
-                .Include(v => v.TypeVoiture)
-                .ToList();
-
-            return voitures.Where(v => NecessiteMaintenance(v.Id)).ToList();
-        }
-
-        // ✅ CORRIGÉ: Classe dédiée pour les résultats avec urgence
-        public class VoitureAvecUrgence
-        {
-            public Voiture Voiture { get; set; }
-            public string Urgence { get; set; }
-            public string Message { get; set; }
-        }
-
-        // ✅ CORRIGÉ: Retourner une liste d'objets typés
-        public List<VoitureAvecUrgence> GetVoituresAvecUrgence()
-        {
-            var voitures = _context.Voitures
-                .Include(v => v.TypeVoiture)
-                .ToList();
-
-            var result = new List<VoitureAvecUrgence>();
-
-            foreach (var voiture in voitures)
-            {
-                var (necessaire, urgence, message) = VerifierMaintenanceAvecUrgence(voiture.Id);
-                if (necessaire || urgence != "🟢 INFO")
-                {
-                    result.Add(new VoitureAvecUrgence
-                    {
-                        Voiture = voiture,
-                        Urgence = urgence,
-                        Message = message
-                    });
-                }
-            }
-
-            // Trier par urgence (critique d'abord)
-            return result.OrderBy(r =>
-            {
-                if (r.Urgence.Contains("CRITIQUE")) return 1;
-                if (r.Urgence.Contains("URGENT")) return 2;
-                if (r.Urgence.Contains("ATTENTION")) return 3;
-                if (r.Urgence.Contains("À PRÉVOIR")) return 4;
-                return 5;
-            }).ToList();
-        }
-
-        // Vérifier et créer des alertes pour une voiture
+        /// <summary>
+        /// ✅ Vérifier TOUS les types de maintenance pour une voiture
+        /// </summary>
+        /// <summary>
+        /// ✅ Vérifier TOUS les types de maintenance pour une voiture
+        /// </summary>
         public void VerifierEtCreerAlertes(int voitureId)
         {
-            var (necessaire, urgence, message) = VerifierMaintenanceAvecUrgence(voitureId);
+            var voiture = _context.Voitures
+                .Include(v => v.TypeVoiture)
+                .FirstOrDefault(v => v.Id == voitureId);
 
-            if (necessaire)
+            if (voiture == null) return;
+
+            System.Diagnostics.Debug.WriteLine($"[VerifierEtCreerAlertes] Vérification pour voiture {voitureId}");
+
+            // ✅ Parcourir TOUS les types de maintenance configurés
+            foreach (var typeConfig in MaintenanceConfig.Intervalles)
             {
-                var voiture = _context.Voitures
-                    .Include(v => v.TypeVoiture)
-                    .FirstOrDefault(v => v.Id == voitureId);
+                string typeMaintenance = typeConfig.Key;
 
-                if (voiture == null) return;
+                // Récupérer la dernière maintenance de ce type
+                var derniereMaintenance = _context.Maintenances
+                    .Where(m => m.VoitureId == voitureId &&
+                                m.TypeMaintenance == typeMaintenance)
+                    .OrderByDescending(m => m.DateMaintenance)
+                    .FirstOrDefault();
 
-                string messageComplet = $"{urgence} - {voiture.Marque} {voiture.Modele} ({voiture.Matricule}): {message}";
+                if (derniereMaintenance == null)
+                {
+                    // ✅ Pas de maintenance de ce type enregistrée
+                    var moisDepuis = (DateTime.Now - voiture.DerniereMaintenance).TotalDays / 30;
 
-                // Créer l'alerte avec le niveau d'urgence
-                _alerteService.CreerAlerteMaintenanceSiNecessaire(voitureId, messageComplet, urgence);
-            }
-            else
-            {
-                // Résoudre les alertes existantes si la maintenance n'est plus nécessaire
-                _alerteService.ResoudreAlertesVoiture(voitureId);
+                    if (moisDepuis >= typeConfig.Value.Mois && typeConfig.Value.Mois > 0)
+                    {
+                        string message = $"🔴 CRITIQUE - {voiture.Marque} {voiture.Modele} ({voiture.Matricule}): " +
+                                       $"Aucune {typeMaintenance} enregistrée depuis {moisDepuis:N0} mois";
+
+                        _alerteService.CreerAlerteMaintenanceSiNecessaire(
+                            voitureId,
+                            message,
+                            "🔴 CRITIQUE");
+                    }
+                }
+                else
+                {
+                    // ✅ IMPORTANT : Ignorer si la maintenance vient d'être effectuée (moins de 1 heure)
+                    if (derniereMaintenance.Statut == "Effectuée" &&
+                        derniereMaintenance.DateExecution.HasValue &&
+                        (DateTime.Now - derniereMaintenance.DateExecution.Value).TotalHours < 1)
+                    {
+                        System.Diagnostics.Debug.WriteLine($"[VerifierEtCreerAlertes] {typeMaintenance} vient d'être effectuée, skip");
+                        continue;
+                    }
+
+                    // ✅ Calculer les jours et km restants
+                    int joursRestants = (derniereMaintenance.DateProchaineMaintenance - DateTime.Now).Days;
+                    double kmRestants = derniereMaintenance.KilometrageProchain - voiture.Kilometrage;
+
+                    System.Diagnostics.Debug.WriteLine($"[VerifierEtCreerAlertes] {typeMaintenance}: {joursRestants} jours, {kmRestants:N0} km");
+
+                    // ✅ Déterminer l'urgence
+                    string urgence = MaintenanceConfig.DeterminerUrgence(joursRestants, kmRestants);
+
+                    // ✅ Créer alerte si nécessaire
+                    if (urgence != "🟢 OK")
+                    {
+                        string message = MaintenanceConfig.GenererMessageAlerte(
+                            typeMaintenance,
+                            voiture,
+                            joursRestants,
+                            kmRestants,
+                            urgence);
+
+                        _alerteService.CreerAlerteMaintenanceSiNecessaire(
+                            voitureId,
+                            message,
+                            urgence);
+
+                        System.Diagnostics.Debug.WriteLine($"[VerifierEtCreerAlertes] Alerte créée: {urgence}");
+                    }
+                    else
+                    {
+                        // ✅ Résoudre les alertes existantes pour ce type si maintenance OK
+                        _alerteService.ResoudreAlertesParType(voitureId, typeMaintenance);
+
+                        // ✅ Mettre à jour le statut si en retard
+                        if (joursRestants < 0 && derniereMaintenance.Statut == "Planifiée")
+                        {
+                            derniereMaintenance.Statut = "En retard";
+                            _context.SaveChanges();
+                        }
+                    }
+                }
             }
         }
 
-        // Vérifier toutes les voitures et créer des alertes
+        /// <summary>
+        /// ✅ Vérifier toutes les voitures (à exécuter quotidiennement)
+        /// </summary>
         public void VerifierToutesLesVoitures()
         {
-            var voitures = _context.Voitures.ToList();
+            var voitures = _context.Voitures
+                .Where(v => v.Statut != "Hors service") // ✅ Exclusion véhicules hors service
+                .ToList();
+
             foreach (var voiture in voitures)
             {
                 VerifierEtCreerAlertes(voiture.Id);
             }
-            
-            // ✅ NOUVEAU: Vérifier les maintenances planifiées
+
+            // ✅ Vérifier les maintenances planifiées
             VerifierMaintenancesPlanifiees();
         }
 
-        // ✅ NOUVEAU: Vérifier les maintenances planifiées et créer des alertes
+        /// <summary>
+        /// ✅ Vérifier les maintenances planifiées et créer des alertes
+        /// </summary>
+        /// <summary>
+        /// ✅ Vérifier les maintenances planifiées et créer des alertes
+        /// VERSION CORRIGÉE - Sans String.Format dans LINQ
+        /// </summary>
         public void VerifierMaintenancesPlanifiees()
         {
+            // ✅ Récupérer d'abord TOUTES les maintenances en mémoire
             var maintenancesPlanifiees = _context.Maintenances
                 .Include(m => m.Voiture)
                 .Where(m => m.Statut == "Planifiée")
-                .ToList();
+                .ToList(); // ✅ IMPORTANT: ToList() exécute la requête AVANT le traitement
 
             foreach (var maintenance in maintenancesPlanifiees)
             {
-                DateTime dateMaintenance = maintenance.DateMaintenance;
-                DateTime maintenant = DateTime.Now;
-                int joursRestants = (dateMaintenance - maintenant).Days;
+                // ✅ Maintenant on est en mémoire, pas dans LINQ to Entities
+                int joursRestants = (maintenance.DateMaintenance - DateTime.Now).Days;
 
-                // Mettre à jour le statut si la date est dépassée
-                if (joursRestants < 0 && maintenance.Statut == "Planifiée")
+                // ✅ Mettre à jour le statut si la date est dépassée
+                if (joursRestants < 0)
                 {
                     maintenance.Statut = "En retard";
                     _context.SaveChanges();
                 }
 
-                // Créer une alerte si la date est proche ou dépassée
+                // ✅ Créer une alerte si la date est proche ou dépassée
                 string urgence = "";
                 string message = "";
+
+                // ✅ Construire les strings EN MÉMOIRE (pas dans LINQ)
+                string marque = maintenance.Voiture.Marque ?? "";
+                string modele = maintenance.Voiture.Modele ?? "";
+                string matricule = maintenance.Voiture.Matricule ?? "";
+                string typeMain = maintenance.TypeMaintenance ?? "";
+
+                string vehiculeInfo = marque + " " + modele + " (" + matricule + ")";
 
                 if (joursRestants < 0)
                 {
                     urgence = "🔴 CRITIQUE";
-                    message = $"Maintenance planifiée DÉPASSÉE de {Math.Abs(joursRestants)} jour(s) - {maintenance.Voiture.Marque} {maintenance.Voiture.Modele} ({maintenance.Voiture.Matricule}) - Type: {maintenance.TypeMaintenance}";
+                    int joursDepasses = Math.Abs(joursRestants);
+                    message = "Maintenance planifiée DÉPASSÉE de " + joursDepasses.ToString() + " jour(s) - " +
+                             vehiculeInfo + " - Type: " + typeMain;
                 }
                 else if (joursRestants <= 1)
                 {
                     urgence = "🔴 URGENT";
-                    message = $"Maintenance planifiée DEMAIN - {maintenance.Voiture.Marque} {maintenance.Voiture.Modele} ({maintenance.Voiture.Matricule}) - Type: {maintenance.TypeMaintenance}";
+                    if (joursRestants == 0)
+                    {
+                        message = "Maintenance planifiée AUJOURD'HUI - " + vehiculeInfo + " - Type: " + typeMain;
+                    }
+                    else
+                    {
+                        message = "Maintenance planifiée DEMAIN - " + vehiculeInfo + " - Type: " + typeMain;
+                    }
                 }
                 else if (joursRestants <= 3)
                 {
                     urgence = "🔴 URGENT";
-                    message = $"Maintenance planifiée dans {joursRestants} jour(s) - {maintenance.Voiture.Marque} {maintenance.Voiture.Modele} ({maintenance.Voiture.Matricule}) - Type: {maintenance.TypeMaintenance}";
+                    message = "Maintenance planifiée dans " + joursRestants.ToString() + " jour(s) - " +
+                             vehiculeInfo + " - Type: " + typeMain;
                 }
                 else if (joursRestants <= 7)
                 {
                     urgence = "🟠 ATTENTION";
-                    message = $"Maintenance planifiée dans {joursRestants} jour(s) - {maintenance.Voiture.Marque} {maintenance.Voiture.Modele} ({maintenance.Voiture.Matricule}) - Type: {maintenance.TypeMaintenance}";
+                    message = "Maintenance planifiée dans " + joursRestants.ToString() + " jour(s) - " +
+                             vehiculeInfo + " - Type: " + typeMain;
                 }
 
-                // Créer l'alerte si nécessaire
+                // ✅ Créer l'alerte si nécessaire
                 if (!string.IsNullOrEmpty(urgence))
                 {
                     _alerteService.CreerAlerteMaintenancePlanifieeSiNecessaire(
                         maintenance.VoitureId,
                         maintenance.Id,
                         message,
-                        urgence
-                    );
+                        urgence);
                 }
             }
         }
 
-        // Obtenir les statistiques de maintenance
+
+        #endregion
+
+        #region Exécution de Maintenance
+
+        /// <summary>
+        /// ✅ Marquer une maintenance comme effectuée
+        /// </summary>
+        /// <summary>
+        /// ✅ Marquer une maintenance comme effectuée - VERSION CORRIGÉE
+        /// </summary>
+        public void MarquerCommeEffectuee(int maintenanceId, double coutReel, string notesGarage = "")
+        {
+            var maintenance = _context.Maintenances
+                .Include(m => m.Voiture)
+                .FirstOrDefault(m => m.Id == maintenanceId);
+
+            if (maintenance == null)
+                throw new Exception("Maintenance introuvable");
+
+            // 1. Mettre à jour la maintenance
+            maintenance.Statut = "Effectuée";
+            maintenance.DateExecution = DateTime.Now;
+            maintenance.CoutReel = coutReel;
+            maintenance.NotesGarage = notesGarage;
+
+            // 2. Mettre à jour la date de prochaine maintenance
+            maintenance.DateProchaineMaintenance = MaintenanceConfig.CalculerProchaineDateMaintenance(
+                maintenance.TypeMaintenance,
+                DateTime.Now);
+
+            maintenance.KilometrageProchain = MaintenanceConfig.CalculerProchainKilometrage(
+                maintenance.TypeMaintenance,
+                maintenance.Voiture.Kilometrage);
+
+            // 3. Mettre à jour la voiture
+            if (maintenance.Voiture != null)
+            {
+                maintenance.Voiture.DerniereMaintenance = DateTime.Now;
+                maintenance.Voiture.Statut = "Disponible";
+
+                System.Diagnostics.Debug.WriteLine($"[MarquerCommeEffectuee] Voiture {maintenance.VoitureId} mise à jour");
+            }
+
+            // 4. ✅ IMPORTANT : Sauvegarder AVANT de résoudre les alertes
+            _context.SaveChanges();
+
+            System.Diagnostics.Debug.WriteLine($"[MarquerCommeEffectuee] Maintenance sauvegardée, résolution des alertes...");
+
+            // 5. ✅ Résoudre TOUTES les alertes de maintenance pour cette voiture et ce type
+            _alerteService.ResoudreAlertesVoiture(maintenance.VoitureId);
+            _alerteService.ResoudreAlertesParType(maintenance.VoitureId, maintenance.TypeMaintenance);
+
+            System.Diagnostics.Debug.WriteLine($"[MarquerCommeEffectuee] ✅ Alertes résolues");
+
+            // 6. ✅ NE PAS RE-VÉRIFIER immédiatement - la maintenance vient d'être effectuée
+            // La prochaine vérification se fera lors du prochain cycle automatique
+        }
+        #endregion
+
+        #region Statistiques et Rapports
+
         public Dictionary<string, int> GetStatistiquesMaintenance()
         {
             return new Dictionary<string, int>
@@ -358,27 +424,11 @@ namespace LocationVoitures.Data.Services
                 ["Total"] = _context.Maintenances.Count(),
                 ["Effectuées"] = _context.Maintenances.Count(m => m.Statut == "Effectuée"),
                 ["Planifiées"] = _context.Maintenances.Count(m => m.Statut == "Planifiée"),
-                ["En retard"] = _context.Maintenances.Count(m => m.Statut == "En retard")
+                ["En retard"] = _context.Maintenances.Count(m => m.Statut == "En retard"),
+                ["En cours"] = _context.Maintenances.Count(m => m.Statut == "En cours")
             };
         }
-        public Maintenance CreateMaintenance(Maintenance maintenance)
-        {
-            if (maintenance == null)
-                throw new ArgumentNullException(nameof(maintenance));
 
-            // Vérification : la voiture existe ?
-            var voiture = _context.Voitures.Find(maintenance.VoitureId);
-            if (voiture == null)
-                throw new Exception("Voiture introuvable");
-
-            // Ajouter la maintenance
-            _context.Maintenances.Add(maintenance);
-            _context.SaveChanges();
-
-            return maintenance;
-        }
-
-        // Obtenir les statistiques d'urgence
         public Dictionary<string, int> GetStatistiquesUrgence()
         {
             var voituresAvecUrgence = GetVoituresAvecUrgence();
@@ -391,5 +441,156 @@ namespace LocationVoitures.Data.Services
                 ["À Prévoir"] = voituresAvecUrgence.Count(v => v.Urgence.Contains("À PRÉVOIR"))
             };
         }
+
+        /// <summary>
+        /// ✅ Obtenir les maintenances à venir (7 prochains jours)
+        /// </summary>
+        public List<Maintenance> GetMaintenancesAVenir(int jours = 7)
+        {
+            DateTime limite = DateTime.Now.AddDays(jours);
+            return _context.Maintenances
+                .Include(m => m.Voiture)
+                .Where(m => m.Statut == "Planifiée" &&
+                           m.DateMaintenance <= limite &&
+                           m.DateMaintenance >= DateTime.Now)
+                .OrderBy(m => m.DateMaintenance)
+                .ToList();
+        }
+
+        /// <summary>
+        /// ✅ Coût total des maintenances sur une période
+        /// </summary>
+        public double GetCoutMaintenances(DateTime debut, DateTime fin)
+        {
+            return _context.Maintenances
+                .Where(m => m.DateExecution >= debut &&
+                           m.DateExecution <= fin &&
+                           m.CoutReel.HasValue)
+                .Sum(m => m.CoutReel.Value);
+        }
+
+        #endregion
+
+        #region Classes et Méthodes Existantes
+
+        public class VoitureAvecUrgence
+        {
+            public Voiture Voiture { get; set; }
+            public string Urgence { get; set; }
+            public string Message { get; set; }
+        }
+
+        public List<VoitureAvecUrgence> GetVoituresAvecUrgence()
+        {
+            var voitures = _context.Voitures
+                .Include(v => v.TypeVoiture)
+                .Where(v => v.Statut != "Hors service")
+                .ToList();
+
+            var result = new List<VoitureAvecUrgence>();
+
+            foreach (var voiture in voitures)
+            {
+                var (necessaire, urgence, message) = VerifierMaintenanceAvecUrgence(voiture.Id);
+                if (necessaire || urgence != "🟢 OK")
+                {
+                    result.Add(new VoitureAvecUrgence
+                    {
+                        Voiture = voiture,
+                        Urgence = urgence,
+                        Message = message
+                    });
+                }
+            }
+
+            return result.OrderBy(r =>
+            {
+                if (r.Urgence.Contains("CRITIQUE")) return 1;
+                if (r.Urgence.Contains("URGENT")) return 2;
+                if (r.Urgence.Contains("ATTENTION")) return 3;
+                if (r.Urgence.Contains("À PRÉVOIR")) return 4;
+                return 5;
+            }).ToList();
+        }
+
+        public (bool Necessaire, string Urgence, string Message) VerifierMaintenanceAvecUrgence(int voitureId)
+        {
+            var voiture = _context.Voitures.Find(voitureId);
+            if (voiture == null) return (false, "🟢 OK", "Voiture introuvable");
+
+            // ✅ Vérifier la maintenance la plus urgente parmi tous les types
+            string urgenceGlobale = "🟢 OK";
+            string messageGlobal = "Toutes les maintenances sont à jour";
+            bool necessaire = false;
+
+            foreach (var typeConfig in MaintenanceConfig.Intervalles)
+            {
+                var derniereMaintenance = GetMaintenancesByVoiture(voitureId)
+                    .Where(m => m.TypeMaintenance == typeConfig.Key)
+                    .OrderByDescending(m => m.DateMaintenance)
+                    .FirstOrDefault();
+
+                if (derniereMaintenance != null)
+                {
+                    int joursRestants = (derniereMaintenance.DateProchaineMaintenance - DateTime.Now).Days;
+                    double kmRestants = derniereMaintenance.KilometrageProchain - voiture.Kilometrage;
+
+                    string urgence = MaintenanceConfig.DeterminerUrgence(joursRestants, kmRestants);
+
+                    if (urgence != "🟢 OK")
+                    {
+                        necessaire = true;
+
+                        // ✅ Garder l'urgence la plus critique
+                        if (urgence.Contains("CRITIQUE"))
+                        {
+                            urgenceGlobale = urgence;
+                            messageGlobal = $"{typeConfig.Key}: " +
+                                (joursRestants < 0 ? $"en retard de {Math.Abs(joursRestants)} jours" :
+                                 kmRestants < 0 ? $"kilométrage dépassé de {Math.Abs(kmRestants):N0} km" :
+                                 $"dans {joursRestants} jours ou {kmRestants:N0} km");
+                        }
+                        else if (urgenceGlobale == "🟢 OK" ||
+                                (urgence.Contains("URGENT") && !urgenceGlobale.Contains("CRITIQUE")))
+                        {
+                            urgenceGlobale = urgence;
+                            messageGlobal = $"{typeConfig.Key}: dans {joursRestants} jours ou {kmRestants:N0} km";
+                        }
+                    }
+                }
+            }
+
+            return (necessaire, urgenceGlobale, messageGlobal);
+        }
+
+        public List<Voiture> GetVoituresNecessitantMaintenance()
+        {
+            var voitures = _context.Voitures
+                .Include(v => v.TypeVoiture)
+                .ToList();
+
+            return voitures.Where(v => {
+                var (necessaire, _, _) = VerifierMaintenanceAvecUrgence(v.Id);
+                return necessaire;
+            }).ToList();
+        }
+
+        public bool NecessiteMaintenance(int voitureId)
+        {
+            var result = VerifierMaintenanceAvecUrgence(voitureId);
+            return result.Necessaire;
+        }
+
+        public int CalculerJoursRestants(DateTime prochaineMaintenance)
+        {
+            return (prochaineMaintenance - DateTime.Now).Days;
+        }
+
+        public double CalculerKmRestants(double kilometrageActuel, double kilometrageProchain)
+        {
+            return kilometrageProchain - kilometrageActuel;
+        }
+
+        #endregion
     }
 }

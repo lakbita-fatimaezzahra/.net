@@ -306,7 +306,7 @@
                             </Style>
                         </DataGridTextColumn.ElementStyle>
                     </DataGridTextColumn>
-
+               
                     <DataGridTextColumn Header="Kilométrage" 
                                         Binding="{Binding Kilometrage, StringFormat='{}{0:N0} km'}" 
                                         Width="100">

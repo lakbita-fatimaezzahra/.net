@@ -17,10 +17,10 @@
     <Compile Update="LocationDetailsWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="Pages\AddEditVoiturePage.xaml.cs">
+    <Compile Update="MarquerMaintenanceEffectueeWindow .xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="Pages\AddLocationPage.xaml.cs">
+    <Compile Update="Pages\AddEditVoiturePage.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="Pages\AlertesPage.xaml.cs">

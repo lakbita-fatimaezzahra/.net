@@ -30,7 +30,7 @@ namespace LocationVoitures.BackOffice.Pages
 
             if (images.Count > 0)
             {
-                ImagePrincipale.Source = new BitmapImage(new System.Uri(images[0].Chemin));
+                SetImageSource(images[0].Chemin, ImagePrincipale);
             }
 
             // Miniatures du carousel
@@ -43,17 +43,55 @@ namespace LocationVoitures.BackOffice.Pages
                     Width = 80,
                     Height = 80,
                     Margin = new Thickness(5),
-                    Stretch = System.Windows.Media.Stretch.Uniform,
-                    Source = new BitmapImage(new System.Uri(img.Chemin))
+                    Stretch = System.Windows.Media.Stretch.Uniform
                 };
 
-                // Permet cliquer pour changer l'image principale
+                SetImageSource(img.Chemin, miniature);
+
+                // Stocker le chemin pour le clic
+                string imgPath = img.Chemin;
                 miniature.MouseLeftButtonUp += (s, e) =>
                 {
-                    ImagePrincipale.Source = miniature.Source;
+                    SetImageSource(imgPath, ImagePrincipale);
                 };
 
                 CarouselImages.Children.Add(miniature);
+            }
+        }
+
+        private void SetImageSource(string relativePath, Image imageControl)
+        {
+            if (imageControl == null || string.IsNullOrEmpty(relativePath))
+            {
+                imageControl.Source = null;
+                return;
+            }
+
+            try
+            {
+                // Racine du projet FrontOffice/wwwroot
+                string exeDir = AppDomain.CurrentDomain.BaseDirectory;
+                string frontOfficeRoot = Path.GetFullPath(Path.Combine(exeDir, @"..\..\..\..\lovationVoiture.FrontOffice\wwwroot"));
+
+                // Chemin complet du fichier sur disque
+                string fullPath = Path.Combine(frontOfficeRoot, relativePath.TrimStart('/').Replace('/', '\\'));
+
+                // Vérifier si le fichier existe avant de créer l'URI
+                if (File.Exists(fullPath))
+                {
+                    imageControl.Source = new BitmapImage(new Uri(fullPath, UriKind.Absolute));
+                }
+                else
+                {
+                    // Log ou debug
+                    Console.WriteLine($"Fichier non trouvé: {fullPath}");
+                    imageControl.Source = null;
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Erreur chargement image: {ex.Message}");
+                imageControl.Source = null;
             }
         }
 
@@ -82,16 +120,8 @@ namespace LocationVoitures.BackOffice.Pages
             }
         }
 
-        /*private void PlanifierMaintenance_Click(object sender, RoutedEventArgs e)
-        {
-            NavigationService.Navigate(new AddMaintenancePage(_voiture));
-        }*/
-        private void PlanifierMaintenance_Click(object sender, RoutedEventArgs e)
-        {
-            // TODO: Naviguer vers la page pour planifier la maintenance
-            // Exemple : NavigationService.Navigate(new AddMaintenancePage(_voiture));
-            MessageBox.Show($"Planification maintenance pour {_voiture.Matricule}", "Maintenance");
-        }
+       
+      
 
         private void Retour_Click(object sender, RoutedEventArgs e)
         {

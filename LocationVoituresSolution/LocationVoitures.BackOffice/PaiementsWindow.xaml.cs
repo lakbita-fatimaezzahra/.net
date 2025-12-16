@@ -1,4 +1,5 @@
-﻿using LocationVoitures.Data.Models;
+﻿using LocationVoitures.BackOffice.Utils;
+using LocationVoitures.Data.Models;
 using LocationVoitures.Data.Services;
 using Microsoft.Win32;
 using System;
@@ -144,9 +145,31 @@ namespace LocationVoitures.BackOffice
                 TxtNotes.Clear();
                 LoadData();
 
-                // Générer reçu
+                // Envoi automatique du reçu par mail
+                if (!string.IsNullOrEmpty(_location.Client.Email))
+                {
+                    try
+                    {
+                        EmailHelper.SendPaymentReceipt(
+                            email: _location.Client.Email,
+                            nomClient: _location.Client.Nom + " " + _location.Client.Prenom,
+                            numeroLocation: _location.Id.ToString(),
+                            montant: montant,
+                            modePaiement: modePaiement,
+                            datePaiement: DateTime.Now,
+                            resteAPayer: Math.Max(0, _resteAPayer - montant)
+                        );
+                    }
+                    catch (Exception mailEx)
+                    {
+                        MessageBox.Show($"Erreur lors de l'envoi du mail : {mailEx.Message}", "Erreur",
+                            MessageBoxButton.OK, MessageBoxImage.Error);
+                    }
+                }
+
+                // Générer reçu PDF
                 var genererRecu = MessageBox.Show(
-                    "Voulez-vous générer un reçu pour ce paiement ?",
+                    "Voulez-vous générer un reçu PDF pour ce paiement ?",
                     "Génération de reçu",
                     MessageBoxButton.YesNo,
                     MessageBoxImage.Question);
